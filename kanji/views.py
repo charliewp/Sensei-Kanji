@@ -43,8 +43,12 @@ def chart(request):
         #    ['1988', 8.5, 6.2, 5.1, 17.5]
         #]
         series = []
-        series.append(str("Temp"))
-        series.append("AckTime")
+        series.append(str("Temperature"))
+        series.append("Mesh Response Time")
+        
+        yaxis_labels = []
+        yaxis_labels.append("Degree F")
+        yaxis_labels.append("msecs")
         #series.append("Humidity")
         #series.append("Wind Speed")
         data = []
@@ -83,7 +87,7 @@ def chart(request):
         
         print(data)
         
-        return render(request, 'chart.html',  {'data': data, 'series': series})
+        return render(request, 'chart2.html',  {'data': data, 'series': series, 'yaxis_labels': yaxis_labels})
           
 def webhook(request):
    #
