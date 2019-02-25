@@ -24,6 +24,7 @@ anychart.onDocumentReady(function () {
     //window.alert("Hello");
     data = {{ data | safe }};
     series = {{ series | safe }}
+    colors = {{ colors | safe }}
     yaxis_labels = {{ yaxis_labels | safe }}    
     //debugger;
     var dataSet = anychart.data.set(data);    
@@ -64,6 +65,7 @@ anychart.onDocumentReady(function () {
       chartSeries[n].name(series[n]);
       chartSeries[n].hovered().markers().enabled(true).type('circle').size(4);
       chartSeries[n].tooltip().position('right').anchor('left-center').offsetX(5).offsetY(5);
+      chartSeries[n].stroke(colors[n]);
 
       // turn the legend on
       //chart[n].legend().enabled(true).fontSize(13).padding([0, 0, 10, 0]);
