@@ -52,8 +52,7 @@ def chart(request):
         
         colors = ["red", "blue", "green", "black"]
         
-        data = []
-        
+        data = []        
            
         node = Node.objects.all().filter(coreid=coreid).first()
         
@@ -68,8 +67,9 @@ def chart(request):
             data.append([date_time, float(eventLog.eventdata), eventLog.meshacktimemillis])
         
         print(data)
+        print(node.location)
         
-        location = "{0}/{1}".format(node.location.description, node.name)
+        location = "{0}  Node:{1}".format(node.location.description, node.name)
         
         return render(request, 'chart2.html',  {'location': location, 'data': data, 'series': series, 'yaxis_labels': yaxis_labels, 'colors': colors})
           
