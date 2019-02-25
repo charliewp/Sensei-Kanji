@@ -44,7 +44,7 @@ def chart(request):
         #]
         series = []
         series.append(str("Temp"))
-        #series.append("RPM")
+        series.append("AckTime")
         #series.append("Humidity")
         #series.append("Wind Speed")
         data = []
@@ -79,7 +79,7 @@ def chart(request):
         
         for eventLog in eventLogs:
             date_time = eventLog.timestamp.strftime("%m/%d/%Y, %H:%M:%S")
-            data.append([date_time, float(eventLog.eventdata)])
+            data.append([date_time, float(eventLog.eventdata), eventLog.meshacktimemillis])
         
         print(data)
         
