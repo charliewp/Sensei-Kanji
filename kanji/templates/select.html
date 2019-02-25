@@ -1,0 +1,94 @@
+{% load staticfiles %}
+<html>
+<head>
+    <title>Device Select</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/guestbook.css' %}">
+</head>
+<body>
+<div class="container">
+<c><small> charliewp/Guestbook v1.02 uses the GNU GPL v3.0 [v20180725]</small></c>
+</div>
+{% if message %}
+   <p style="color: red;padding:10px">
+   <div class="container">
+      <div style="width:100%; padding:10px">
+        <c3>{{message}}</c3>
+      </div>
+   </div>
+   </p>
+{% endif %}
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+<div class="container">
+            <h1></h1>
+            <div style="width:100%">
+                <form name="login" action="/ophouse/signin/" method="get">
+                  {%csrf_token%}
+                  {% if device == 'Touch' %}
+                                <button class="kiosk-touch-primary" style="width:100%">Start a Client Kiosk </button>
+                  {% else %}
+                                <button class="desktop-primary" style="width:100%">Start a Client Kiosk </button>
+                  {% endif %}
+                  
+                </form>
+            </div>
+            <div style="width:100%">
+                <form name="login" action="/ophouse/queue?servicetype=1" method="get">
+                  {%csrf_token%}
+                  {% if device == 'Touch' %}
+                                <button class="kiosk-touch-primary" style="width:100%">Start a Volunteer Workstation</button>
+                  {% else %}
+                                <button class="desktop-primary" style="width:100%">Start a Volunteer Workstation</button>
+                  {% endif %}
+                  
+                </form>
+            </div>
+            <div style="width:100%">
+                <form name="login" action="/ophouse/staffqueue/" method="get">
+                  {%csrf_token%}
+                  {% if device == 'Touch' %}
+                                <button class="kiosk-touch-primary" style="width:100%">View all Service Queues</button>
+                  {% else %}
+                                <button class="desktop-primary" style="width:100%">View all Service Queues</button>
+                  {% endif %}
+                  
+                </form>
+            </div>
+            <div style="width:100%">
+                <form name="login" action="/ophouse/staff/" method="get">
+                  {%csrf_token%}
+                  {% if device == 'Touch' %}
+                                <button class="kiosk-touch-primary" style="width:100%">Start a Staff Portal</button>
+                  {% else %}
+                                <button class="desktop-primary" style="width:100%">Start a Staff Portal</button>
+                  {% endif %}
+                  
+                </form>
+            </div>
+            <div style="width:100%">
+                <form name="login" action="/ophouse/reporter/" method="get">
+                  {%csrf_token%}
+                  {% if device == 'Touch' %}
+                                <button class="kiosk-touch-primary" style="width:100%">Data Visualizer</button>
+                  {% else %}
+                                <button class="desktop-primary" style="width:100%">Data Visualizer</button>
+                  {% endif %}
+                  
+                </form>
+            </div>
+</body>
+</html>

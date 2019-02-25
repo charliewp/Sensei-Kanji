@@ -1,0 +1,152 @@
+{% load widget_tweaks %}
+{% load staticfiles %}
+
+<html>
+<head>
+    <title>Select Services</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!--    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> -->
+    <link rel="stylesheet" href="{% static 'css/guestbook.css' %}">
+<script type="text/javascript">
+    window.setTimeout("redirectpage();", 60000);    
+    function redirectpage(){
+    window.top.location.href = '/ophouse/signin';
+    }
+</script>
+</head>
+<body>
+<div class="container">
+<c><small> charliewp/Guestbook v1.02 uses the GNU GPL v3.0 [v20180725]</small></c>
+</div>
+<div class="container">
+<div style="width:100%; padding:0px">
+{% if staffrequest == 1 %}
+<form name="login" action="/ophouse/staff/" method="get">
+                    {%csrf_token%}
+                    {% for error in form.non_field_errors %}
+                    <div class="form-group has-errors text-danger small">
+                        {{error}}
+                    </div>
+                    {% endfor %}
+                    <div class="divTable">
+                       <div class="divTableBody">
+                         <div class="divTableRow">
+                            {% if device == 'Touch' %} <!--HP Envy Touch -->
+                              <div class="divTableCell">
+                                <button class="kiosk-touch-primary" style="width:100%">Go Back / Regresa</button>
+                              </div>
+                            {% else %} <!--Desktop -->
+                              <div class="divTableCell">
+                                <button class="desktop-primary" style="width:100%">Go Back / Regresa</button>
+                              </div>
+                            {% endif %}
+                         </div>
+                        </div>
+                    </div>
+</form>
+</div>
+{% endif %}
+   <h2>You have <strong>{{credits}}</strong> service credits in the Opportunity Bank, Help serve today by selecting from the service opportunities below.</h2>
+   {% if device == 'Touch' %} <!--HP Envy Touch -->
+     <button class="kiosk-touch-primary" style="width:100%">Earn Service Credits in the Opportunity Bank!</button>
+   {% else %} <!--Desktop -->
+     <button class="desktop-primary" style="width:100%">Earn Service Credits in the Opportunity Bank!</button>
+   {% endif %}
+   <div class="form-group badge-checkboxes" style="width:100%;">
+      {% if staffrequest %}
+        <form action="/ophouse/services?template=2connection={{connection}}&staff=1" method="post">
+      {% else %}
+        <form action="/ophouse/services?template=2&connection={{connection}}" method="post">
+      {% endif %}
+      {% csrf_token %}
+       <div class="divTable" style="width:100%">
+                       <div class="divTableBody">
+                         <div class="divTableRow">
+                            <div class="divTableCell" style="width:100%;padding:20px">
+                               <div>
+                                  <div>
+                                  {% for choice_id, choice_label in form.services.field.widget.choices %}
+                                  {% if choice_label in constrainedByUnitsList %}
+                                     <label for="id_options_{{ choice_id }}" class="checkbox-inline disabled" >
+                                     <input  type="checkbox" id="id_options_{{ choice_id }}" value="{{ choice_id }}" name="services" disabled="true"  {% if choice_id in form.services.value  %} checked="checked"{% endif %}}/>
+                                       {% if device == 'Touch' %} <!--HP Envy Touch -->
+                                         <span class="badge" style="background:#ccccb3;color:#8a8a5c;font-size:48px;">{{choice_label}}<br><notavailable>- full today -</notavailable></span>
+                                       {% else %} <!--Desktop -->
+                                         <span class="badge" style="background:#ccccb3;color:#8a8a5c;font-size:48px;">{{choice_label}}<br><notavailable>- full today -</notavailable></span>
+                                       {% endif %}
+                                     {{choice}}
+                                     </label>
+                                  {% elif choice_label in constrainedByQuotaList %}
+                                     <label for="id_options_{{ choice_id }}" class="checkbox-inline disabled" >
+                                     <input  type="checkbox" id="id_options_{{ choice_id }}" value="{{ choice_id }}" name="services" disabled="true"  {% if choice_id in form.services.value  %} checked="checked"{% endif %}}/>
+                                       {% if device == 'Touch' %} <!--HP Envy Touch -->
+                                         <span class="badge" style="background:#ccccb3;color:#8a8a5c;font-size:48px;">{{choice_label}}<br><notavailable>- you've reached limit -</notavailable></span>
+                                       {% else %} <!--Desktop -->
+                                         <span class="badge" style="background:#ccccb3;color:#8a8a5c;font-size:48px;">{{choice_label}}<br><notavailable>- you've reached limit -</notavailable></span>
+                                       {% endif %}
+                                     {{choice}}
+                                     </label>
+                                  {% elif choice_label in constrainedByCostList %}
+                                     <label for="id_options_{{ choice_id }}" class="checkbox-inline disabled" >
+                                     <input  type="checkbox" id="id_options_{{ choice_id }}" value="{{ choice_id }}" name="services" disabled="true"  {% if choice_id in form.services.value  %} checked="checked"{% endif %}}/>
+                                       {% if device == 'Touch' %} <!--HP Envy Touch -->
+                                         <span class="badge" style="background:#ccccb3;color:#8a8a5c;font-size:48px;">{{choice_label}}<br><notavailable>- need credits -</notavailable></span>
+                                       {% else %} <!--Desktop -->
+                                         <span class="badge" style="background:#ccccb3;color:#8a8a5c;font-size:48px;">{{choice_label}}<br><notavailable>- need credits -</notavailable></span>
+                                       {% endif %}
+                                     {{choice}}
+                                     </label>
+                                  {% else %}
+                                       <label for="id_options_{{ choice_id }}" class="checkbox-inline enabled" >
+                                       <input  type="checkbox" id="id_options_{{ choice_id }}" value="{{ choice_id }}" name="services" {% if choice_id in form.services.value  %} checked="checked"{% endif %}}/>
+                                       {% if device == 'Touch' %} <!--HP Envy Touch -->
+                                         <span class="badge" style="font-size:48px;">{{choice_label}}
+                                         {% for key, value in points.items %}
+                                           {% if key == choice_id and value != 0 %}
+                                             <br><kiosk-button-points>adds {{value}} credit(s)</kiosk-button-points>
+                                           {% endif %}
+                                         {% endfor %}
+                                         </span>
+                                       {% else %} <!--Desktop -->
+                                         <span class="badge" style="font-size:48px;">{{choice_label}}
+                                         {% for key, value in points.items %}
+                                           {% if key == choice_id and value != 0 %}
+                                             <br><desktop-button-points>adds {{value}} credit(s)</desktop-button-points>
+                                           {% endif %}
+                                         {% endfor %}
+                                         </span>
+                                       {% endif %}
+                                       {{choice}}
+                                     </label>                                   
+                                  {% endif %}                                     
+                                  {% endfor %}
+                                </div>
+                                </div>
+                            </div>
+                         </div>
+                       </div>
+      </div>
+
+      <div class="divTable" style="width:100%;padding:0px;" >
+                       <div class="divTableBody">
+                         <div class="divTableRow">
+                            {% if device == 'Touch' %} <!--HP Envy Touch -->
+                              <div class="divTableCell" style="width:100%">
+                               <button class="kiosk-touch-success" style="width:100%" >Next / Siguiente</button>
+                              </div>
+                            {% else %} <!--Desktop -->
+                              <div class="divTableCell" style="width:100%">
+                               <button class="desktop-success" style="width:100%" >Next / Siguiente</button>
+                              </div>
+                            {% endif %}
+                         </div>
+                       </div>
+      </div>
+      </form>
+   </div>
+</div>
+</body>
+</html>
