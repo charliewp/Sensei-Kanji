@@ -76,7 +76,7 @@ anychart.onDocumentReady(function () {
       gauges[n] = anychart.gauges.circular();
       gauges[n].fill('#fff').stroke(null).padding(0).margin(5).startAngle(270).sweepAngle(180);
       gauges[n].axis().labels().padding(5).fontSize(14).position('outside').format('{%Value}');
-      gauges[n].data(data[data.length-1][n]);
+      gauges[n].data(data[data.length-1][n+1]);
       gauges[n].axis().scale().minimum(0).maximum(100).ticks({interval: 10}).minorTicks({interval: 5});
       gauges[n].axis().fill('#545f69').width(1).ticks({type: 'line', fill: 'white', length: 2});
       gauges[n].needle().stroke('2 #07090d').startRadius('5%').endRadius('90%').startWidth('7.5%').endWidth('0.1%').middleWidth('2.5%');
