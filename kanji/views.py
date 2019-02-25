@@ -62,7 +62,8 @@ def chart(request):
         eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).filter(timestamp__gte = time24hoursago)
         
         for eventLog in eventLogs:
-            date_time = eventLog.timestamp.strftime("%m/%d/%Y, %H:%M:%S")
+            #date_time = eventLog.timestamp.strftime("%m/%d/%Y, %H:%M:%S")
+            date_time = eventLog.timestamp.strftime("%d, %H:%M")
             data.append([date_time, float(eventLog.eventdata), eventLog.meshacktimemillis])
         
         print(data)
