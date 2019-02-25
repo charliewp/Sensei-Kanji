@@ -54,6 +54,7 @@ def chart(request):
         
         data = []
         
+           
         node = Node.objects.all().filter(coreid=coreid).first()
         
         now = datetime.today()
@@ -68,7 +69,9 @@ def chart(request):
         
         print(data)
         
-        return render(request, 'chart2.html',  {'data': data, 'series': series, 'yaxis_labels': yaxis_labels, 'colors': colors})
+        location = "{0}/{1}".format(node.location.description, node.name)
+        
+        return render(request, 'chart2.html',  {'location': location, 'data': data, 'series': series, 'yaxis_labels': yaxis_labels, 'colors': colors})
           
 def webhook(request):
    #
