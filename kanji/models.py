@@ -11,10 +11,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 
-
-from localflavor.us.models import USStateField
-from localflavor.us.models import USZipCodeField
-
 class EventType(models.Model):
     ideventtype  = models.BigAutoField(primary_key=True)
     description = models.CharField(max_length=24)
