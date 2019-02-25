@@ -6,6 +6,7 @@ from . import views
 
 urlpatterns = [ 
 	url(r'^$', views.index, name='index'),
+    url(r'chart*', views.chart, name='chart'),
     url(r'webhook', views.webhook, name='webhook'),
-    url(r'chart', views.chart, name='chart'),
+    
 ]
