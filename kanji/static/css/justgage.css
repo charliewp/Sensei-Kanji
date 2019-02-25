@@ -1,0 +1,12 @@
+/* Value */
+#jgDownload text:nth-child(7) tspan {
+  font-size: 12.9em !important;
+  color: #ffffff !important;
+}
+/* Label */
+#jgDownload text:nth-child(8) tspan,
+jgDownload text:nth-child(9) tspan,
+jgDownload text:nth-child(10) tspan {
+  font-size: 12.9em !important;
+  color: #ffffff !important;
+}

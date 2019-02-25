@@ -71,7 +71,7 @@ def chart(request):
         
         location = "{0}  Node:{1}".format(node.location.description, node.name)
         
-        return render(request, 'chart2.html',  {'location': location, 'data': data, 'series': series, 'yaxis_labels': yaxis_labels, 'colors': colors})
+        return render(request, 'chart3.html',  {'location': location, 'data': data, 'series': series, 'yaxis_labels': yaxis_labels, 'colors': colors})
           
 def webhook(request):
    #
