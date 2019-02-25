@@ -63,7 +63,7 @@ def chart(request):
         
         for eventLog in eventLogs:
             #date_time = eventLog.timestamp.strftime("%m/%d/%Y, %H:%M:%S")
-            date_time = eventLog.timestamp.strftime("%d, %H:%M")
+            date_time = eventLog.timestamp.strftime(%H:%M")
             data.append([date_time, float(eventLog.eventdata), eventLog.meshacktimemillis])
         
         print(data)
