@@ -82,7 +82,7 @@ def chart(request):
         
         for pingLog in pingLogs:
             date_time = pingLog.timestamp.strftime("%H:%M")
-            pingState = 100*(10001 - pingLog.pingstate.idonlinestate)
+            pingState = 1000*(10001 - pingLog.pingstate.idonlinestate)
             ping.append([date_time, pingState])
           
       
