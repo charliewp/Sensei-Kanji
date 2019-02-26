@@ -114,6 +114,19 @@ anychart.onDocumentReady(function () {
       }
       chart[n].xAxis().ticks().enabled(false);
       chart[n].yAxis().ticks().enabled(false);
+      //
+      //work on the time axis
+      var dateScale = anychart.scales.dateTime();
+      // set one year ticks interval
+      var dateTicks = dateScale.ticks();
+      dateTicks.interval(1);
+      // set two months minor ticks interval
+      var dateMinorTicks = dateScale.minorTicks();
+      dateMinorTicks.interval(0, 2);
+      // set DateTime Scale as y scale of the chart
+      chart[n].xScale(dateScale);
+
+      //
       // turn on chart animation
       chart[n].animation(true);
       // set chart padding
