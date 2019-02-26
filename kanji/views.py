@@ -72,7 +72,7 @@ def chart(request):
         
         for eventLog in eventLogs:
             #date_time = eventLog.timestamp.strftime("%m/%d/%Y, %H:%M:%S")
-            date_time = eventLog.timestamp.strftime("%HH:MM")
+            date_time = eventLog.timestamp.strftime("%H:%M")
             #date_time = eventLog.timestamp.replace(tzinfo=timezone.utc).astimezone(tz="US/Eastern").strftime("%H:%M")
             ackTime = eventLog.meshacktimemillis
             if ackTime>1000:
