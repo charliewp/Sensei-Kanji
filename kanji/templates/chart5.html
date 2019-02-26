@@ -108,8 +108,9 @@ anychart.onDocumentReady(function () {
       seriesData[n] = dataSet.mapAs({'x': 0, 'value': n+1});
       // create line chart
       chart[n] = anychart.line();
-      if n!=0:
-        chart[n].xAxis().labels().enabled(false)
+      if (n!=0) {
+         chart[n].xAxis().labels().enabled(false);
+      }
       // turn on chart animation
       chart[n].animation(true);
       // set chart padding
