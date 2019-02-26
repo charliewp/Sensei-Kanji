@@ -82,13 +82,11 @@ def chart(request):
         ping = []
         
         pingLogs = PingLog.objects.all().filter(node=node).filter(timestamp__gte = time24hoursago).order_by('timestamp')
-        n=0
+        
         for pingLog in pingLogs:        
             date_time = pingLog.timestamp.strftime("%H:%M")
             pingState = 100*(10001 - pingLog.pingstate.idonlinestate)
-            #pingState = n * 10
             ping.append([date_time, pingState])
-            n = n + 1
         
         location = "{0}  Node:{1}".format(node.location.description, node.name)
         

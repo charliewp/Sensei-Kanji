@@ -146,7 +146,7 @@ anychart.onDocumentReady(function () {
 
     // set chart title text settings
     pingchart.title('Ping');
-    pingchart.yScale().minimum(-100);
+    pingchart.yScale().minimum(0);
     pingchart.yScale().maximum(100);
 
     // set yAxis title
@@ -157,7 +157,7 @@ anychart.onDocumentReady(function () {
     //pingchartSeries.name('Ping');
     //pingchartSeries.hovered().markers().enabled(true).type('circle').size(4);
     //pingchartSeries.tooltip().position('right').anchor('left-center').offsetX(5).offsetY(5);
-    pingchartSeries.stroke('green');
+    pingchartSeries.stroke('4 green');
 
     pingchart.container('ping_');      
     pingchart.draw();    
