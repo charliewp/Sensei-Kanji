@@ -55,7 +55,7 @@ html, body, #container {
     </div>
 
     <div class="row" style="width:900px;">
-        <div class="column" id="ping" style="width:900px;height:100px"></div>
+        <div class="column" id="ping_" style="width:900px;height:100px"></div>
     </div>
 </div>
 <script>
@@ -135,13 +135,14 @@ anychart.onDocumentReady(function () {
     pingchart.animation(true);
 
     // set chart padding
-    pingchart.padding([10, 20, 5, 20]);
+    //pingchart.padding([10, 20, 5, 20]);
+    pingchart.padding([0,0,0,0]);
 
     // turn on the crosshair
-    pingchart.crosshair().enabled(true).yLabel(false).yStroke(null);
+    //pingchart.crosshair().enabled(true).yLabel(false).yStroke(null);
 
     // set tooltip mode to point
-    pingchart.tooltip().positionMode('point');
+    //pingchart.tooltip().positionMode('point');
 
     // set chart title text settings
     pingchart.title('Ping');
@@ -154,11 +155,11 @@ anychart.onDocumentReady(function () {
 
     var pingchartSeries = pingchart.line(pingseriesData);
     //pingchartSeries.name('Ping');
-    pingchartSeries.hovered().markers().enabled(true).type('circle').size(4);
-    pingchartSeries.tooltip().position('right').anchor('left-center').offsetX(5).offsetY(5);
+    //pingchartSeries.hovered().markers().enabled(true).type('circle').size(4);
+    //pingchartSeries.tooltip().position('right').anchor('left-center').offsetX(5).offsetY(5);
     pingchartSeries.stroke('green');
 
-    pingchart.container('ping');      
+    pingchart.container('ping_');      
     pingchart.draw();    
 
  
