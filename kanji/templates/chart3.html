@@ -81,7 +81,7 @@ anychart.onDocumentReady(function () {
       gauges[n].axis().labels().padding(5).fontSize(1).position('outside').format('{%Value}');
       point = data[data.length-1][n+1]
       gauges[n].data([point]);
-      gauges[n].axis().scale().minimum(ranges[n][0]).maximum(ranges[n][5]).ticks({interval: 10}).minorTicks({interval: 5});
+      gauges[n].axis().scale().minimum(ranges[n][0]).maximum(ranges[n][5]).ticks({interval: 30}).minorTicks({interval: 15});
       gauges[n].axis().fill('#545f69').width(1).ticks({type: 'line', fill: 'white', length: 2});
       gauges[n].needle().stroke('2 #07090d').startRadius('35%').endRadius('90%').startWidth('5.5%').endWidth('0.1%').middleWidth('2.5%');
       gauges[n].range(0, {from: ranges[n][0], to: ranges[n][1], position: 'inside', fill: fills[n][0], startSize: 15, endSize: 15, radius: 100 });
