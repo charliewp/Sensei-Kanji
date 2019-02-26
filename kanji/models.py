@@ -81,7 +81,7 @@ class Node(models.Model):
     name = models.CharField(max_length=24)
     coreid = models.CharField(max_length=24)
     coretype = models.ForeignKey(CoreType,on_delete=models.PROTECT,  null=True)
-    #nodetype = models.ForeignKey(CoreType,on_delete=models.PROTECT,  null=True)
+    nodetype = models.ForeignKey(NodeType,on_delete=models.PROTECT,  null=True, default=10000)
     deploystate = models.ForeignKey(DeployState,on_delete=models.PROTECT,  null=True)
     startofservicedate = models.DateField(null=True, blank=True)
     endofservicedate = models.DateField(null=True, blank=True)
