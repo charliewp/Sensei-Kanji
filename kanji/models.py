@@ -24,6 +24,13 @@ class SensorType(models.Model):
     units = models.CharField(max_length=32, default='none')
     def __str__(self):
         return self.description
+        
+class NodeType(models.Model):
+    idnodetype  = models.BigAutoField(primary_key=True)
+    description = models.CharField(max_length=32)
+    shorttag = models.CharField(max_length=32, default='none')
+    def __str__(self):
+        return self.description
     
 class CoreType(models.Model):
     idcoretype  = models.BigAutoField(primary_key=True)
@@ -74,6 +81,7 @@ class Node(models.Model):
     name = models.CharField(max_length=24)
     coreid = models.CharField(max_length=24)
     coretype = models.ForeignKey(CoreType,on_delete=models.PROTECT,  null=True)
+    #nodetype = models.ForeignKey(CoreType,on_delete=models.PROTECT,  null=True)
     deploystate = models.ForeignKey(DeployState,on_delete=models.PROTECT,  null=True)
     startofservicedate = models.DateField(null=True, blank=True)
     endofservicedate = models.DateField(null=True, blank=True)
