@@ -85,8 +85,8 @@ def chart(request):
         n=0
         for pingLog in pingLogs:        
             date_time = pingLog.timestamp.strftime("%H:%M")
-            #pingState = random.randint(0, 500) + 1000*(10001 - pingLog.pingstate.idonlinestate)
-            pingState = n * 10
+            pingState = 100*(10001 - pingLog.pingstate.idonlinestate)
+            #pingState = n * 10
             ping.append([date_time, pingState])
             n = n + 1
         
