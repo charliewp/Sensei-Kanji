@@ -59,7 +59,7 @@ html, body, #container {
     </div>
 </div>
 <script type="text/javascript">
-    window.setTimeout("reloadpage();", 30000);    
+    window.setTimeout("reloadpage();", 60000);    
     function reloadpage() {
       location.reload(true)
     }
@@ -143,13 +143,6 @@ anychart.onDocumentReady(function () {
     // set chart padding
     //pingchart.padding([10, 20, 5, 20]);
     pingchart.padding([0,0,0,0]);
-
-    // turn on the crosshair
-    //pingchart.crosshair().enabled(true).yLabel(false).yStroke(null);
-
-    // set tooltip mode to point
-    //pingchart.tooltip().positionMode('point');
-
     // set chart title text settings
     pingchart.title('Ping');
     pingchart.yScale().minimum(0);

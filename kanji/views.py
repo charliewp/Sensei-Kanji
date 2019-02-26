@@ -58,7 +58,7 @@ def chart(request):
         
         data = []    
 
-        ranges = [ [0, 45, 45, 85, 85, 110], [0, 100, 100, 200, 200, 300] ]
+        ranges = [ [0, 45, 45, 85, 85, 110], [0, 250, 250, 750, 750, 1000] ]
         fills  = [ ['#0b2e7d 0.4', '#009900 0.4', '#dd2c00 0.4'], ['#ffe500 0.4', '#ffe500 0.4', '#dd2c00 0.4']]
         units = ["F", "ms"]
            
@@ -75,8 +75,8 @@ def chart(request):
             date_time = eventLog.timestamp.strftime("%H:%M")
             #date_time = eventLog.timestamp.replace(tzinfo=timezone.utc).astimezone(tz="US/Eastern").strftime("%H:%M")
             ackTime = eventLog.meshacktimemillis
-            if ackTime>300:
-                ackTime=300
+            if ackTime>1000:
+                ackTime=1000
             data.append([date_time, float(eventLog.eventdata), ackTime])
         
         ping = []
