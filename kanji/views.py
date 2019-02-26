@@ -69,7 +69,10 @@ def chart(request):
         for eventLog in eventLogs:
             #date_time = eventLog.timestamp.strftime("%m/%d/%Y, %H:%M:%S")
             date_time = eventLog.timestamp.strftime("%H:%M")
-            data.append([date_time, float(eventLog.eventdata), eventLog.meshacktimemillis])
+            ackTime = eventLog.meshacktimemillis
+            if ackTime>300:
+                ackTime=300
+            data.append([date_time, float(eventLog.eventdata), ackTime])
         
         print(data)
         print(node.location)
