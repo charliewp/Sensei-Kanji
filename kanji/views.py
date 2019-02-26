@@ -20,6 +20,7 @@ from django.template.context import RequestContext
 from django.contrib.auth import authenticate
 
 from .models import EventLog
+from .models import PingLog
 from .models import Node
 from .models import EventType
 from .models import SensorType
@@ -75,12 +76,19 @@ def chart(request):
                 ackTime=300
             data.append([date_time, float(eventLog.eventdata), ackTime])
         
-        print(data)
-        print(node.location)
+        ping = []
+        
+        pingLogs = PingLog.objects.all().filter(node=node).filter(timestamp__gte = time24hoursago).order_by('timestamp')
+        
+        for pingLog in pingLogs:
+            date_time = pingLog.timestamp.strftime("%H:%M")
+            pingState = (pingLog.pingstate.idpingstate - 10000)
+            ping.append([date_time, pingState])
+          
         
         location = "{0}  Node:{1}".format(node.location.description, node.name)
         
-        return render(request, 'chart3.html',  {'ranges': ranges, 'fills': fills, 'units': units, 'location': location, 'data': data, 'series': series, 'yaxis_labels': yaxis_labels, 'colors': colors})
+        return render(request, 'chart4.html',  {'ranges': ranges, 'fills': fills, 'units': units, 'location': location, 'data': data, 'series': series, 'yaxis_labels': yaxis_labels, 'ping': ping, 'colors': colors})
           
 def webhook(request):
    #

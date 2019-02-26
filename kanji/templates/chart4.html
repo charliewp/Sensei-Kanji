@@ -1,0 +1,177 @@
+{% load staticfiles %}                     
+<html>
+<head>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js?hcode=be5162d915534272a57d0bb781d27f2b"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js?hcode=be5162d915534272a57d0bb781d27f2b"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js?hcode=be5162d915534272a57d0bb781d27f2b"></script>
+  <link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css?hcode=be5162d915534272a57d0bb781d27f2b" type="text/css" rel="stylesheet">
+  <link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css?hcode=be5162d915534272a57d0bb781d27f2b" type="text/css" rel="stylesheet"> 
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-circular-gauge.min.js?hcode=be5162d915534272a57d0bb781d27f2b"></script>
+<style type="text/css">
+html, body, #container {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+* {
+  box-sizing: border-box;
+}
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+.left {
+  width: 25%;
+}
+
+.right {
+  width: 75%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+</head>
+<body>
+  <h3>{{ location }}</h3>
+<div class="container"> 
+
+    <div class="row" style="width:900px;">
+        <div class="column" id="container_1" style="width:600px;height:200px"></div>
+        <div class="column" id="speed_1" style="width:300px;height:200px"></div>
+    </div>
+    <div class="row" style="width:900px;">
+        <div class="column" id="container_2" style="width:600px;height:200px"></div>
+        <div class="column" id="speed_2" style="width:300px;height:200px"></div>
+    </div>
+
+    <div class="row" style="width:900px;">
+        <div class="column" id="ping" style="width:900px;height:100px"></div>
+    </div>
+</div>
+<script>
+anychart.onDocumentReady(function () {
+    // create data set on our data
+    //window.alert("Hello");
+    data = {{ data | safe }};
+    ping = {{ ping | safe }};
+    series = {{ series | safe }};
+    colors = {{ colors | safe }};
+    ranges = {{ ranges | safe }};
+    fills = {{ fills | safe  }};
+    units = {{ units | safe }};
+    yaxis_labels = {{ yaxis_labels | safe }};
+
+     
+    //debugger;
+    var dataSet = anychart.data.set(data);    
+    var seriesData = new Array(series.length);
+    var chart = new Array(series.length);
+    var chartSeries = new Array(seriesData.length)
+    
+    var gauges = new Array(seriesData.length)
+    for (n=0; n<series.length; n++) { 
+      gauges[n] = anychart.gauges.circular();
+      gauges[n].fill('#fff').stroke(null).padding(0).margin(5).startAngle(270).sweepAngle(180);
+      gauges[n].axis().labels().padding(5).fontSize(1).position('outside').format('{%Value}');
+      point = data[data.length-1][n+1]
+      gauges[n].data([point]);
+      gauges[n].axis().scale().minimum(ranges[n][0]).maximum(ranges[n][5]).ticks({interval: 30}).minorTicks({interval: 15});
+      gauges[n].axis().fill('#545f69').width(1).ticks({type: 'line', fill: 'white', length: 2});
+      gauges[n].needle().stroke('2 #07090d').startRadius('35%').endRadius('90%').startWidth('5.5%').endWidth('0.1%').middleWidth('2.5%');
+      gauges[n].range(0, {from: ranges[n][0], to: ranges[n][1], position: 'inside', fill: fills[n][0], startSize: 15, endSize: 15, radius: 100 });
+      gauges[n].range(1, { from: ranges[n][2], to: ranges[n][3], position: 'inside', fill: fills[n][1], startSize: 15, endSize: 15, radius: 100 });
+      gauges[n].range(2, { from: ranges[n][4], to: ranges[n][5], position: 'inside', fill: fills[n][2], startSize: 15, endSize: 15, radius: 100 });
+      gauges[n].container('speed_' + (n+1).toString());
+      displayvalue = point + units[n]
+      gauges[n].label(2).text(displayvalue).fontColor('#212121').fontSize(44).offsetY('18%').offsetX(20).anchor('center');
+      gauges[n].draw(); 
+    } 
+           
+    for (n=0; n<series.length; n++) {       
+
+      seriesData[n] = dataSet.mapAs({'x': 0, 'value': n+1});
+      // create line chart
+      chart[n] = anychart.line();
+
+      // turn on chart animation
+      chart[n].animation(true);
+
+      // set chart padding
+      chart[n].padding([10, 20, 5, 20]);
+
+      // turn on the crosshair
+      chart[n].crosshair().enabled(true).yLabel(false).yStroke(null);
+
+      // set tooltip mode to point
+      chart[n].tooltip().positionMode('point');
+
+      // set chart title text settings
+      chart[n].title(series[n]);
+
+      // set yAxis title
+      chart[n].yAxis().title(yaxis_labels[n]);
+      chart[n].xAxis().labels().padding(5)
+
+      chartSeries[n] = chart[n].line(seriesData[n]);
+      chartSeries[n].name(series[n]);
+      chartSeries[n].hovered().markers().enabled(true).type('circle').size(4);
+      chartSeries[n].tooltip().position('right').anchor('left-center').offsetX(5).offsetY(5);
+      chartSeries[n].stroke(colors[n]);
+
+      chart[n].container('container_' + (n+1).toString());      
+      chart[n].draw(); 
+    }
+    
+    var pingSet = anychart.data.set(ping);
+    var pingseriesData = pingSet.mapAs({'x': 0, 'value': n+1});
+      // create line chart
+    var pingchart = anychart.line();
+
+    // turn on chart animation
+    pingchart.animation(true);
+
+    // set chart padding
+    pingchart.padding([10, 20, 5, 20]);
+
+    // turn on the crosshair
+    pingchart.crosshair().enabled(true).yLabel(false).yStroke(null);
+
+    // set tooltip mode to point
+    pingchart.tooltip().positionMode('point');
+
+    // set chart title text settings
+    pingchart.title('Ping');
+
+    // set yAxis title
+    pingchart.yAxis().title(yaxis_labels[n]);
+    pingchart.xAxis().labels().padding(5)
+
+    var pingchartSeries = pingchart.line(pingseriesData);
+    pingchartSeries.name('Ping');
+    pingchartSeries.hovered().markers().enabled(true).type('circle').size(4);
+    pingchartSeries.tooltip().position('right').anchor('left-center').offsetX(5).offsetY(5);
+    pingchartSeries.stroke('black');
+
+    pingchart.container('ping');      
+    pingchart.draw();    
+
+ 
+    
+        
+});
+</script>
+
+</body>
+</html>
+
+                
