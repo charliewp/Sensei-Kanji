@@ -1,8 +1,11 @@
 from datetime import datetime
 from django.utils import timezone
 from datetime import timedelta
+
 import operator
 import json
+import random
+
 from django import forms
 from django.db import models
 from datetime import datetime
@@ -28,7 +31,7 @@ from .models import SensorType
 from django.views.decorators.csrf import ensure_csrf_cookie
 @ensure_csrf_cookie
 
-import random
+
 
 # Create your views here.
 def index(request):
