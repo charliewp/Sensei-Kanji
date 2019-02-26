@@ -28,7 +28,7 @@ from .models import SensorType
 from django.views.decorators.csrf import ensure_csrf_cookie
 @ensure_csrf_cookie
 
-
+import random
 
 # Create your views here.
 def index(request):
