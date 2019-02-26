@@ -64,7 +64,7 @@ def chart(request):
         time24hoursago = now - timedelta(hours=24)
         
                
-        eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).filter(timestamp__gte = time24hoursago)
+        eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).filter(timestamp__gte = time24hoursago).order_by('timestamp')
         
         for eventLog in eventLogs:
             #date_time = eventLog.timestamp.strftime("%m/%d/%Y, %H:%M:%S")
