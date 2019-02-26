@@ -46,12 +46,12 @@ html, body, #container {
 <div class="container"> 
 <!--{% for item in series %}-->
 <div class="row" style="width:900px;">
-    <div class="column" id="container_1" style="width:700px;height:200px"></div>
-    <div class="column" id="speed_1" style="width:200px;height:200px"></div>
+    <div class="column" id="container_1" style="width:600px;height:200px"></div>
+    <div class="column" id="speed_1" style="width:300px;height:200px"></div>
 </div>
 <div class="row" style="width:900px;">
-    <div class="column" id="container_2" style="width:700px;height:200px"></div>
-    <div class="column" id="speed_2" style="width:200px;height:200px"></div>
+    <div class="column" id="container_2" style="width:600px;height:200px"></div>
+    <div class="column" id="speed_2" style="width:300px;height:200px"></div>
 </div>
 <!--{% endfor %}  -->
 </div>
@@ -62,6 +62,9 @@ anychart.onDocumentReady(function () {
     data = {{ data | safe }};
     series = {{ series | safe }}
     colors = {{ colors | safe }}
+    ranges = {{ ranges | safe }}
+    fills = {{ fills | safe  }}
+    units = {{ units | safe }}
     yaxis_labels = {{ yaxis_labels | safe }} 
 
      
@@ -76,14 +79,17 @@ anychart.onDocumentReady(function () {
       gauges[n] = anychart.gauges.circular();
       gauges[n].fill('#fff').stroke(null).padding(0).margin(5).startAngle(270).sweepAngle(180);
       gauges[n].axis().labels().padding(5).fontSize(14).position('outside').format('{%Value}');
-      gauges[n].data(data[data.length-1][n+1]);
-      gauges[n].axis().scale().minimum(0).maximum(100).ticks({interval: 10}).minorTicks({interval: 5});
+      point = data[data.length-1][n+1]
+      gauges[n].data([point]);
+      gauges[n].axis().scale().minimum(ranges[n][0]).maximum(ranges[n][5]).ticks({interval: 10}).minorTicks({interval: 5});
       gauges[n].axis().fill('#545f69').width(1).ticks({type: 'line', fill: 'white', length: 2});
-      gauges[n].needle().stroke('2 #07090d').startRadius('5%').endRadius('90%').startWidth('7.5%').endWidth('0.1%').middleWidth('2.5%');
-      gauges[n].range(0, {from: 0, to: 45, position: 'inside', fill: '#0b2e7d 0.4', startSize: 100, endSize: 100, radius: 100 });
-      gauges[n].range(1, { from: 45, to: 85, position: 'inside', fill: '#009900 0.4', startSize: 100, endSize: 100, radius: 100 });
-      gauges[n].range(2, { from: 85, to: 110, position: 'inside', fill: '#dd2c00 0.4', startSize: 100, endSize: 100, radius: 100 });
+      gauges[n].needle().stroke('2 #07090d').startRadius('35%').endRadius('90%').startWidth('5.5%').endWidth('0.1%').middleWidth('2.5%');
+      gauges[n].range(0, {from: ranges[n][0], to: ranges[n][1], position: 'inside', fill: fills[n][0], startSize: 15, endSize: 15, radius: 100 });
+      gauges[n].range(1, { from: ranges[n][2], to: ranges[n][3], position: 'inside', fill: fills[n][1], startSize: 15, endSize: 15, radius: 100 });
+      gauges[n].range(2, { from: ranges[n][4], to: ranges[n][5], position: 'inside', fill: fills[n][2], startSize: 15, endSize: 15, radius: 100 });
       gauges[n].container('speed_' + (n+1).toString());
+      displayvalue = point + units[n]
+      gauges[n].label(2).text(displayvalue).fontColor('#212121').fontSize(44).offsetY('18%').offsetX(20).anchor('center');
       gauges[n].draw(); 
     } 
            

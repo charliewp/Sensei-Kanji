@@ -44,7 +44,7 @@ def chart(request):
         #]
         series = []
         series.append(str("Temperature"))
-        series.append("Mesh Response Time")
+        series.append("Network")
         
         yaxis_labels = []
         yaxis_labels.append("Degree F")
@@ -52,13 +52,18 @@ def chart(request):
         
         colors = ["red", "blue", "green", "black"]
         
-        data = []        
+        data = []    
+
+        ranges = [ [0, 45, 45, 85, 85, 110], [0, 100, 100, 200, 200, 300] ]
+        fills  = [ ['#0b2e7d 0.4', '#009900 0.4', '#dd2c00 0.4'], ['#ffe500 0.4', '#ffe500 0.4', '#dd2c00 0.4']]
+        units = ["F", "ms"]
            
         node = Node.objects.all().filter(coreid=coreid).first()
         
         now = datetime.today()
         time24hoursago = now - timedelta(hours=24)
         
+               
         eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).filter(timestamp__gte = time24hoursago)
         
         for eventLog in eventLogs:
@@ -71,7 +76,7 @@ def chart(request):
         
         location = "{0}  Node:{1}".format(node.location.description, node.name)
         
-        return render(request, 'chart3.html',  {'location': location, 'data': data, 'series': series, 'yaxis_labels': yaxis_labels, 'colors': colors})
+        return render(request, 'chart3.html',  {'ranges': ranges, 'fills': fills, 'units': units, 'location': location, 'data': data, 'series': series, 'yaxis_labels': yaxis_labels, 'colors': colors})
           
 def webhook(request):
    #
