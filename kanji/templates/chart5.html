@@ -147,14 +147,14 @@ anychart.onDocumentReady(function () {
     pingchart.title('Ping');
 
     // set yAxis title
-    pingchart.yAxis().title(yaxis_labels[n]);
+    //pingchart.yAxis().title(yaxis_labels[n]);
     pingchart.xAxis().labels().padding(5)
 
     var pingchartSeries = pingchart.line(pingseriesData);
-    pingchartSeries.name('Ping');
+    //pingchartSeries.name('Ping');
     pingchartSeries.hovered().markers().enabled(true).type('circle').size(4);
     pingchartSeries.tooltip().position('right').anchor('left-center').offsetX(5).offsetY(5);
-    pingchartSeries.stroke('green');
+    pingchartSeries.stroke('10 green');
 
     pingchart.container('ping');      
     pingchart.draw();    
