@@ -78,7 +78,7 @@ anychart.onDocumentReady(function () {
     for (n=0; n<series.length; n++) { 
       gauges[n] = anychart.gauges.circular();
       gauges[n].fill('#fff').stroke(null).padding(0).margin(5).startAngle(270).sweepAngle(180);
-      gauges[n].axis().labels().padding(5).fontSize(14).position('outside').format('{%Value}');
+      gauges[n].axis().labels().padding(5).fontSize(1).position('outside').format('{%Value}');
       point = data[data.length-1][n+1]
       gauges[n].data([point]);
       gauges[n].axis().scale().minimum(ranges[n][0]).maximum(ranges[n][5]).ticks({interval: 10}).minorTicks({interval: 5});
