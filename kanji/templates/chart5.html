@@ -123,7 +123,7 @@ anychart.onDocumentReady(function () {
       dateMinorTicks.interval(0, 0, 0, 0, 60);
       // set DateTime Scale as x scale of the chart
       var offset = new Date().getTimezoneOffset();
-      anychart.format.outputTimezone(-300);
+      anychart.format.outputTimezone(0);
       
       chart[n].xScale(dateScale);      
       // turn on chart animation
