@@ -79,7 +79,7 @@ def node(request):
                     "linecolor" : "green",
                     "ranges"    : [0, 25, 25, 50, 50, 100],
                     "fills"     : ['#ffe500 0.4', '#ffe500 0.4', '#dd2c00 0.4'],
-                    "units"     : "1/0"
+                    "units"     : "1/0",
                     "gaugeshow" : "false"
                 }
                 
