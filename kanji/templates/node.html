@@ -168,7 +168,8 @@ anychart.onDocumentReady(function () {
     // set chart title text settings
     pingchart.title('Ping');
     pingchart.yScale().minimum(0);
-    pingchart.yScale().maximum(100);    
+    pingchart.yScale().maximum(100); 
+    pingchart.tooltip().titleFormat("time: {%x}{dateTimeFormat:HH:mm:ss}");    
     //work on the time axis
     var dateScale2 = anychart.scales.dateTime();
     // set one year ticks interval
