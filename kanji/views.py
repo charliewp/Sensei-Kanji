@@ -41,7 +41,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 def index(request):
     return HttpResponse("Hello, world. You're at the Sensei-Kanji index page.")
     
-def chart(request):
+def node(request):
     if request.method == 'GET':
         coreid = request.GET.get('coreid')
         #data  and array of arrays
@@ -99,7 +99,7 @@ def chart(request):
         
         location = "{0}  Node:{1}".format(node.location.description, node.name)
         
-        return render(request, 'chart5.html',  {'ranges': ranges, 'fills': fills, 'units': units, 'location': location, 'data': data, 'series': series, 'yaxis_labels': yaxis_labels, 'ping': ping, 'colors': colors})
+        return render(request, 'node.html',  {'ranges': ranges, 'fills': fills, 'units': units, 'location': location, 'data': data, 'series': series, 'yaxis_labels': yaxis_labels, 'ping': ping, 'colors': colors})
           
 def webhook(request):
    #
