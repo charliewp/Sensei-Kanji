@@ -78,7 +78,7 @@ def chart(request):
         eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).filter(timestamp__gte = time24hoursago).order_by('timestamp')
         
         for eventLog in eventLogs:
-            date_time = eventLog.timestamp.strftime("%m/%d/%Y, %H:%M:%S")
+            date_time = eventLog.timestamp.strftime("%m/%d/%Y %H:%M:%S")
             #date_time = eventLog.timestamp.strftime("%H:%M")
             #date_time = eventLog.timestamp.replace(tzinfo=timezone.utc).astimezone(tz="US/Eastern").strftime("%H:%M")
             ackTime = eventLog.meshacktimemillis
@@ -91,10 +91,9 @@ def chart(request):
         pingLogs = PingLog.objects.all().filter(node=node).filter(timestamp__gte = time24hoursago).order_by('timestamp')
         
         for pingLog in pingLogs:        
-            date_time = pingLog.timestamp.strftime("%m/%d/%Y, %H:%M:%S")
+            date_time = pingLog.timestamp.strftime("%m/%d/%Y %H:%M:%S")
             pingState = 100*(10001 - pingLog.pingstate.idonlinestate)
-            #ping.append([date_time, pingState])
-            ping.append([pingLog.timestamp, pingState])
+            ping.append([date_time, pingState])
         
         location = "{0}  Node:{1}".format(node.location.description, node.name)
         
