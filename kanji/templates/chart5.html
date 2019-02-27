@@ -130,7 +130,7 @@ anychart.onDocumentReady(function () {
       chart[n].crosshair().enabled(true).yLabel(false).yStroke(null);
       // set tooltip mode to point
       chart[n].tooltip().positionMode('point');
-      chart[n].tooltip().titleFormat("time: {%x}");
+      //chart[n].tooltip().titleFormat("time: {%x}");
       // set the tooltip content
       chart[n].tooltip().format(function(e){
         var xtime = (this.x)/1000;
