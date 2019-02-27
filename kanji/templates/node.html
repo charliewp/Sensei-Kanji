@@ -94,12 +94,12 @@ anychart.onDocumentReady(function () {
       gauges[n].axis().labels().padding(5).fontSize(1).position('outside').format('{%Value}');
       point = data[data.length-1][n+1]
       gauges[n].data([point]);
-      gauges[n].axis().scale().minimum(chartdefs.charts[n]['ranges'][0]).maximum(ranges[n][5]).ticks({interval: 30}).minorTicks({interval: 15});
+      gauges[n].axis().scale().minimum(chartdefs.charts[n]['ranges'][0]).maximum(chartdefs.charts[n]['ranges'][5]).ticks({interval: 30}).minorTicks({interval: 15});
       gauges[n].axis().fill('#545f69').width(1).ticks({type: 'line', fill: 'white', length: 2});
       gauges[n].needle().stroke('2 #07090d').startRadius('35%').endRadius('90%').startWidth('5.5%').endWidth('0.1%').middleWidth('2.5%');
-      gauges[n].range(0, {from: ranges[n][0], to: ranges[n][1], position: 'inside', fill: fills[n][0], startSize: 15, endSize: 15, radius: 100 });
-      gauges[n].range(1, { from: ranges[n][2], to: ranges[n][3], position: 'inside', fill: fills[n][1], startSize: 15, endSize: 15, radius: 100 });
-      gauges[n].range(2, { from: ranges[n][4], to: ranges[n][5], position: 'inside', fill: fills[n][2], startSize: 15, endSize: 15, radius: 100 });
+      gauges[n].range(0, {from: chartdefs.charts[n]['ranges'][0], to: chartdefs.charts[n]['ranges'][1], position: 'inside', fill: fills[n][0], startSize: 15, endSize: 15, radius: 100 });
+      gauges[n].range(1, { from: chartdefs.charts[n]['ranges'][2], to: chartdefs.charts[n]['ranges'][3], position: 'inside', fill: fills[n][1], startSize: 15, endSize: 15, radius: 100 });
+      gauges[n].range(2, { from: chartdefs.charts[n]['ranges'][4], to: chartdefs.charts[n]['ranges'][5], position: 'inside', fill: fills[n][2], startSize: 15, endSize: 15, radius: 100 });
       gauges[n].container('speed_' + (n+1).toString());
       displayvalue = point + units[n]
       gauges[n].label(2).text(displayvalue).fontColor('#212121').fontSize(44).offsetY('18%').offsetX(20).anchor('center');
