@@ -140,13 +140,13 @@ anychart.onDocumentReady(function () {
       chart[n].tooltip().positionMode('point');
       chart[n].tooltip().titleFormat("time: {%x}{dateTimeFormat:HH:mm:ss}");
       // set chart title text settings
-      chart[n].title(series[n]);
+      chart[n].title(chartdefs.charts[n]['title']);
       // set yAxis title
       chart[n].yAxis().title(chartdefs.charts[n]['linecolor']);
       chart[n].xAxis().labels().padding(5)
 
       chartSeries[n] = chart[n].line(seriesData[n]);
-      chartSeries[n].name(series[n]);
+      chartSeries[n].name(chartdefs.charts[n]['title']);
       chartSeries[n].hovered().markers().enabled(true).type('circle').size(4);
       chartSeries[n].tooltip().position('right').anchor('left-center').offsetX(5).offsetY(5);
       chartSeries[n].stroke(chartdefs.charts[n]['linecolor']);
