@@ -122,7 +122,7 @@ anychart.onDocumentReady(function () {
       dateTicks.interval(1);
       // set two months minor ticks interval
       var dateMinorTicks = dateScale.minorTicks();
-      dateMinorTicks.interval(0, 0, 0, 6);
+      dateMinorTicks.interval(0, 2);
       // set DateTime Scale as y scale of the chart
       chart[n].xScale(dateScale);
 
