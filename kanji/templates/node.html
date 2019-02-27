@@ -79,7 +79,7 @@ anychart.onDocumentReady(function () {
     var chartSeries = new Array(numCharts)
     
     var gauges = new Array(seriesData.length)
-    for (n=0; n<3; n++) { 
+    for (n=0; n<numCharts; n++) { 
       if (chartdefs.charts[n]['gaugeshow']=="true") {
         gauges[n] = anychart.gauges.circular();
         gauges[n].fill('#fff').stroke(null).padding(0).margin(5).startAngle(270).sweepAngle(180);
@@ -94,12 +94,12 @@ anychart.onDocumentReady(function () {
         gauges[n].range(2, { from: chartdefs.charts[n]['ranges'][4], to: chartdefs.charts[n]['ranges'][5], position: 'inside', fill: chartdefs.charts[n]['fills'][2], startSize: 15, endSize: 15, radius: 100 });
         gauges[n].container('speed_' + (n+1).toString());
         displayvalue = point + chartdefs.charts[n]['units']
-        gauges[n].label(2).text(displayvalue).fontColor('#212121').fontSize(44).offsetY('18%').offsetX(20).anchor('center');
+        gauges[n].label(2).text(displayvalue).fontColor('#212121').fontSize(parseInt(chartdefs.charts[n]['gaugefont'])).offsetY('18%').offsetX(20).anchor('center');
         gauges[n].draw(); 
       }
     } 
            
-    for (n=0; n<3; n++) { 
+    for (n=0; n<numCharts; n++) { 
       seriesData[n] = dataSet.mapAs({'x': 0, 'value': n+1});
       // create line chart
       chart[n] = anychart.line();
