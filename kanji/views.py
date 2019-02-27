@@ -95,13 +95,13 @@ def node(request):
         yaxis_labels.append("msecs")
         yaxis_labels.append("ping")
         
-        colors = ["red", "blue", "green", "black"]
+        #colors = ["red", "blue", "green", "black"]
         
         data = []    
 
         # for each chart ...
         #ranges = [ [0, 45, 45, 85, 85, 110], [0, 250, 250, 750, 750, 1000], [0, 25, 25, 50, 50, 100] ]
-        fills  = [ ['#0b2e7d 0.4', '#009900 0.4', '#dd2c00 0.4'], ['#ffe500 0.4', '#ffe500 0.4', '#dd2c00 0.4'], ['#ffe500 0.4', '#ffe500 0.4', '#dd2c00 0.4']]
+        #fills  = [ ['#0b2e7d 0.4', '#009900 0.4', '#dd2c00 0.4'], ['#ffe500 0.4', '#ffe500 0.4', '#dd2c00 0.4'], ['#ffe500 0.4', '#ffe500 0.4', '#dd2c00 0.4']]
         units = ["F", "ms", "UP"]
            
         node = Node.objects.all().filter(coreid=coreid).first()
@@ -138,7 +138,7 @@ def node(request):
         
         location = "{0}  Node:{1}".format(node.location.description, node.name)
         
-        return render(request, 'node.html',  {'chartdefs': chartdefs, 'fills': fills, 'units': units, 'location': location, 'data': data, 'series': series, 'yaxis_labels': yaxis_labels, 'colors': colors})
+        return render(request, 'node.html',  {'chartdefs': chartdefs, 'units': units, 'location': location, 'data': data, 'series': series, 'yaxis_labels': yaxis_labels})
           
 def webhook(request):
    #
