@@ -83,7 +83,7 @@ def node(request):
             ]
         }
         
-        print("chardefs len={0}".format(len(chartdefs['charts'])))
+        print("chardefs len=-{0}".format(len(chartdefs['charts'])))
         
         #print("name={0}".format(charts['charts'][1]['title']))
         
