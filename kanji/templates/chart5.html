@@ -106,6 +106,7 @@ anychart.onDocumentReady(function () {
       seriesData[n] = dataSet.mapAs({'x': 0, 'value': n+1});
       // create line chart
       chart[n] = anychart.line();
+      chart[n].format.outputTimezone(-5);
       if (n!=0) {
          chart[n].xAxis().labels().enabled(false);         
       }
@@ -130,7 +131,7 @@ anychart.onDocumentReady(function () {
       chart[n].crosshair().enabled(true).yLabel(false).yStroke(null);
       // set tooltip mode to point
       chart[n].tooltip().positionMode('point');
-      chart[n].tooltip().titleFormat("time: {%x %%zz}{dateTimeFormat:HH:mm:ss}");
+      chart[n].tooltip().titleFormat("time: {%x}{dateTimeFormat:HH:mm:ss}");
       // set the tooltip content
       //chart[n].tooltip().format(function(e){
       //  var xtime = (this.x)/1000;
