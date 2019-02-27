@@ -119,7 +119,7 @@ anychart.onDocumentReady(function () {
       var dateScale = anychart.scales.dateTime();
       // set one year ticks interval
       var dateTicks = dateScale.ticks();
-      dateTicks.interval(1);
+      dateTicks.interval(0, 0, 0, 1);
       // set two months minor ticks interval
       var dateMinorTicks = dateScale.minorTicks();
       //years interval, months interval, days interval, hours interval, minutes interval, seconds interval.
