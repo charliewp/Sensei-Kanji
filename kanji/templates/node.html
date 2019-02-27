@@ -88,7 +88,7 @@ anychart.onDocumentReady(function () {
     var chartSeries = new Array(seriesData.length)
     
     var gauges = new Array(seriesData.length)
-    for (n=0; n<3; n++) { 
+    for (n=0; n<len(chartdefs['charts']); n++) { 
       gauges[n] = anychart.gauges.circular();
       gauges[n].fill('#fff').stroke(null).padding(0).margin(5).startAngle(270).sweepAngle(180);
       gauges[n].axis().labels().padding(5).fontSize(1).position('outside').format('{%Value}');
