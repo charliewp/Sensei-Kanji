@@ -1,6 +1,7 @@
 from datetime import datetime
 from django.utils import timezone
 from datetime import timedelta
+from django.urls import resolve
 import pytz
 
 import operator
@@ -44,7 +45,7 @@ def index(request):
 def node(request):
     if request.method == 'GET':
         #coreid = request.GET.get('coreid')
-        pathParts = request.path.split("/")
+        pathParts = resolve(request.path_info).url_name.split("/")
         coreid = pathParts(len(pathParts)-1)
         #data  and array of arrays
         #[
