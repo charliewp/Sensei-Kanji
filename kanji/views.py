@@ -93,7 +93,8 @@ def chart(request):
         for pingLog in pingLogs:        
             date_time = pingLog.timestamp.strftime("%m/%d/%Y, %H:%M:%S")
             pingState = 100*(10001 - pingLog.pingstate.idonlinestate)
-            ping.append([date_time, pingState])
+            #ping.append([date_time, pingState])
+            ping.append([pingLog.timestamp, pingState])
         
         location = "{0}  Node:{1}".format(node.location.description, node.name)
         
