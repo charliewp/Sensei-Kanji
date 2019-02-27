@@ -85,10 +85,10 @@ def node(request):
         
         #print("name={0}".format(charts['charts'][1]['title']))
         
-        #series = []
-        #series.append(str("Temperature"))
-        #series.append("Network")
-        #series.append("Ping")
+        series = []
+        series.append(str("Temperature"))
+        series.append("Network")
+        series.append("Ping")
         
         #yaxis_labels = []
         #yaxis_labels.append("Degree F")
@@ -138,7 +138,7 @@ def node(request):
         
         location = "{0}  Node:{1}".format(node.location.description, node.name)
         
-        return render(request, 'node.html',  {'chartdefs': chartdefs, 'location': location, 'data': data })
+        return render(request, 'node.html',  {'chartdefs': chartdefs, 'location': location, 'data': data, 'series': series })
           
 def webhook(request):
    #
