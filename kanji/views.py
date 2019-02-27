@@ -68,8 +68,8 @@ def chart(request):
            
         node = Node.objects.all().filter(coreid=coreid).first()
         
-        #now = datetime.today()
-        now = timezone.now()
+        now = datetime.today()
+        #now = timezone.now()
         time24hoursago = now - timedelta(hours=24)
         
         log.debug(time24hoursago)
