@@ -70,6 +70,7 @@ def node(request):
         
         data = []    
 
+        # for each chart ...
         ranges = [ [0, 45, 45, 85, 85, 110], [0, 250, 250, 750, 750, 1000], [0, 25, 25, 50, 50, 100] ]
         fills  = [ ['#0b2e7d 0.4', '#009900 0.4', '#dd2c00 0.4'], ['#ffe500 0.4', '#ffe500 0.4', '#dd2c00 0.4'], ['#ffe500 0.4', '#ffe500 0.4', '#dd2c00 0.4']]
         units = ["F", "ms", "UP"]
@@ -97,18 +98,18 @@ def node(request):
                 ackTime=1000
             data.append([date_time, float(eventLog.eventdata), ackTime, pingLog.pingstate.idonlinestate])
         
-        ping = []
+        #ping = []
         
-        pingLogs = PingLog.objects.all().filter(node=node).filter(timestamp__gte = time24hoursago).order_by('timestamp')
+        #pingLogs = PingLog.objects.all().filter(node=node).filter(timestamp__gte = time24hoursago).order_by('timestamp')
         
-        for pingLog in pingLogs:        
-            date_time = pingLog.timestamp.strftime("%m/%d/%Y %H:%M:%S")
-            pingState = 100*(10001 - pingLog.pingstate.idonlinestate)
-            ping.append([date_time, pingState])
+        #for pingLog in pingLogs:        
+        #    date_time = pingLog.timestamp.strftime("%m/%d/%Y %H:%M:%S")
+        #    pingState = 100*(10001 - pingLog.pingstate.idonlinestate)
+        #    ping.append([date_time, pingState])
         
         location = "{0}  Node:{1}".format(node.location.description, node.name)
         
-        return render(request, 'node.html',  {'ranges': ranges, 'fills': fills, 'units': units, 'location': location, 'data': data, 'series': series, 'yaxis_labels': yaxis_labels, 'ping': ping, 'colors': colors})
+        return render(request, 'node.html',  {'ranges': ranges, 'fills': fills, 'units': units, 'location': location, 'data': data, 'series': series, 'yaxis_labels': yaxis_labels, 'colors': colors})
           
 def webhook(request):
    #
