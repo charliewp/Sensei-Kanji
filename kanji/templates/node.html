@@ -101,7 +101,7 @@ anychart.onDocumentReady(function () {
       gauges[n].range(1, { from: chartdefs.charts[n]['ranges'][2], to: chartdefs.charts[n]['ranges'][3], position: 'inside', fill: chartdefs.charts[n]['fills'][1], startSize: 15, endSize: 15, radius: 100 });
       gauges[n].range(2, { from: chartdefs.charts[n]['ranges'][4], to: chartdefs.charts[n]['ranges'][5], position: 'inside', fill: chartdefs.charts[n]['fills'][2], startSize: 15, endSize: 15, radius: 100 });
       gauges[n].container('speed_' + (n+1).toString());
-      displayvalue = point + chartdefs.charts[n]['ranges']
+      displayvalue = point + chartdefs.charts[n]['units']
       gauges[n].label(2).text(displayvalue).fontColor('#212121').fontSize(44).offsetY('18%').offsetX(20).anchor('center');
       gauges[n].draw(); 
     } 
