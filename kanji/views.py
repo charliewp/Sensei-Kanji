@@ -83,28 +83,8 @@ def node(request):
             ]
         }
         
-        print("chardefs len=-{0}".format(len(chartdefs['charts'])))
-        
-        #print("name={0}".format(charts['charts'][1]['title']))
-        
-        series = []
-        series.append(str("Temperature"))
-        series.append("Network")
-        series.append("Ping")
-        
-        #yaxis_labels = []
-        #yaxis_labels.append("Degree F")
-        #yaxis_labels.append("msecs")
-        #yaxis_labels.append("ping")
-        
-        #colors = ["red", "blue", "green", "black"]
-        
-        data = []    
-
-        # for each chart ...
-        #ranges = [ [0, 45, 45, 85, 85, 110], [0, 250, 250, 750, 750, 1000], [0, 25, 25, 50, 50, 100] ]
-        #fills  = [ ['#0b2e7d 0.4', '#009900 0.4', '#dd2c00 0.4'], ['#ffe500 0.4', '#ffe500 0.4', '#dd2c00 0.4'], ['#ffe500 0.4', '#ffe500 0.4', '#dd2c00 0.4']]
-        #units = ["F", "ms", "UP"]
+              
+        data = []
            
         node = Node.objects.all().filter(coreid=coreid).first()
         
@@ -141,7 +121,7 @@ def node(request):
         location = "{0}  Node:{1}".format(node.location.description, node.name)
         
         
-        return render(request, 'node.html',  {'chartdefs': chartdefs, 'location': location, 'data': data, 'series': series })
+        return render(request, 'node.html',  {'chartdefs': chartdefs, 'location': location, 'data': data })
           
 def webhook(request):
    #

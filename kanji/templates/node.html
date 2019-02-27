@@ -69,19 +69,9 @@ html, body, #container {
 </script>
 <script>
 anychart.onDocumentReady(function () {
-    // create data set on our data
-    //window.alert("Hello");
     data = {{ data | safe }};
-    //ping = {{ ping | safe }};
-    //series = {{ series | safe }};
-    //colors = {{ colors | safe }};
-    //ranges = {{ ranges | safe }};
-    //fills = {{ fills | safe  }};
-    //units = {{ units | safe }};
     chartdefs = {{ chartdefs | safe}};
-    //yaxis_labels = {{ yaxis_labels | safe }};
-     
-    //debugger;
+    
     var numCharts = chartdefs['charts'].length;
     var dataSet = anychart.data.set(data);    
     var seriesData = new Array(numCharts);
@@ -154,45 +144,7 @@ anychart.onDocumentReady(function () {
       chart[n].container('container_' + (n+1).toString());      
       chart[n].draw(); 
     }
-    /*
-    var pingSet = anychart.data.set(ping);
-    var pingseriesData = pingSet.mapAs({'x': 0, 'value': 1});
-      // create line chart
-    var pingchart = anychart.line();
-    // turn on chart animation
-    pingchart.animation(true);
-    // set chart padding
-    //pingchart.padding([10, 20, 5, 20]);
-    pingchart.padding([0,0,0,0]);
-    // set chart title text settings
-    pingchart.title('Ping');
-    pingchart.yScale().minimum(0);
-    pingchart.yScale().maximum(100); 
-    pingchart.tooltip().titleFormat("time: {%x}{dateTimeFormat:HH:mm:ss}"); 
-    pingchart.xAxis().labels().enabled(false);    
-    //work on the time axis
-    var dateScale2 = anychart.scales.dateTime();
-    // set one year ticks interval
-    var dateTicks2 = dateScale2.ticks();
-    dateTicks2.interval(0, 0, 0, 0, 30);
-    // set two months minor ticks interval
-    var dateMinorTicks2 = dateScale2.minorTicks();
-    //years interval, months interval, days interval, hours interval, minutes interval, seconds interval.
-    dateMinorTicks2.interval(0, 0, 0, 0, 60);
-    // set DateTime Scale as y scale of the chart
-    pingchart.xScale(dateScale2);
-    // set yAxis title
-    //pingchart.yAxis().title(yaxis_labels[n]);
-    pingchart.xAxis().labels().padding(5)
-    var pingchartSeries = pingchart.line(pingseriesData);
-    //pingchartSeries.name('Ping');
-    //pingchartSeries.hovered().markers().enabled(true).type('circle').size(4);
-    //pingchartSeries.tooltip().position('right').anchor('left-center').offsetX(5).offsetY(5);
-    pingchartSeries.stroke('2 green');
-
-    pingchart.container('ping_');      
-    pingchart.draw(); 
-*/    
+      
 });
 </script>
 
