@@ -89,37 +89,27 @@ def node(request):
         node = Node.objects.all().filter(coreid=coreid).first()
         
         now = datetime.today()
-        #now = timezone.now()
         time24hoursago = now - timedelta(hours=24)
-        
         log.debug(time24hoursago)
         
         # get last 24hours       
         eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).filter(timestamp__gte = time24hoursago).order_by('timestamp')
-        # get ALL
-        #eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).order_by('timestamp')
+        # eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).order_by('timestamp')
         
         for eventLog in eventLogs:
             date_time = eventLog.timestamp.strftime("%m/%d/%Y %H:%M:%S")
-            #date_time = eventLog.timestamp.strftime("%H:%M")
-            #date_time = eventLog.timestamp.replace(tzinfo=timezone.utc).astimezone(tz="US/Eastern").strftime("%H:%M")
             ackTime = eventLog.meshacktimemillis
             pingLog = PingLog.objects.all().filter(node=node).filter(timestamp__gte = eventLog.timestamp).first()
+            
             if ackTime>1000:
                 ackTime=1000
-            data.append([date_time, float(eventLog.eventdata), ackTime, pingLog.pingstate.idonlinestate])
-        
-        #ping = []
-        
-        #pingLogs = PingLog.objects.all().filter(node=node).filter(timestamp__gte = time24hoursago).order_by('timestamp')
-        
-        #for pingLog in pingLogs:        
-        #    date_time = pingLog.timestamp.strftime("%m/%d/%Y %H:%M:%S")
-        #    pingState = 100*(10001 - pingLog.pingstate.idonlinestate)
-        #    ping.append([date_time, pingState])
+            
+            if pingLog:
+                data.append([date_time, float(eventLog.eventdata), ackTime, pingLog.pingstate.idonlinestate])
+            else:
+                data.append([date_time, float(eventLog.eventdata), ackTime, 500])
         
         location = "{0}  Node:{1}".format(node.location.description, node.name)
-        
         
         return render(request, 'node.html',  {'chartdefs': chartdefs, 'location': location, 'data': data })
           
