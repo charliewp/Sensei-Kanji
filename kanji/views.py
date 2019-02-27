@@ -75,9 +75,9 @@ def chart(request):
         log.debug(time24hoursago)
         
         # get last 24hours       
-        eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).filter(timestamp__gte = time24hoursago).order_by('timestamp')
+        #eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).filter(timestamp__gte = time24hoursago).order_by('timestamp')
         # get ALL
-        #eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).order_by('timestamp')
+        eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).order_by('timestamp')
         
         for eventLog in eventLogs:
             date_time = eventLog.timestamp.strftime("%m/%d/%Y %H:%M:%S")
