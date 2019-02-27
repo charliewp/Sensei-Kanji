@@ -50,12 +50,41 @@ def node(request):
         pathParts = url.split("/")
         coreid = pathParts[len(pathParts)-1]
         print("coreId={0}".format(coreid))
-        #data  and array of arrays
-        #[
-        #    ['1986', 3.6, 2.3, 2.8, 11.5],
-        #    ['1987', 7.1, 4.0, 4.1, 14.1],
-        #    ['1988', 8.5, 6.2, 5.1, 17.5]
-        #]
+        
+        chartdefs = { "charts": [
+                {
+                    "title"     : "Temperature",
+                    "ylabel"    : "Degrees F",
+                    "yshow"     : "true",
+                    "linecolor" : "red",
+                    "ranges"    : [0, 45, 45, 85, 85, 110],
+                    "fills"     : ['#0b2e7d 0.4', '#009900 0.4', '#dd2c00 0.4'],
+                    "units"     : "F"
+                },
+                {
+                    "title"     : "Network",
+                    "ylabel"    : "millis",
+                    "yshow"     : "true",
+                    "linecolor" : "blue",
+                    "ranges"    : [0, 250, 250, 750, 750, 1000],
+                    "fills"     :  ['#ffe500 0.4', '#ffe500 0.4', '#dd2c00 0.4'],
+                    "units"     : "ms"
+                },
+                {
+                    "title"     : "Ping",
+                    "ylabel"    : "ping",
+                    "yshow"     : "true",
+                    "linecolor" : "green",
+                    "ranges"    : [0, 25, 25, 50, 50, 100],
+                    "fills"     : ['#ffe500 0.4', '#ffe500 0.4', '#dd2c00 0.4'],
+                    "units"     : "1/0"
+                }
+                
+            ]
+        }
+        
+        #print("name={0}".format(charts['charts'][1]['title']))
+        
         series = []
         series.append(str("Temperature"))
         series.append("Network")
@@ -109,7 +138,7 @@ def node(request):
         
         location = "{0}  Node:{1}".format(node.location.description, node.name)
         
-        return render(request, 'node.html',  {'ranges': ranges, 'fills': fills, 'units': units, 'location': location, 'data': data, 'series': series, 'yaxis_labels': yaxis_labels, 'colors': colors})
+        return render(request, 'node.html',  {'chartdefs': chartdefs, 'ranges': ranges, 'fills': fills, 'units': units, 'location': location, 'data': data, 'series': series, 'yaxis_labels': yaxis_labels, 'colors': colors})
           
 def webhook(request):
    #
