@@ -73,7 +73,7 @@ anychart.onDocumentReady(function () {
     //window.alert("Hello");
     data = {{ data | safe }};
     //ping = {{ ping | safe }};
-    //series = {{ series | safe }};
+    series = {{ series | safe }};
     //colors = {{ colors | safe }};
     //ranges = {{ ranges | safe }};
     //fills = {{ fills | safe  }};
@@ -88,7 +88,7 @@ anychart.onDocumentReady(function () {
     var chartSeries = new Array(seriesData.length)
     
     var gauges = new Array(seriesData.length)
-    for (n=0; n<3; n++) { 
+    for (n=0; n<series.length; n++) { 
       gauges[n] = anychart.gauges.circular();
       gauges[n].fill('#fff').stroke(null).padding(0).margin(5).startAngle(270).sweepAngle(180);
       gauges[n].axis().labels().padding(5).fontSize(1).position('outside').format('{%Value}');
@@ -106,7 +106,7 @@ anychart.onDocumentReady(function () {
       gauges[n].draw(); 
     } 
            
-    for (n=0; n<3; n++) { 
+    for (n=0; n<series.length; n++) { 
       seriesData[n] = dataSet.mapAs({'x': 0, 'value': n+1});
       // create line chart
       chart[n] = anychart.line();
@@ -139,13 +139,13 @@ anychart.onDocumentReady(function () {
       chart[n].tooltip().positionMode('point');
       chart[n].tooltip().titleFormat("time: {%x}{dateTimeFormat:HH:mm:ss}");
       // set chart title text settings
-      chart[n].title(chartdefs.charts[n]['title']);
+      chart[n].title(series[n]);
       // set yAxis title
       chart[n].yAxis().title(chartdefs.charts[n]['linecolor']);
       chart[n].xAxis().labels().padding(5)
 
       chartSeries[n] = chart[n].line(seriesData[n]);
-      chartSeries[n].name(chartdefs.charts[n]['title']);
+      chartSeries[n].name(series[n]);
       chartSeries[n].hovered().markers().enabled(true).type('circle').size(4);
       chartSeries[n].tooltip().position('right').anchor('left-center').offsetX(5).offsetY(5);
       chartSeries[n].stroke(chartdefs.charts[n]['linecolor']);
