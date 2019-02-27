@@ -76,6 +76,16 @@ class Location(models.Model):
     def __str__(self):
         return self.description
 
+class Channel(models.Model):
+    idchannel = models.BigAutoField(primary_key=True)
+    uplink = models.IntegerField(null=False)
+    dnlink = models.IntegerField(null=False)
+    
+class MeshNetwork(models.Model):
+    idmeshnetwork = models.BigAutoField(primary_key=True)
+    name = models.CharField(max_length=24)
+    password = models.CharField(max_length=24)
+
 class Node(models.Model):
     idnode  = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=24)
@@ -83,6 +93,8 @@ class Node(models.Model):
     coretype = models.ForeignKey(CoreType,on_delete=models.PROTECT,  null=True)
     nodetype = models.ForeignKey(NodeType,on_delete=models.PROTECT,  null=True, default=10000)
     deploystate = models.ForeignKey(DeployState,on_delete=models.PROTECT,  null=True)
+    channel = models.ForeignKey(Channel,on_delete=models.PROTECT,  null=True)
+    meshnetwork = models.ForeignKey(MeshNetwork,on_delete=models.PROTECT,  null=True)
     startofservicedate = models.DateField(null=True, blank=True)
     endofservicedate = models.DateField(null=True, blank=True)
     firmware =  models.ForeignKey(Firmware,on_delete=models.PROTECT, null=True)
@@ -109,12 +121,7 @@ class PingLog(models.Model):
     timestamp = models.DateTimeField(("DateTime"),auto_now_add=True)
     node = models.ForeignKey(Node,on_delete=models.PROTECT, default=1)
     pingstate = models.ForeignKey(OnlineState,on_delete=models.PROTECT, null=True)
-    
-class Channel(models.Model):
-    idchannel = models.BigAutoField(primary_key=True)
-    uplink = models.IntegerField(null=False)
-    dnlink = models.IntegerField(null=False)
-       
+      
 class Sensor(models.Model):
     idsensor = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=24)
