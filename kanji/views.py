@@ -65,7 +65,7 @@ def chart(request):
         node = Node.objects.all().filter(coreid=coreid).first()
         
         now = datetime.today()
-        time24hoursago = now - timedelta(hours=24)
+        time24hoursago = now - timedelta(hours=48)
         
                
         eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).filter(timestamp__gte = time24hoursago).order_by('timestamp')
