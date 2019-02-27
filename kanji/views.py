@@ -43,7 +43,9 @@ def index(request):
     
 def node(request):
     if request.method == 'GET':
-        coreid = request.GET.get('coreid')
+        #coreid = request.GET.get('coreid')
+        pathParts = request.path.split("/")
+        coreid = pathParts(len(pathParts)-1)
         #data  and array of arrays
         #[
         #    ['1986', 3.6, 2.3, 2.8, 11.5],
