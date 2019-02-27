@@ -1,6 +1,7 @@
 from datetime import datetime
 from django.utils import timezone
 from datetime import timedelta
+import pytz
 
 import operator
 import json
@@ -64,8 +65,11 @@ def chart(request):
            
         node = Node.objects.all().filter(coreid=coreid).first()
         
-        now = datetime.today()
-        time24hoursago = now - timedelta(hours=48)
+        #now = datetime.today()
+        now = timezone.now()
+        time24hoursago = now - timedelta(hours=24)
+        
+        print(time24hoursago)
         
                
         eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).filter(timestamp__gte = time24hoursago).order_by('timestamp')
