@@ -59,7 +59,8 @@ def node(request):
                     "linecolor" : "red",
                     "ranges"    : [0, 45, 45, 85, 85, 110],
                     "fills"     : ['#0b2e7d 0.4', '#009900 0.4', '#dd2c00 0.4'],
-                    "units"     : "F"
+                    "units"     : "F",
+                    "gaugeshow" : "true"
                 },
                 {
                     "title"     : "Network",
@@ -68,7 +69,8 @@ def node(request):
                     "linecolor" : "blue",
                     "ranges"    : [0, 250, 250, 750, 750, 1000],
                     "fills"     :  ['#ffe500 0.4', '#ffe500 0.4', '#dd2c00 0.4'],
-                    "units"     : "ms"
+                    "units"     : "ms",
+                    "gaugeshow" : "true"
                 },
                 {
                     "title"     : "Ping",
@@ -78,6 +80,7 @@ def node(request):
                     "ranges"    : [0, 25, 25, 50, 50, 100],
                     "fills"     : ['#ffe500 0.4', '#ffe500 0.4', '#dd2c00 0.4'],
                     "units"     : "1/0"
+                    "gaugeshow" : "false"
                 }
                 
             ]
