@@ -132,7 +132,7 @@ anychart.onDocumentReady(function () {
       // set chart title text settings
       chart[n].title(chartdefs.charts[n]['title']);
       // set yAxis title
-      chart[n].yAxis().title(chartdefs.charts[n]['linecolor']);
+      chart[n].yAxis().title(chartdefs.charts[n]['ylabel']);
       chart[n].xAxis().labels().padding(5)
 
       chartSeries[n] = chart[n].line(seriesData[n]);
