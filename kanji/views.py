@@ -87,8 +87,7 @@ def chart(request):
         
         pingLogs = PingLog.objects.all().filter(node=node).filter(timestamp__gte = time24hoursago).order_by('timestamp')
         
-        for pingLog in pingLogs:        
-            date_time = eventLog.timestamp.strftime("%m/%d/%Y, %H:%M:%S")
+        for pingLog in pingLog.timestamp.strftime("%m/%d/%Y, %H:%M:%S")
             pingState = 100*(10001 - pingLog.pingstate.idonlinestate)
             ping.append([date_time, pingState])
         
