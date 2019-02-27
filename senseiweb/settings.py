@@ -142,7 +142,7 @@ LOGGING = {
         'dlogfile': {
             'level':'DEBUG',
             'class':'logging.handlers.RotatingFileHandler',
-            'filename': settings.BASE_DIR + "/gblog_debug.txt",
+            'filename': settings.BASE_DIR + "/kanji_debug.txt",
             'maxBytes': 1024*1024*5,
             'backupCount': 5,
             'formatter': 'standard',
@@ -150,7 +150,7 @@ LOGGING = {
         'wlogfile': {
             'level':'WARN',
             'class':'logging.handlers.RotatingFileHandler',
-            'filename': settings.BASE_DIR + "/gblog_warn.txt",
+            'filename': settings.BASE_DIR + "/kanji_warn.txt",
             'maxBytes': 1024*1024*5,
             'backupCount': 5,
             'formatter': 'standard',
@@ -158,7 +158,7 @@ LOGGING = {
         'ilogfile': {
             'level':'INFO',
             'class':'logging.handlers.RotatingFileHandler',
-            'filename': settings.BASE_DIR + "/gblog_info.txt",
+            'filename': settings.BASE_DIR + "/kanji_info.txt",
             'maxBytes': 1024*1024*5,
             'backupCount': 5,
             'formatter': 'standard',
