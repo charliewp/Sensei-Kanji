@@ -59,18 +59,20 @@ def node(request):
         series = []
         series.append(str("Temperature"))
         series.append("Network")
+        series.append("Ping")
         
         yaxis_labels = []
         yaxis_labels.append("Degree F")
         yaxis_labels.append("msecs")
+        yaxis_labels.append("ping")
         
         colors = ["red", "blue", "green", "black"]
         
         data = []    
 
-        ranges = [ [0, 45, 45, 85, 85, 110], [0, 250, 250, 750, 750, 1000] ]
-        fills  = [ ['#0b2e7d 0.4', '#009900 0.4', '#dd2c00 0.4'], ['#ffe500 0.4', '#ffe500 0.4', '#dd2c00 0.4']]
-        units = ["F", "ms"]
+        ranges = [ [0, 45, 45, 85, 85, 110], [0, 250, 250, 750, 750, 1000], [0, 25, 25, 50, 50, 100] ]
+        fills  = [ ['#0b2e7d 0.4', '#009900 0.4', '#dd2c00 0.4'], ['#ffe500 0.4', '#ffe500 0.4', '#dd2c00 0.4'], ['#ffe500 0.4', '#ffe500 0.4', '#dd2c00 0.4']]
+        units = ["F", "ms", "UP"]
            
         node = Node.objects.all().filter(coreid=coreid).first()
         
@@ -90,9 +92,10 @@ def node(request):
             #date_time = eventLog.timestamp.strftime("%H:%M")
             #date_time = eventLog.timestamp.replace(tzinfo=timezone.utc).astimezone(tz="US/Eastern").strftime("%H:%M")
             ackTime = eventLog.meshacktimemillis
+            pingLog = PingLog.objects.all().filter(node=node).filter(timestamp__gte = eventLog.timestamp).order_by('timestamp').first()
             if ackTime>1000:
                 ackTime=1000
-            data.append([date_time, float(eventLog.eventdata), ackTime])
+            data.append([date_time, float(eventLog.eventdata), ackTime, pingLog.pingstate.idonlinestate])
         
         ping = []
         

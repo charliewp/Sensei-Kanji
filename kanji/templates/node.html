@@ -53,9 +53,12 @@ html, body, #container {
         <div class="column" id="container_2" style="width:600px;height:200px"></div>
         <div class="column" id="speed_2" style="width:300px;height:200px"></div>
     </div>
-
     <div class="row" style="width:900px;">
-        <div class="column" id="ping_" style="width:900px;height:100px"></div>
+        <div class="column" id="container_3" style="width:600px;height:100px"></div>
+        <div class="column" id="speed_3" style="width:300px;height:100px"></div>
+    </div>
+    <div class="row" style="width:900px;">
+        <div class="column" id="ping_" style="width:600px;height:100px"></div>
     </div>
 </div>
 <script type="text/javascript">
@@ -169,7 +172,8 @@ anychart.onDocumentReady(function () {
     pingchart.title('Ping');
     pingchart.yScale().minimum(0);
     pingchart.yScale().maximum(100); 
-    pingchart.tooltip().titleFormat("time: {%x}{dateTimeFormat:HH:mm:ss}");    
+    pingchart.tooltip().titleFormat("time: {%x}{dateTimeFormat:HH:mm:ss}"); 
+    pingchart.xAxis().labels().enabled(false);    
     //work on the time axis
     var dateScale2 = anychart.scales.dateTime();
     // set one year ticks interval
