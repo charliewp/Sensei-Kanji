@@ -172,11 +172,11 @@ anychart.onDocumentReady(function () {
     var dateScale2 = anychart.scales.dateTime();
     // set one year ticks interval
     var dateTicks2 = dateScale2.ticks();
-    dateTicks2.interval(0, 0, 0, 1);
+    dateTicks2.interval(0, 0, 0, 0, 15);
     // set two months minor ticks interval
     var dateMinorTicks2 = dateScale2.minorTicks();
     //years interval, months interval, days interval, hours interval, minutes interval, seconds interval.
-    dateMinorTicks2.interval(0, 0, 0, 1);
+    dateMinorTicks2.interval(0, 0, 0, 0, 5);
     // set DateTime Scale as y scale of the chart
     pingchart.xScale(dateScale2);
 
