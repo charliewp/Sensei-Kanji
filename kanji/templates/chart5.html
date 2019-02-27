@@ -167,6 +167,18 @@ anychart.onDocumentReady(function () {
     pingchart.title('Ping');
     pingchart.yScale().minimum(0);
     pingchart.yScale().maximum(100);
+    
+     //work on the time axis
+      var dateScale = anychart.scales.dateTime();
+      // set one year ticks interval
+      var dateTicks = dateScale.ticks();
+      dateTicks.interval(0, 0, 0, 1);
+      // set two months minor ticks interval
+      var dateMinorTicks = dateScale.minorTicks();
+      //years interval, months interval, days interval, hours interval, minutes interval, seconds interval.
+      dateMinorTicks.interval(0, 0, 0, .25);
+      // set DateTime Scale as y scale of the chart
+      pingchart.xScale(dateScale);
 
     // set yAxis title
     //pingchart.yAxis().title(yaxis_labels[n]);
