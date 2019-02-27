@@ -83,6 +83,8 @@ def node(request):
             ]
         }
         
+        print("chardefs len={0}".format(len(chartdefs['charts'])))
+        
         #print("name={0}".format(charts['charts'][1]['title']))
         
         series = []
@@ -137,6 +139,7 @@ def node(request):
         #    ping.append([date_time, pingState])
         
         location = "{0}  Node:{1}".format(node.location.description, node.name)
+        
         
         return render(request, 'node.html',  {'chartdefs': chartdefs, 'location': location, 'data': data, 'series': series })
           
