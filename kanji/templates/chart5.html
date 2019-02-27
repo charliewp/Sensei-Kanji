@@ -130,7 +130,9 @@ anychart.onDocumentReady(function () {
       chart[n].crosshair().enabled(true).yLabel(false).yStroke(null);
       // set tooltip mode to point
       chart[n].tooltip().positionMode('point');
-      chart[n].tooltip().titleFormat("time: {%x}");
+      //chart[n].tooltip().titleFormat("time: {%x}");
+      chart[n].tooltip().titleFormat("time: {datetime.utcfromtimestamp(%x).strftime('%Y-%m-%d %H:%M:%S')}");
+      //humantime = datetime.utcfromtimestamp(%x).strftime('%Y-%m-%d %H:%M:%S')
       // set chart title text settings
       chart[n].title(series[n]);
       // set yAxis title
