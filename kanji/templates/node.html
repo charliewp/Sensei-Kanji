@@ -73,7 +73,7 @@ anychart.onDocumentReady(function () {
     //window.alert("Hello");
     data = {{ data | safe }};
     //ping = {{ ping | safe }};
-    series = {{ series | safe }};
+    //series = {{ series | safe }};
     //colors = {{ colors | safe }};
     //ranges = {{ ranges | safe }};
     //fills = {{ fills | safe  }};
@@ -82,10 +82,11 @@ anychart.onDocumentReady(function () {
     //yaxis_labels = {{ yaxis_labels | safe }};
      
     //debugger;
+    var numCharts = chartdefs['charts'].length;
     var dataSet = anychart.data.set(data);    
-    var seriesData = new Array(chartdefs['charts'].length);
-    var chart = new Array(series.length);
-    var chartSeries = new Array(seriesData.length)
+    var seriesData = new Array(numCharts);
+    var chart = new Array(numCharts);
+    var chartSeries = new Array(numCharts)
     
     var gauges = new Array(seriesData.length)
     for (n=0; n<3; n++) { 
