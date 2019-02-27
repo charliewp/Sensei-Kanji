@@ -109,3 +109,14 @@ class PingLog(models.Model):
     timestamp = models.DateTimeField(("DateTime"),auto_now_add=True)
     node = models.ForeignKey(Node,on_delete=models.PROTECT, default=1)
     pingstate = models.ForeignKey(OnlineState,on_delete=models.PROTECT, null=True)
+    
+ class Channel(models.Model):
+    idchannel = models.BigAutoField(primary_key=True)
+    uplink = models.IntegerField(null=False)
+    dnlink = models.IntegerField(null=False)
+       
+ class Sensor(models.Model):
+    idsensor = models.BigAutoField(primary_key=True)
+    name = models.CharField(max_length=24)
+    node = models.ForeignKey(Node,on_delete=models.PROTECT, default=1)
+    sensortype = models.ForeignKey(SensorType,on_delete=models.PROTECT, default=1)
