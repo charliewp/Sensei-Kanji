@@ -29,6 +29,9 @@ from .models import Node
 from .models import EventType
 from .models import SensorType
 
+import logging
+log = logging.getLogger('KANJI-LOGGER')
+
 from django.views.decorators.csrf import ensure_csrf_cookie
 @ensure_csrf_cookie
 
