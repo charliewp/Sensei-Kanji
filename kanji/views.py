@@ -138,7 +138,7 @@ def node(request):
         
         location = "{0}  Node:{1}".format(node.location.description, node.name)
         
-        return render(request, 'node.html',  {'chartdefs': chartdefs, 'location': location, 'data': data, })
+        return render(request, 'node.html',  {'chartdefs': chartdefs, 'location': location, 'data': data })
           
 def webhook(request):
    #
