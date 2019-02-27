@@ -92,7 +92,7 @@ def node(request):
             #date_time = eventLog.timestamp.strftime("%H:%M")
             #date_time = eventLog.timestamp.replace(tzinfo=timezone.utc).astimezone(tz="US/Eastern").strftime("%H:%M")
             ackTime = eventLog.meshacktimemillis
-            pingLog = PingLog.objects.all().filter(node=node).filter(timestamp__gte = eventLog.timestamp).order_by('timestamp').last()
+            pingLog = PingLog.objects.all().filter(node=node).filter(timestamp__gte = eventLog.timestamp).first()
             if ackTime>1000:
                 ackTime=1000
             data.append([date_time, float(eventLog.eventdata), ackTime, pingLog.pingstate.idonlinestate])
