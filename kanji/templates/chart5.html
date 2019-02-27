@@ -122,7 +122,10 @@ anychart.onDocumentReady(function () {
       //years, months, days, hours, minutes, seconds.
       dateMinorTicks.interval(0, 0, 0, 0, 60);
       // set DateTime Scale as x scale of the chart
-      chart[n].format.dateTime(this.value, 'MMM', -8 * 60, locale);
+      
+      chart[n].xAxis().labels().format(function () {
+        return anychart.format.dateTime(this.value, 'MMM', -8 * 60, locale);
+      });
       //
       chart[n].xScale(dateScale);      
       // turn on chart animation
