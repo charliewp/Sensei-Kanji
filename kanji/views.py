@@ -69,7 +69,7 @@ def chart(request):
         now = timezone.now()
         time24hoursago = now - timedelta(hours=24)
         
-        print(time24hoursago)
+        log.debug(time24hoursago)
         
                
         eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).filter(timestamp__gte = time24hoursago).order_by('timestamp')
