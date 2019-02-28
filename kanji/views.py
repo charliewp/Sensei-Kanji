@@ -114,6 +114,7 @@ def channel(request):
         
         data = []
         
+        offset = 0.0
         for node in nodes:
             # get last 24hours       
             eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).filter(timestamp__gte = time24hoursago).order_by('timestamp')
@@ -122,8 +123,9 @@ def channel(request):
             for eventLog in eventLogs:
               eventtime = eventLog.timestamp
               date_time = eventLog.timestamp.strftime("%m/%d/%Y %H:%M:%S") 
-              nodedata.append([date_time, float(eventLog.eventdata)])
+              nodedata.append([date_time, float(eventLog.eventdata) + offset])
             data.append(nodedata)
+            offset = offset+ 5.0
         
         print("channel data ={0}".format(data))
         
