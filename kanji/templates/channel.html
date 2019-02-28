@@ -63,6 +63,7 @@ anychart.onDocumentReady(function () {
     // 3-dimensional array
     data = {{ data | safe }};
     annotations = {{ annotations | safe }};
+    eventmarkers = {{ eventmarkers | safe }}
     chartdefs = {{ chartdefs | safe}};
     
     //var numCharts = chartdefs['charts'].length;
@@ -103,7 +104,10 @@ anychart.onDocumentReady(function () {
     // draw lines where controller transitions
     var marker = chart.lineMarker();
     marker.axis(chart.yAxis());
-    marker.value(75);  
+    marker.value(75); 
+
+    plot.eventMarkers(eventmarkers);
+        
     
     //work on the time axis
     var dateScale = anychart.scales.dateTime();

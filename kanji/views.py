@@ -81,6 +81,8 @@ def channel(request):
         
         annotations = []
         
+        eventmarkers = { "groups": [ { "data": [] } ] }
+             
         state = 0
         
         colors = ["red", "green", "blue"]
@@ -98,6 +100,7 @@ def channel(request):
               # synthetic controller input
               if state==0 and float(eventLog.eventdata)>80.0:
                 state = 1
+                eventmarkers['groups'][0]['data'].append({"date": date_time, "description": "On"})
                 annotations.append([ date_time, float(eventLog.eventdata), "On"])
             #print("node {0} data ={1}".format(node.name, nodedata))  
             data.append(nodedata)
@@ -126,7 +129,7 @@ def channel(request):
         timediffstr = str(td.days) + "d " + str(td.seconds // 3600) + "h " + str(td.seconds // 60 % 60) + "m " + str(td.seconds % 60) + "s ago"
         location = "mesh {0}/{1} channel".format(meshnetworkname, channelname)
         
-        return render(request, 'channel.html',  {'location': location, 'timediff': timediffstr, 'chartdefs': chartdefs, 'data': data, 'annotations': annotations })
+        return render(request, 'channel.html',  {'location': location, 'timediff': timediffstr, 'chartdefs': chartdefs, 'data': data, 'eventmarkers': eventmarkers, 'annotations': annotations })
           
     
 def node(request):
