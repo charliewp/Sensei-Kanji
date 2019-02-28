@@ -1,0 +1,158 @@
+{% load staticfiles %}                     
+<html>
+<head>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js?hcode=be5162d915534272a57d0bb781d27f2b"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js?hcode=be5162d915534272a57d0bb781d27f2b"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js?hcode=be5162d915534272a57d0bb781d27f2b"></script>
+  <link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css?hcode=be5162d915534272a57d0bb781d27f2b" type="text/css" rel="stylesheet">
+  <link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css?hcode=be5162d915534272a57d0bb781d27f2b" type="text/css" rel="stylesheet"> 
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-circular-gauge.min.js?hcode=be5162d915534272a57d0bb781d27f2b"></script>
+<style type="text/css">
+html, body, #container {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+* {
+  box-sizing: border-box;
+}
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+.left {
+  width: 25%;
+}
+
+.right {
+  width: 75%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="row" style="width:900px;">
+        <div class="column" id="location" style="text-align:center;width:600px;height:20px">{{ location }}</div>
+        <div class="column" id="timediff" style="text-align:center;width:300px;height:20px">{{ timediff }}</div>
+    </div>
+    <div class="row" style="width:900px;">
+        <div class="column" id="container_1" style="width:600px;height:200px"></div>
+        <div class="column" id="speed_1" style="width:300px;height:200px"></div>
+    </div>
+    <div class="row" style="width:900px;">
+        <div class="column" id="container_2" style="width:600px;height:150px"></div>
+        <div class="column" id="speed_2" style="width:300px;height:150px"></div>
+    </div>
+    <div class="row" style="width:900px;">
+        <div class="column" id="container_3" style="width:600px;height:100px"></div>
+        <div class="column" id="speed_3" style="width:300px;height:100px"></div>
+    </div>
+    <div class="row" style="width:900px;">
+        <div class="column" id="ping_" style="width:600px;height:100px"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    window.setTimeout("reloadpage();", 60000);    
+    function reloadpage() {
+      location.reload(true)
+    }
+</script>
+<script>
+anychart.onDocumentReady(function () {
+    data = {{ data | safe }};
+    chartdefs = {{ chartdefs | safe}};
+    
+    var numCharts = chartdefs['charts'].length;
+    var dataSet = anychart.data.set(data);    
+    var seriesData = new Array(numCharts);
+    var chart = new Array(numCharts);
+    var chartSeries = new Array(numCharts)
+    
+    var gauges = new Array(seriesData.length)
+    for (n=0; n<numCharts; n++) { 
+      if (chartdefs.charts[n]['gaugeshow']=="true") {
+        gauges[n] = anychart.gauges.circular();
+        gauges[n].fill('#fff').stroke(null).padding(0).margin(5).startAngle(270).sweepAngle(180);
+        gauges[n].axis().labels().padding(5).fontSize(1).position('outside').format('{%Value}');
+        point = data[data.length-1][n+1]
+        gauges[n].data([point]);
+        gauges[n].axis().scale().minimum(chartdefs.charts[n]['ranges'][0]).maximum(chartdefs.charts[n]['ranges'][5]).ticks({interval: 30}).minorTicks({interval: 15});
+        gauges[n].axis().fill('#545f69').width(1).ticks({type: 'line', fill: 'white', length: 2});
+        gauges[n].needle().stroke('0 #07090d').startRadius('75%').endRadius('100%').startWidth('5.5%').endWidth('0.5%').middleWidth('2.5%');
+        gauges[n].range(0, {from: chartdefs.charts[n]['ranges'][0], to: chartdefs.charts[n]['ranges'][1], position: 'inside', fill: chartdefs.charts[n]['fills'][0], startSize: 15, endSize: 15, radius: 100 });
+        gauges[n].range(1, { from: chartdefs.charts[n]['ranges'][2], to: chartdefs.charts[n]['ranges'][3], position: 'inside', fill: chartdefs.charts[n]['fills'][1], startSize: 15, endSize: 15, radius: 100 });
+        gauges[n].range(2, { from: chartdefs.charts[n]['ranges'][4], to: chartdefs.charts[n]['ranges'][5], position: 'inside', fill: chartdefs.charts[n]['fills'][2], startSize: 15, endSize: 15, radius: 100 });
+        gauges[n].container('speed_' + (n+1).toString());
+        displayvalue = point + chartdefs.charts[n]['units']
+        gauges[n].label(2).text(displayvalue).fontColor('#212121').fontSize(parseInt(chartdefs.charts[n]['gaugefont'])).offsetY(chartdefs.charts[n]['gaugeyoff']).offsetX(chartdefs.charts[n]['gaugexoff']).anchor('center');
+        gauges[n].draw(); 
+      }
+    } 
+           
+    for (n=0; n<numCharts; n++) { 
+      seriesData[n] = dataSet.mapAs({'x': 0, 'value': n+1});
+      // create line chart
+      chart[n] = anychart.line();
+      //chart[n].format.outputTimezone(-5);
+      if (n!=0) {
+         chart[n].xAxis().labels().enabled(false);         
+      }
+      chart[n].xAxis().ticks().enabled(true);
+      chart[n].yAxis().ticks().enabled(false);
+      //work on the time axis
+      var dateScale = anychart.scales.dateTime();
+      // set one year ticks interval
+      var dateTicks = dateScale.ticks();
+      dateTicks.interval(0, 0, 0, 0, 60);
+      // set two months minor ticks interval
+      var dateMinorTicks = dateScale.minorTicks();
+      //years, months, days, hours, minutes, seconds.
+      dateMinorTicks.interval(0, 0, 0, 0, 30);
+      // set DateTime Scale as x scale of the chart
+      var offset = new Date().getTimezoneOffset();
+      anychart.format.outputTimezone(600);      
+      chart[n].xScale(dateScale);      
+      // turn on chart animation
+      chart[n].animation(true);
+      // set chart padding
+      chart[n].padding([10, 20, 5, 20]);
+      // turn on the crosshair
+      chart[n].crosshair().enabled(true).yLabel(false).yStroke(null);
+      // set tooltip mode to point
+      chart[n].tooltip().positionMode('point');
+      chart[n].tooltip().titleFormat("time: {%x}{dateTimeFormat:HH:mm:ss}");
+      // set chart title text settings
+      chart[n].title(chartdefs.charts[n]['title']);
+      // set yAxis title
+      chart[n].yAxis().title(chartdefs.charts[n]['ylabel']);
+      chart[n].xAxis().labels().padding(5)
+
+      chartSeries[n] = chart[n].line(seriesData[n]);
+      chartSeries[n].name(chartdefs.charts[n]['title']);
+      chartSeries[n].hovered().markers().enabled(true).type('circle').size(4);
+      chartSeries[n].tooltip().position('right').anchor('left-center').offsetX(5).offsetY(5);
+      chartSeries[n].stroke(chartdefs.charts[n]['linecolor']);
+
+      chart[n].container('container_' + (n+1).toString());      
+      chart[n].draw(); 
+    }
+      
+});
+</script>
+
+</body>
+</html>
+
+                

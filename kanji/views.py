@@ -42,6 +42,93 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 def index(request):
     return HttpResponse("Hello, world. You're at the Sensei-Kanji index page.")
     
+def channel(request):
+    if request.method == 'GET':
+        #coreid = request.GET.get('coreid')
+        url = request.path_info
+        print("url={0}".format(url))
+        pathParts = url.split("/")
+        coreid = pathParts[len(pathParts)-1]
+        print("coreId={0}".format(coreid))
+        
+        chartdefs = { "charts": [
+                {
+                    "title"     : "Temperature",
+                    "ylabel"    : "Degrees F",
+                    "yshow"     : "true",
+                    "linecolor" : "red",
+                    "ranges"    : [0, 45, 45, 85, 85, 110],
+                    "fills"     : ['#0b2e7d 0.4', '#009900 0.4', '#dd2c00 0.4'],
+                    "units"     : "F",
+                    "gaugeshow" : "true",
+                    "gaugefont" : "44",
+                    "gaugexoff" : "50%",
+                    "gaugeyoff" : "20%"
+                    
+                },
+                {
+                    "title"     : "Network",
+                    "ylabel"    : "millis",
+                    "yshow"     : "true",
+                    "linecolor" : "blue",
+                    "ranges"    : [0, 250, 250, 750, 750, 1000],
+                    "fills"     :  ['#ffe500 0.4', '#ffe500 0.4', '#dd2c00 0.4'],
+                    "units"     : "ms",
+                    "gaugeshow" : "true",
+                    "gaugefont" : "24",
+                    "gaugexoff" : "50%",
+                    "gaugeyoff" : "20%"
+                },
+                {
+                    "title"     : "Ping",
+                    "ylabel"    : "ping",
+                    "yshow"     : "false",
+                    "linecolor" : "green",
+                    "ranges"    : [0, 25, 25, 50, 50, 100],
+                    "fills"     : ['#ffe500 0.4', '#ffe500 0.4', '#dd2c00 0.4'],
+                    "units"     : "1/0",
+                    "gaugeshow" : "false",
+                    "gaugefont" : "44",
+                    "gaugexoff" : "20%",
+                    "gaugeyoff" : "20%"
+                }
+                
+            ]
+        }
+        
+              
+        
+           
+        node = Node.objects.all().filter(coreid=coreid).first()
+        now = datetime.today()
+        time24hoursago = now - timedelta(hours=24)
+        log.debug(time24hoursago)
+        # get last 24hours       
+        eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).filter(timestamp__gte = time24hoursago).order_by('timestamp')
+        # eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).order_by('timestamp')
+        
+        data = []
+        for eventLog in eventLogs:
+            eventtime = eventLog.timestamp
+            date_time = eventLog.timestamp.strftime("%m/%d/%Y %H:%M:%S")
+            ackTime = eventLog.meshacktimemillis
+            pingLog = PingLog.objects.all().filter(node=node).filter(timestamp__gte = eventLog.timestamp).first()
+            
+            if ackTime>1000:
+                ackTime=1000
+            
+            if pingLog:
+                data.append([date_time, float(eventLog.eventdata), ackTime, pingLog.pingstate.idonlinestate])
+            else:
+                data.append([date_time, float(eventLog.eventdata), ackTime, 500])
+        
+        td = timezone.now() - eventtime       
+        timediffstr = str(td.days) + "d " + str(td.seconds // 3600) + "h " + str(td.seconds // 60 % 60) + "m " + str(td.seconds % 60) + "s ago"
+        location = "{0}  Node:{1}".format(node.location.description, node.name)
+        
+        return render(request, 'channel.html',  {'location': location, 'timediff': timediffstr, 'chartdefs': chartdefs, 'data': data })
+          
+    
 def node(request):
     if request.method == 'GET':
         #coreid = request.GET.get('coreid')
