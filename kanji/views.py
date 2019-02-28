@@ -91,18 +91,17 @@ def node(request):
         }
         
               
-        data = []
+        
            
         node = Node.objects.all().filter(coreid=coreid).first()
-        
         now = datetime.today()
         time24hoursago = now - timedelta(hours=24)
         log.debug(time24hoursago)
-        
         # get last 24hours       
         eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).filter(timestamp__gte = time24hoursago).order_by('timestamp')
         # eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).order_by('timestamp')
         
+        data = []
         for eventLog in eventLogs:
             date_time = eventLog.timestamp.strftime("%m/%d/%Y %H:%M:%S")
             ackTime = eventLog.meshacktimemillis
@@ -116,9 +115,11 @@ def node(request):
             else:
                 data.append([date_time, float(eventLog.eventdata), ackTime, 500])
         
+        timedelta = now - date_time
+        
         location = "{0}  Node:{1}".format(node.location.description, node.name)
         
-        return render(request, 'node.html',  {'chartdefs': chartdefs, 'location': location, 'data': data })
+        return render(request, 'node.html',  {'location': location, 'timedelta': timedelta.seconds, chartdefs': chartdefs, 'data': data })
           
 def webhook(request):
    #
