@@ -29,6 +29,8 @@ from .models import PingLog
 from .models import Node
 from .models import EventType
 from .models import SensorType
+from .models import MeshNetwork
+from .models import Channel
 
 import logging
 log = logging.getLogger('KANJI-LOGGER')
