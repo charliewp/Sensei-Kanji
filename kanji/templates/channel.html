@@ -133,6 +133,7 @@ anychart.onDocumentReady(function () {
       chartSeries[n].hovered().markers().enabled(true).type('circle').size(4);
       chartSeries[n].tooltip().position('right').anchor('left-center').offsetX(5).offsetY(5);
       chartSeries[n].stroke(chartdefs.charts[n]['linecolor']);
+      chart.addSeries(chartSeries[n]);
     }
     
     chart.container('container_1');      
