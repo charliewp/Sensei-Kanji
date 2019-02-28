@@ -55,6 +55,9 @@ def channel(request):
         meshnetwork_id = int(pathParts[len(pathParts)-2])
         channel_id = int(pathParts[len(pathParts)-1])
         
+        meshnetworkname = MeshNetwork.objects.get(pk=int(meshnetwork_id)).name
+        channelname = Channel.objects.get(pk=int(channel_id)).name
+        
         print("meshnetwork_id={0} channel_id={1}".format(meshnetwork_id, channel_id))
         
         chartdefs = { "charts": [] }
@@ -108,7 +111,7 @@ def channel(request):
         
         td = timezone.now() - eventtime       
         timediffstr = str(td.days) + "d " + str(td.seconds // 3600) + "h " + str(td.seconds // 60 % 60) + "m " + str(td.seconds % 60) + "s ago"
-        location = "{0}  Node:{1}".format(node.location.description, node.name)
+        location = "{0}/{1}".format(meshnetworkname, channelname)
         
         return render(request, 'channel.html',  {'location': location, 'timediff': timediffstr, 'chartdefs': chartdefs, 'data': data })
           
