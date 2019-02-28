@@ -108,6 +108,8 @@ def channel(request):
         
         nodes = Node.objects.all().filter(meshnetwork_id=meshnetwork_id).filter(channel_id=channel_id)
         
+        data = []
+        
         for node in nodes:
             # get last 24hours       
             eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).filter(timestamp__gte = time24hoursago).order_by('timestamp')
