@@ -119,20 +119,20 @@ anychart.onDocumentReady(function () {
     chart.tooltip().positionMode('point');
     chart.tooltip().titleFormat("time: {%x}{dateTimeFormat:HH:mm:ss}");
     // set chart title text settings
-    chart.title(chartdefs.charts[n]['title']);
+    chart.title(chartdefs.charts[0]['title']);
     // set yAxis title
-    chart.yAxis().title(chartdefs.charts[n]['ylabel']);
+    chart.yAxis().title(chartdefs.charts[0]['ylabel']);
     chart.xAxis().labels().padding(5)      
       
     // there will be multiple series in the same chart 
     for (n=0; n<3; n++) {
-      var dataSet = anychart.data.set(data[n];
+      var dataSet = anychart.data.set(data[n]);
       var seriesData = dataSet.mapAs({'x': 0, 'value': 1});
       chartSeries[n] = chart.line(seriesData);
-      chartSeries[n].name(chartdefs.charts[n]['title']);
+      chartSeries[n].name(chartdefs.charts[0]['title']);
       chartSeries[n].hovered().markers().enabled(true).type('circle').size(4);
       chartSeries[n].tooltip().position('right').anchor('left-center').offsetX(5).offsetY(5);
-      chartSeries[n].stroke(chartdefs.charts[n]['linecolor']);
+      chartSeries[n].stroke(chartdefs.charts[0]['linecolor']);
     }
     
     chart.container('container_1');      
