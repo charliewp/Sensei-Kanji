@@ -81,7 +81,7 @@ def channel(request):
             nodedata = []
             for eventLog in eventLogs:
               eventtime = eventLog.timestamp
-              date_time = eventLog.timestamp.strftime("%m/%d/%Y %H:%M:%S") 
+              date_time = eventLog.timestamp.strftime("%m/%d/%Y %H:%M") 
               nodedata.append([date_time, float(eventLog.eventdata) + float(nodenumber*10)])
             print("node {0} data ={1}".format(node.name, nodedata))  
             data.append(nodedata)
