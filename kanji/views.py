@@ -103,6 +103,7 @@ def node(request):
         
         data = []
         for eventLog in eventLogs:
+            eventtime = eventLog.timestamp
             date_time = eventLog.timestamp.strftime("%m/%d/%Y %H:%M:%S")
             ackTime = eventLog.meshacktimemillis
             pingLog = PingLog.objects.all().filter(node=node).filter(timestamp__gte = eventLog.timestamp).first()
@@ -115,7 +116,7 @@ def node(request):
             else:
                 data.append([date_time, float(eventLog.eventdata), ackTime, 500])
         
-        timediff = now - date_time
+        timediff = now - eventtime
         
         location = "{0}  Node:{1}".format(node.location.description, node.name)
         
