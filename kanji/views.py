@@ -57,50 +57,7 @@ def channel(request):
         
         print("meshnetwork_id={0} channel_id={1}".format(meshnetwork_id, channel_id))
         
-        chartdefs = { "charts": [
-                {
-                    "title"     : "Temperature",
-                    "ylabel"    : "Degrees F",
-                    "yshow"     : "true",
-                    "linecolor" : "red",
-                    "ranges"    : [0, 45, 45, 85, 85, 110],
-                    "fills"     : ['#0b2e7d 0.4', '#009900 0.4', '#dd2c00 0.4'],
-                    "units"     : "F",
-                    "gaugeshow" : "true",
-                    "gaugefont" : "44",
-                    "gaugexoff" : "50%",
-                    "gaugeyoff" : "20%"
-                    
-                },
-                {
-                    "title"     : "Network",
-                    "ylabel"    : "millis",
-                    "yshow"     : "true",
-                    "linecolor" : "blue",
-                    "ranges"    : [0, 250, 250, 750, 750, 1000],
-                    "fills"     :  ['#ffe500 0.4', '#ffe500 0.4', '#dd2c00 0.4'],
-                    "units"     : "ms",
-                    "gaugeshow" : "true",
-                    "gaugefont" : "24",
-                    "gaugexoff" : "50%",
-                    "gaugeyoff" : "20%"
-                },
-                {
-                    "title"     : "Ping",
-                    "ylabel"    : "ping",
-                    "yshow"     : "false",
-                    "linecolor" : "green",
-                    "ranges"    : [0, 25, 25, 50, 50, 100],
-                    "fills"     : ['#ffe500 0.4', '#ffe500 0.4', '#dd2c00 0.4'],
-                    "units"     : "1/0",
-                    "gaugeshow" : "false",
-                    "gaugefont" : "44",
-                    "gaugexoff" : "20%",
-                    "gaugeyoff" : "20%"
-                }
-                
-            ]
-        }
+        chartdefs = { "charts": [] }
         
         now = datetime.today()
         time24hoursago = now - timedelta(hours=1)
@@ -114,7 +71,9 @@ def channel(request):
         
         data = []
         
-        offset = 0.0
+        colors = ["red", "green", "blue"]
+        
+        nodenumber = 0
         for node in nodes:
             # get last 24hours       
             eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).filter(timestamp__gte = time24hoursago).order_by('timestamp')
@@ -123,11 +82,28 @@ def channel(request):
             for eventLog in eventLogs:
               eventtime = eventLog.timestamp
               date_time = eventLog.timestamp.strftime("%m/%d/%Y %H:%M:%S") 
-              nodedata.append([date_time, float(eventLog.eventdata) + offset])
+              nodedata.append([date_time, float(eventLog.eventdata) + float(nodenumber*10)])
             print("node {0} data ={1}".format(node.name, nodedata))  
             data.append(nodedata)
-            offset = offset+ 5.0
+            
+            chartdef = {
+                    "title"     : node.name,
+                    "ylabel"    : node.name,
+                    "yshow"     : "false",
+                    "linecolor" : colors[nodenumber],
+                    "ranges"    : [0, 25, 25, 50, 50, 100],
+                    "fills"     : ['#ffe500 0.4', '#ffe500 0.4', '#dd2c00 0.4'],
+                    "units"     : "1/0",
+                    "gaugeshow" : "false",
+                    "gaugefont" : "44",
+                    "gaugexoff" : "20%",
+                    "gaugeyoff" : "20%"
+            }
+            print("chartdef ={0}".format(chartdef))
+            chartdefs['carts'].append(chartdef)
+            nodenumber = nodenumber + 1
         
+        print("chartdefs ={0}".format(chartdefs))
         print("channel data ={0}".format(data))
         
         td = timezone.now() - eventtime       
