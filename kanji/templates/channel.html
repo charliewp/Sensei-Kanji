@@ -96,22 +96,14 @@ anychart.onDocumentReady(function () {
     // create line chart
     chart = anychart.line();
     // access the annotations() object of the plot to work with annotations
-    var annotations = chart.plot().annotations();    
+    var plot = chart.plot(0); 
     chart.xAxis().ticks().enabled(true);
     chart.yAxis().ticks().enabled(false);
     
     // draw lines where controller transitions
     var marker = chart.lineMarker();
     marker.axis(chart.yAxis());
-    marker.value(75);
-    
-   
-    
-    //annotations.horizontalLine({valueAnchor: 75.0});
-    // create a Label annotation
-    //for (k=0; k<annotations.length; k++) {
-    //  controller.label({ xAnchor: annotations[k][0], valueAnchor: annotations[k][1], text: annotations[k][2] });
-    //}
+    marker.value(75);  
     
     //work on the time axis
     var dateScale = anychart.scales.dateTime();
