@@ -120,7 +120,7 @@ def node(request):
         
         location = "{0}  Node:{1}".format(node.location.description, node.name)
         
-        timediffstr = str(td.days) + "D " + str(td.seconds // 3600) + "H " + str(td.seconds // 60 % 60) + "M"
+        timediffstr = str(td.days) + "d " + str(td.seconds // 3600) + "h " + str(td.seconds // 60 % 60) + "m"
         
         return render(request, 'node.html',  {'location': location, 'timedelta': timediffstr, 'chartdefs': chartdefs, 'data': data })
           
