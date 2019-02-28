@@ -131,7 +131,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'kanji/static/media')
 
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
+    'disable_existing_loggers': False,
     'formatters': {
         'standard': {
             'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
@@ -142,7 +142,7 @@ LOGGING = {
         'dlogfile': {
             'level':'DEBUG',
             'class':'logging.handlers.RotatingFileHandler',
-            'filename': "kanji_debug.txt",
+            'filename': settings.BASE_DIR + "/kanji_debug.txt",
             'maxBytes': 1024*1024*5,
             'backupCount': 5,
             'formatter': 'standard',
