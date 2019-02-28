@@ -235,11 +235,7 @@ def webhook(request):
    doc = dataParts[4]
    acktime = dataParts[5]
 
-   log.error("ERROR view/webhook iddevice={0}".format(coreid))
-   log.error("ERROR view/webhook publishtopic={0}".format(eventtype))
-   log.error("ERROR view/webhook sensorid={0}".format(sensorid))
-   log.error("ERROR view/webhook doc={0}".format(doc))
-    
+       
    # query = "INSERT INTO sensordb_event (timestamp, device_id, publishtopic_id, sensortype_id, doc, ack_time) \
    #      VALUES ('{0}', {1}, {2}, {3}, '{4}', {5})"\
    #      .format(dt.now(), iddevice, publishtopic, sensorid, doc, acktime)
@@ -253,5 +249,11 @@ def webhook(request):
    eventlog.meshacktimemillis = int(acktime)  
    
    eventlog.save()
+   
+   log.error("ERROR view/webhook core={0}".format(eventlog,node.name))
+   log.error("ERROR view/webhook iddevice={0}".format(coreid))
+   log.error("ERROR view/webhook publishtopic={0}".format(eventtype))
+   log.error("ERROR view/webhook sensorid={0}".format(sensorid))
+   log.error("ERROR view/webhook doc={0}".format(doc))
    
    return HttpResponse("Thanks, Sensei/Kanji")
