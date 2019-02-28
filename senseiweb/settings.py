@@ -142,7 +142,7 @@ LOGGING = {
         'dlogfile': {
             'level':'DEBUG',
             'class':'logging.handlers.RotatingFileHandler',
-            'filename': settings.BASE_DIR + "/kanji_debug.txt",
+            'filename': "kanji_debug.txt",
             'maxBytes': 1024*1024*5,
             'backupCount': 5,
             'formatter': 'standard',
