@@ -250,7 +250,7 @@ def webhook(request):
    
    eventlog.save()
    
-   log.error("ERROR view/webhook core={0}".format(eventlog,node.name))
+   log.error("ERROR view/webhook core={0}".format(eventlog.node.name))
    log.error("ERROR view/webhook iddevice={0}".format(coreid))
    log.error("ERROR view/webhook publishtopic={0}".format(eventtype))
    log.error("ERROR view/webhook sensorid={0}".format(sensorid))
