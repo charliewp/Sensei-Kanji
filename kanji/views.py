@@ -79,7 +79,7 @@ def channel(request):
         
         data = []
         
-        annotations[]
+        annotations = []
         
         state = 0
         
