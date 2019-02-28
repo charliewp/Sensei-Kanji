@@ -103,7 +103,7 @@ def channel(request):
         }
         
         now = datetime.today()
-        time24hoursago = now - timedelta(hours=24)
+        time24hoursago = now - timedelta(hours=1)
         log.debug(time24hoursago)
         log.debug("debug")
         log.info("info")
@@ -124,6 +124,7 @@ def channel(request):
               eventtime = eventLog.timestamp
               date_time = eventLog.timestamp.strftime("%m/%d/%Y %H:%M:%S") 
               nodedata.append([date_time, float(eventLog.eventdata) + offset])
+            print("node data ={0}".format(nodedata))  
             data.append(nodedata)
             offset = offset+ 5.0
         
