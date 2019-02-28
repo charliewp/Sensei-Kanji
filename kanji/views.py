@@ -116,7 +116,7 @@ def node(request):
             else:
                 data.append([date_time, float(eventLog.eventdata), ackTime, 500])
         
-        timediff = now - eventtime
+        timediff = timezone.now() - eventtime
         
         location = "{0}  Node:{1}".format(node.location.description, node.name)
         
