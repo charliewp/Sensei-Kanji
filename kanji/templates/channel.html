@@ -106,7 +106,18 @@ anychart.onDocumentReady(function () {
     marker.axis(chart.yAxis());
     marker.value(75); 
 
-    plot.eventMarkers(eventmarkers);
+    plot.eventMarkers({
+  "groups": [
+    {
+      "data": [
+        {
+          "description": "On",
+          "date": "02\/28\/2019 16:37"
+        }
+      ]
+    }
+  ]
+});
         
     
     //work on the time axis
