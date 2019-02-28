@@ -124,7 +124,7 @@ def channel(request):
               eventtime = eventLog.timestamp
               date_time = eventLog.timestamp.strftime("%m/%d/%Y %H:%M:%S") 
               nodedata.append([date_time, float(eventLog.eventdata) + offset])
-            print("node data ={0}".format(nodedata))  
+            print("node {0} data ={1}".format(node.name, nodedata))  
             data.append(nodedata)
             offset = offset+ 5.0
         
