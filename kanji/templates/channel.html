@@ -62,6 +62,7 @@ anychart.onDocumentReady(function () {
     // data[node][][]
     // 3-dimensional array
     data = {{ data | safe }};
+    annotations = {{ annotations | safe }}
     chartdefs = {{ chartdefs | safe}};
     
     //var numCharts = chartdefs['charts'].length;
@@ -122,8 +123,10 @@ anychart.onDocumentReady(function () {
     chart.title("Temperature");
     // set yAxis title
     chart.yAxis().title(chartdefs.charts[0]['ylabel']);
-    chart.xAxis().labels().padding(5)      
-      
+    chart.xAxis().labels().padding(5)   
+
+   
+
     // there will be multiple series in the same chart 
     for (n=0; n<3; n++) {
       var dataSet = anychart.data.set(data[n]);
@@ -133,6 +136,14 @@ anychart.onDocumentReady(function () {
       chartSeries[n].hovered().markers().enabled(true).type('circle').size(4);
       chartSeries[n].tooltip().position('right').anchor('left-center').offsetX(5).offsetY(5);
       chartSeries[n].stroke(chartdefs.charts[n]['linecolor']);
+    }
+    
+    var plot = chart.plot(0);
+    // access the annotations() object of the plot to work with annotations
+    var controller = plot.annotations();
+    // create a Label annotation
+    for (k=0; k<annotations.length; k++) {
+      controller.label({xAnchor: annotations[k][0], valueAnchor: annotations[k][1], text: annotations[k][2]});
     }
     
     chart.container('container_1');      
