@@ -86,7 +86,7 @@ def channel(request):
             print("node {0} data ={1}".format(node.name, nodedata))  
             data.append(nodedata)
             
-            chartdef = {
+            chartdef = 'chart': {
                     "title"     : node.name,
                     "ylabel"    : node.name,
                     "yshow"     : "false",
