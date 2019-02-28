@@ -52,8 +52,9 @@ def channel(request):
         url = request.path_info
         print("url={0}".format(url))
         pathParts = url.split("/")
-        meshnetwork_id = pathParts[len(pathParts)-2]
-        channel_id = pathParts[len(pathParts)-1]
+        meshnetwork_id = int(pathParts[len(pathParts)-2])
+        channel_id = int(pathParts[len(pathParts)-1])
+        
         print("meshnetwork_id={0} channel_id={1}".format(meshnetwork_id, channel_id))
         
         chartdefs = { "charts": [
