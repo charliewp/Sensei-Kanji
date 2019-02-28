@@ -105,6 +105,10 @@ def channel(request):
         now = datetime.today()
         time24hoursago = now - timedelta(hours=24)
         log.debug(time24hoursago)
+        log.debug("debug")
+        log.info("info")
+        log.warn("warn")
+        log.error("error")
         
         nodes = Node.objects.all().filter(meshnetwork_id=meshnetwork_id).filter(channel_id=channel_id)
         
