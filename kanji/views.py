@@ -116,11 +116,11 @@ def node(request):
             else:
                 data.append([date_time, float(eventLog.eventdata), ackTime, 500])
         
-        timediff = timezone.now() - eventtime
+        td = timezone.now() - eventtime
         
         location = "{0}  Node:{1}".format(node.location.description, node.name)
         
-        timediffstr = timediff.hours + ":" + timediff.minutes + ":" + timediff.seconds
+        timediffstr = td.days + "d " + (td.seconds // 3600) + "m " + (td.seconds // 60 % 60) + "s"
         
         return render(request, 'node.html',  {'location': location, 'timedelta': timediffstr, 'chartdefs': chartdefs, 'data': data })
           
