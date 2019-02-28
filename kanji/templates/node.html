@@ -90,7 +90,7 @@ anychart.onDocumentReady(function () {
         gauges[n].data([point]);
         gauges[n].axis().scale().minimum(chartdefs.charts[n]['ranges'][0]).maximum(chartdefs.charts[n]['ranges'][5]).ticks({interval: 30}).minorTicks({interval: 15});
         gauges[n].axis().fill('#545f69').width(1).ticks({type: 'line', fill: 'white', length: 2});
-        gauges[n].needle().stroke('0 #07090d').startRadius('75%').endRadius('100%').startWidth('15.5%').endWidth('5.0%').middleWidth('2.5%');
+        gauges[n].needle().stroke('0 #07090d').startRadius('75%').endRadius('100%').startWidth('5.5%').endWidth('0.1%').middleWidth('2.5%');
         gauges[n].range(0, {from: chartdefs.charts[n]['ranges'][0], to: chartdefs.charts[n]['ranges'][1], position: 'inside', fill: chartdefs.charts[n]['fills'][0], startSize: 15, endSize: 15, radius: 100 });
         gauges[n].range(1, { from: chartdefs.charts[n]['ranges'][2], to: chartdefs.charts[n]['ranges'][3], position: 'inside', fill: chartdefs.charts[n]['fills'][1], startSize: 15, endSize: 15, radius: 100 });
         gauges[n].range(2, { from: chartdefs.charts[n]['ranges'][4], to: chartdefs.charts[n]['ranges'][5], position: 'inside', fill: chartdefs.charts[n]['fills'][2], startSize: 15, endSize: 15, radius: 100 });
