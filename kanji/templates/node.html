@@ -113,11 +113,11 @@ anychart.onDocumentReady(function () {
       var dateScale = anychart.scales.dateTime();
       // set one year ticks interval
       var dateTicks = dateScale.ticks();
-      dateTicks.interval(0, 0, 0, 0, 30);
+      dateTicks.interval(0, 0, 0, 0, 60);
       // set two months minor ticks interval
       var dateMinorTicks = dateScale.minorTicks();
       //years, months, days, hours, minutes, seconds.
-      dateMinorTicks.interval(0, 0, 0, 0, 60);
+      dateMinorTicks.interval(0, 0, 0, 0, 30);
       // set DateTime Scale as x scale of the chart
       var offset = new Date().getTimezoneOffset();
       anychart.format.outputTimezone(600);      
