@@ -103,7 +103,7 @@ def channel(request):
         }
         
         now = datetime.today()
-        time24hoursago = now - timedelta(minutes=5)
+        time24hoursago = now - timedelta(minutes=15)
         log.debug(time24hoursago)
         log.debug("debug")
         log.info("info")
