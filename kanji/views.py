@@ -100,7 +100,7 @@ def channel(request):
                     "gaugeyoff" : "20%"
             }
             print("chartdef ={0}".format(chartdef))
-            chartdefs['carts'].append(chartdef)
+            chartdefs['charts'].append(chartdef)
             nodenumber = nodenumber + 1
         
         print("chartdefs ={0}".format(chartdefs))
