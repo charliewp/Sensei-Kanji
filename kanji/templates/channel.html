@@ -140,11 +140,11 @@ anychart.onDocumentReady(function () {
     
     var plot = chart.plot();
     // access the annotations() object of the plot to work with annotations
-    //var controller = plot.annotations();
+    var controller = plot.annotations();
     // create a Label annotation
-    //for (k=0; k<annotations.length; k++) {
-    //  controller.label({ xAnchor: annotations[k][0], valueAnchor: annotations[k][1], text: annotations[k][2] });
-    //}
+    for (k=0; k<annotations.length; k++) {
+      controller.label({ xAnchor: annotations[k][0], valueAnchor: annotations[k][1], text: annotations[k][2] });
+    }
     
     chart.container('container_1');      
     chart.draw(); 
