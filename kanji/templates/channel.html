@@ -106,18 +106,15 @@ anychart.onDocumentReady(function () {
     marker.axis(chart.yAxis());
     marker.value(75); 
 
-    plot.eventMarkers({
-  "groups": [
-    {
-      "data": [
-        {
-          "description": "On",
-          "date": "02\/28\/2019 16:37"
-        }
-      ]
-    }
-  ]
-});
+ 
+    var controller = plot.annotations();
+
+    // create a Label annotation
+    controller.label({
+      xAnchor: "02\/28\/2019 16:37",
+      valueAnchor: 17.24,
+      text: "Buy"
+    });
         
     
     //work on the time axis
