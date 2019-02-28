@@ -62,8 +62,8 @@ def node(request):
                     "units"     : "F",
                     "gaugeshow" : "true",
                     "gaugefont" : "44",
-                    "gaugexoff" : "20",
-                    "gaugeyoff" : "20"
+                    "gaugexoff" : "20%",
+                    "gaugeyoff" : "20%"
                     
                 },
                 {
@@ -76,8 +76,8 @@ def node(request):
                     "units"     : "ms",
                     "gaugeshow" : "true",
                     "gaugefont" : "24",
-                    "gaugexoff" : "20",
-                    "gaugeyoff" : "20"
+                    "gaugexoff" : "20%",
+                    "gaugeyoff" : "20%"
                 },
                 {
                     "title"     : "Ping",
@@ -89,8 +89,8 @@ def node(request):
                     "units"     : "1/0",
                     "gaugeshow" : "false",
                     "gaugefont" : "44",
-                    "gaugexoff" : "20",
-                    "gaugeyoff" : "20"
+                    "gaugexoff" : "20%",
+                    "gaugeyoff" : "20%"
                 }
                 
             ]
