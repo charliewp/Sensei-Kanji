@@ -114,7 +114,7 @@ def channel(request):
         
         td = timezone.now() - eventtime       
         timediffstr = str(td.days) + "d " + str(td.seconds // 3600) + "h " + str(td.seconds // 60 % 60) + "m " + str(td.seconds % 60) + "s ago"
-        location = html.escape("{0}/{1}".format(meshnetworkname, channelname))
+        location = "{0}/{1}".format(meshnetworkname, channelname)
         
         return render(request, 'channel.html',  {'location': location, 'timediff': timediffstr, 'chartdefs': chartdefs, 'data': data })
           
