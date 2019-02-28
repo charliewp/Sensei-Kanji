@@ -61,9 +61,9 @@ def channel(request):
         meshnetworkname = MeshNetwork.objects.get(pk=int(meshnetwork_id)).name
         channelname = Channel.objects.get(pk=int(channel_id)).name
         
-        print("view/channel meshnetwork_id={0} channel_id={1}".format(meshnetwork_id, channel_id))
-        log.info("view/channel meshnetwork_id={0} channel_id={1}".format(meshnetwork_id, channel_id))
-        log.error("view/channel meshnetwork_id={0} channel_id={1}".format(meshnetwork_id, channel_id))
+        print("PRINT view/channel meshnetwork_id={0} channel_id={1}".format(meshnetwork_id, channel_id))
+        log.info("INFO view/channel meshnetwork_id={0} channel_id={1}".format(meshnetwork_id, channel_id))
+        log.error("ERROR view/channel meshnetwork_id={0} channel_id={1}".format(meshnetwork_id, channel_id))
         
         chartdefs = { "charts": [] }
         
@@ -235,10 +235,10 @@ def webhook(request):
    doc = dataParts[4]
    acktime = dataParts[5]
 
-   print("iddevice={0}".format(coreid))
-   print("publishtopic={0}".format(eventtype))
-   print("sensorid={0}".format(sensorid))
-   print("doc={0}".format(doc))
+   log.error("ERROR view/webhook iddevice={0}".format(coreid))
+   log.error("ERROR view/webhook publishtopic={0}".format(eventtype))
+   log.error("ERROR view/webhook sensorid={0}".format(sensorid))
+   log.error("ERROR view/webhook doc={0}".format(doc))
     
    # query = "INSERT INTO sensordb_event (timestamp, device_id, publishtopic_id, sensortype_id, doc, ack_time) \
    #      VALUES ('{0}', {1}, {2}, {3}, '{4}', {5})"\
