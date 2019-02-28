@@ -48,20 +48,8 @@ html, body, #container {
         <div class="column" id="timediff" style="text-align:center;width:300px;height:20px">{{ timediff }}</div>
     </div>
     <div class="row" style="width:900px;">
-        <div class="column" id="container_1" style="width:600px;height:200px"></div>
-        <div class="column" id="speed_1" style="width:300px;height:200px"></div>
-    </div>
-    <div class="row" style="width:900px;">
-        <div class="column" id="container_2" style="width:600px;height:150px"></div>
-        <div class="column" id="speed_2" style="width:300px;height:150px"></div>
-    </div>
-    <div class="row" style="width:900px;">
-        <div class="column" id="container_3" style="width:600px;height:100px"></div>
-        <div class="column" id="speed_3" style="width:300px;height:100px"></div>
-    </div>
-    <div class="row" style="width:900px;">
-        <div class="column" id="ping_" style="width:600px;height:100px"></div>
-    </div>
+        <div class="column" id="container_1" style="width:600px;height:200px"></div>        
+    </div>    
 </div>
 <script type="text/javascript">
     window.setTimeout("reloadpage();", 60000);    
@@ -71,15 +59,17 @@ html, body, #container {
 </script>
 <script>
 anychart.onDocumentReady(function () {
+    // data[node][][]
+    // 3-dimensional array
     data = {{ data | safe }};
     chartdefs = {{ chartdefs | safe}};
     
-    var numCharts = chartdefs['charts'].length;
-    var dataSet = anychart.data.set(data);    
-    var seriesData = new Array(numCharts);
-    var chart = new Array(numCharts);
-    var chartSeries = new Array(numCharts)
-    
+    //var numCharts = chartdefs['charts'].length;
+    //var dataSet = anychart.data.set(data);    
+    //var seriesData = new Array(numCharts);
+    //var chart = new Array(numCharts);
+    //var chartSeries = new Array(numCharts)
+    /*
     var gauges = new Array(seriesData.length)
     for (n=0; n<numCharts; n++) { 
       if (chartdefs.charts[n]['gaugeshow']=="true") {
@@ -100,54 +90,54 @@ anychart.onDocumentReady(function () {
         gauges[n].draw(); 
       }
     } 
-           
-    for (n=0; n<numCharts; n++) { 
-      seriesData[n] = dataSet.mapAs({'x': 0, 'value': n+1});
-      // create line chart
-      chart[n] = anychart.line();
-      //chart[n].format.outputTimezone(-5);
-      if (n!=0) {
-         chart[n].xAxis().labels().enabled(false);         
-      }
-      chart[n].xAxis().ticks().enabled(true);
-      chart[n].yAxis().ticks().enabled(false);
-      //work on the time axis
-      var dateScale = anychart.scales.dateTime();
-      // set one year ticks interval
-      var dateTicks = dateScale.ticks();
-      dateTicks.interval(0, 0, 0, 0, 60);
-      // set two months minor ticks interval
-      var dateMinorTicks = dateScale.minorTicks();
-      //years, months, days, hours, minutes, seconds.
-      dateMinorTicks.interval(0, 0, 0, 0, 30);
-      // set DateTime Scale as x scale of the chart
-      var offset = new Date().getTimezoneOffset();
-      anychart.format.outputTimezone(600);      
-      chart[n].xScale(dateScale);      
-      // turn on chart animation
-      chart[n].animation(true);
-      // set chart padding
-      chart[n].padding([10, 20, 5, 20]);
-      // turn on the crosshair
-      chart[n].crosshair().enabled(true).yLabel(false).yStroke(null);
-      // set tooltip mode to point
-      chart[n].tooltip().positionMode('point');
-      chart[n].tooltip().titleFormat("time: {%x}{dateTimeFormat:HH:mm:ss}");
-      // set chart title text settings
-      chart[n].title(chartdefs.charts[n]['title']);
-      // set yAxis title
-      chart[n].yAxis().title(chartdefs.charts[n]['ylabel']);
-      chart[n].xAxis().labels().padding(5)
-      // there will be multiple series in the same chart 
-      chartSeries[n] = chart[n].line(seriesData[n]);
+    */       
+    //seriesData[n] = dataSet.mapAs({'x': 0, 'value': n+1});
+    // create line chart
+    chart = anychart.line();      
+    chart.xAxis().ticks().enabled(true);
+    chart.yAxis().ticks().enabled(false);
+    //work on the time axis
+    var dateScale = anychart.scales.dateTime();
+    // set one year ticks interval
+    var dateTicks = dateScale.ticks();
+    dateTicks.interval(0, 0, 0, 0, 60);
+    // set two months minor ticks interval
+    var dateMinorTicks = dateScale.minorTicks();
+    //years, months, days, hours, minutes, seconds.
+    dateMinorTicks.interval(0, 0, 0, 0, 30);
+    // set DateTime Scale as x scale of the chart
+    var offset = new Date().getTimezoneOffset();
+    anychart.format.outputTimezone(600);      
+    chart.xScale(dateScale);      
+    // turn on chart animation
+    chart.animation(true);
+    // set chart padding
+    chart.padding([10, 20, 5, 20]);
+    // turn on the crosshair
+    chart.crosshair().enabled(true).yLabel(false).yStroke(null);
+    // set tooltip mode to point
+    chart.tooltip().positionMode('point');
+    chart.tooltip().titleFormat("time: {%x}{dateTimeFormat:HH:mm:ss}");
+    // set chart title text settings
+    chart.title(chartdefs.charts[n]['title']);
+    // set yAxis title
+    chart.yAxis().title(chartdefs.charts[n]['ylabel']);
+    chart.xAxis().labels().padding(5)      
+      
+    // there will be multiple series in the same chart 
+    for (n=0; n<3; n++) {
+      var dataSet = anychart.data.set(data[n];
+      var seriesData = dataSet.mapAs({'x': 0, 'value': 1});
+      chartSeries[n] = chart.line(seriesData);
       chartSeries[n].name(chartdefs.charts[n]['title']);
       chartSeries[n].hovered().markers().enabled(true).type('circle').size(4);
       chartSeries[n].tooltip().position('right').anchor('left-center').offsetX(5).offsetY(5);
       chartSeries[n].stroke(chartdefs.charts[n]['linecolor']);
-
-      chart[n].container('container_' + (n+1).toString());      
-      chart[n].draw(); 
     }
+    
+    chart.container('container_1');      
+    chart.draw(); 
+    
       
 });
 </script>
