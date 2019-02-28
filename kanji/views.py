@@ -115,11 +115,11 @@ def node(request):
             else:
                 data.append([date_time, float(eventLog.eventdata), ackTime, 500])
         
-        timedelta = now - date_time
+        timediff = now - date_time
         
         location = "{0}  Node:{1}".format(node.location.description, node.name)
         
-        return render(request, 'node.html',  {'location': location, 'timedelta': timedelta.seconds, 'chartdefs': chartdefs, 'data': data })
+        return render(request, 'node.html',  {'location': location, 'timedelta': timediff.seconds, 'chartdefs': chartdefs, 'data': data })
           
 def webhook(request):
    #
