@@ -89,7 +89,7 @@ def channel(request):
               eventtime = eventLog.timestamp
               date_time = eventLog.timestamp.strftime("%m/%d/%Y %H:%M") 
               nodedata.append([date_time, float(eventLog.eventdata)])
-            print("node {0} data ={1}".format(node.name, nodedata))  
+            #print("node {0} data ={1}".format(node.name, nodedata))  
             data.append(nodedata)
             
             chartdef = {
