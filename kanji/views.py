@@ -61,17 +61,19 @@ def channel(request):
         meshnetworkname = MeshNetwork.objects.get(pk=int(meshnetwork_id)).name
         channelname = Channel.objects.get(pk=int(channel_id)).name
         
-        print("view meshnetwork_id={0} channel_id={1}".format(meshnetwork_id, channel_id))
+        print("view/channel meshnetwork_id={0} channel_id={1}".format(meshnetwork_id, channel_id))
+        log.info("view/channel meshnetwork_id={0} channel_id={1}".format(meshnetwork_id, channel_id))
+        log.error("view/channel meshnetwork_id={0} channel_id={1}".format(meshnetwork_id, channel_id))
         
         chartdefs = { "charts": [] }
         
         now = datetime.today()
         time24hoursago = now - timedelta(hours=24)
         log.debug(time24hoursago)
-        log.debug("debug")
-        log.info("info")
-        log.warn("warn")
-        log.error("error")
+        #log.debug("debug")
+        #log.info("info")
+        #log.warn("warn")
+        #log.error("error")
         
         nodes = Node.objects.all().filter(meshnetwork_id=meshnetwork_id).filter(channel_id=channel_id)
         
