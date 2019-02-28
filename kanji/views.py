@@ -53,7 +53,7 @@ def channel(request):
     #  request url ~ /channel/meshnetwork_id/channel_id
     if request.method == 'GET':
         url = request.path_info
-        print("url={0}".format(url))
+        #print("url={0}".format(url))
         pathParts = url.split("/")
         meshnetwork_id = int(pathParts[len(pathParts)-2])
         channel_id = int(pathParts[len(pathParts)-1])
@@ -61,7 +61,7 @@ def channel(request):
         meshnetworkname = MeshNetwork.objects.get(pk=int(meshnetwork_id)).name
         channelname = Channel.objects.get(pk=int(channel_id)).name
         
-        print("meshnetwork_id={0} channel_id={1}".format(meshnetwork_id, channel_id))
+        print("view meshnetwork_id={0} channel_id={1}".format(meshnetwork_id, channel_id))
         
         chartdefs = { "charts": [] }
         
@@ -105,12 +105,12 @@ def channel(request):
                     "gaugexoff" : "20%",
                     "gaugeyoff" : "20%"
             }
-            print("chartdef ={0}".format(chartdef))
+            #print("chartdef ={0}".format(chartdef))
             chartdefs['charts'].append(chartdef)
             nodenumber = nodenumber + 1
         
-        print("chartdefs ={0}".format(chartdefs))
-        print("channel data ={0}".format(data))
+        #print("chartdefs ={0}".format(chartdefs))
+        #print("channel data ={0}".format(data))
         
         td = timezone.now() - eventtime       
         timediffstr = str(td.days) + "d " + str(td.seconds // 3600) + "h " + str(td.seconds // 60 % 60) + "m " + str(td.seconds % 60) + "s ago"
