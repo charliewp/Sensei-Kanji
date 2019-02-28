@@ -121,9 +121,6 @@ def channel(request):
         
         #print("chartdefs ={0}".format(chartdefs))
         #print("channel data ={0}".format(data))
-        
-        log.error("ERROR view/channel eventmarkers={0}".format(eventmarkers))
-        
         td = timezone.now() - eventtime       
         timediffstr = str(td.days) + "d " + str(td.seconds // 3600) + "h " + str(td.seconds // 60 % 60) + "m " + str(td.seconds % 60) + "s ago"
         location = "mesh {0}/{1} channel".format(meshnetworkname, channelname)
