@@ -94,13 +94,24 @@ anychart.onDocumentReady(function () {
     */       
     //seriesData[n] = dataSet.mapAs({'x': 0, 'value': n+1});
     // create line chart
-    chart = anychart.line();      
+    chart = anychart.line();
+    // access the annotations() object of the plot to work with annotations
+    var annotations = chart.plot().annotations();    
     chart.xAxis().ticks().enabled(true);
     chart.yAxis().ticks().enabled(false);
     
+    // draw lines where controller transitions
     var marker = chart.lineMarker();
     marker.axis(chart.yAxis());
     marker.value(75);
+    
+   
+    
+    //annotations.horizontalLine({valueAnchor: 75.0});
+    // create a Label annotation
+    //for (k=0; k<annotations.length; k++) {
+    //  controller.label({ xAnchor: annotations[k][0], valueAnchor: annotations[k][1], text: annotations[k][2] });
+    //}
     
     //work on the time axis
     var dateScale = anychart.scales.dateTime();
@@ -143,14 +154,7 @@ anychart.onDocumentReady(function () {
       chartSeries[n].stroke(chartdefs.charts[n]['linecolor']);
     }
     
-    //var plot = chart.plot();
-    // access the annotations() object of the plot to work with annotations
-    //var annotations = plot.annotations();
-    //annotations.horizontalLine({valueAnchor: 75.0});
-    // create a Label annotation
-    //for (k=0; k<annotations.length; k++) {
-    //  controller.label({ xAnchor: annotations[k][0], valueAnchor: annotations[k][1], text: annotations[k][2] });
-    //}
+  
     
     chart.container('container_1');      
     chart.draw(); 
