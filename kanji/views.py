@@ -61,7 +61,9 @@ def node(request):
                     "fills"     : ['#0b2e7d 0.4', '#009900 0.4', '#dd2c00 0.4'],
                     "units"     : "F",
                     "gaugeshow" : "true",
-                    "gaugefont" : "44"
+                    "gaugefont" : "44",
+                    "gaugexoff" : "20",
+                    "gaugeyoff" : "20"
                     
                 },
                 {
@@ -73,7 +75,9 @@ def node(request):
                     "fills"     :  ['#ffe500 0.4', '#ffe500 0.4', '#dd2c00 0.4'],
                     "units"     : "ms",
                     "gaugeshow" : "true",
-                    "gaugefont" : "24"
+                    "gaugefont" : "24",
+                    "gaugexoff" : "20",
+                    "gaugeyoff" : "20"
                 },
                 {
                     "title"     : "Ping",
@@ -84,7 +88,9 @@ def node(request):
                     "fills"     : ['#ffe500 0.4', '#ffe500 0.4', '#dd2c00 0.4'],
                     "units"     : "1/0",
                     "gaugeshow" : "false",
-                    "gaugefont" : "44"
+                    "gaugefont" : "44",
+                    "gaugexoff" : "20",
+                    "gaugeyoff" : "20"
                 }
                 
             ]
