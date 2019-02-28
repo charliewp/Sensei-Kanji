@@ -62,7 +62,7 @@ def node(request):
                     "units"     : "F",
                     "gaugeshow" : "true",
                     "gaugefont" : "44",
-                    "gaugexoff" : "40%",
+                    "gaugexoff" : "50%",
                     "gaugeyoff" : "20%"
                     
                 },
@@ -76,7 +76,7 @@ def node(request):
                     "units"     : "ms",
                     "gaugeshow" : "true",
                     "gaugefont" : "24",
-                    "gaugexoff" : "20%",
+                    "gaugexoff" : "50%",
                     "gaugeyoff" : "20%"
                 },
                 {
