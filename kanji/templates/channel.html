@@ -138,7 +138,7 @@ anychart.onDocumentReady(function () {
       // set yAxis title
       chart[n].yAxis().title(chartdefs.charts[n]['ylabel']);
       chart[n].xAxis().labels().padding(5)
-
+      // there will be multiple series in the same chart 
       chartSeries[n] = chart[n].line(seriesData[n]);
       chartSeries[n].name(chartdefs.charts[n]['title']);
       chartSeries[n].hovered().markers().enabled(true).type('circle').size(4);

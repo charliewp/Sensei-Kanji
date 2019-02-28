@@ -43,13 +43,18 @@ def index(request):
     return HttpResponse("Hello, world. You're at the Sensei-Kanji index page.")
     
 def channel(request):
+    #
+    #  Here we are looking at events from all nodes on a meshchannel
+    #  meshchannel = meshnetwork/channel
+    #
+    #  request url ~ /channel/meshnetwork_id/channel_id
     if request.method == 'GET':
-        #coreid = request.GET.get('coreid')
         url = request.path_info
         print("url={0}".format(url))
         pathParts = url.split("/")
-        coreid = pathParts[len(pathParts)-1]
-        print("coreId={0}".format(coreid))
+        meshnetwork_id = pathParts[len(pathParts)-2]
+        channel_id = pathParts[len(pathParts)-1]
+        print("meshnetwork_id={0} channel_id={1}".format(meshnetwork_id, channel_id))
         
         chartdefs = { "charts": [
                 {
@@ -96,31 +101,24 @@ def channel(request):
             ]
         }
         
-              
-        
-           
-        node = Node.objects.all().filter(coreid=coreid).first()
         now = datetime.today()
         time24hoursago = now - timedelta(hours=24)
         log.debug(time24hoursago)
-        # get last 24hours       
-        eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).filter(timestamp__gte = time24hoursago).order_by('timestamp')
-        # eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).order_by('timestamp')
         
-        data = []
-        for eventLog in eventLogs:
-            eventtime = eventLog.timestamp
-            date_time = eventLog.timestamp.strftime("%m/%d/%Y %H:%M:%S")
-            ackTime = eventLog.meshacktimemillis
-            pingLog = PingLog.objects.all().filter(node=node).filter(timestamp__gte = eventLog.timestamp).first()
-            
-            if ackTime>1000:
-                ackTime=1000
-            
-            if pingLog:
-                data.append([date_time, float(eventLog.eventdata), ackTime, pingLog.pingstate.idonlinestate])
-            else:
-                data.append([date_time, float(eventLog.eventdata), ackTime, 500])
+        nodes = Node.objects.all().filter(meshnetwork_id=meshnetwork_id).filter(channel_id=channel_id)
+        
+        for node in nodes:
+            # get last 24hours       
+            eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).filter(timestamp__gte = time24hoursago).order_by('timestamp')
+            # eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).order_by('timestamp')
+            nodedata = []
+            for eventLog in eventLogs:
+              eventtime = eventLog.timestamp
+              date_time = eventLog.timestamp.strftime("%m/%d/%Y %H:%M:%S") 
+              nodedata.append([date_time, float(eventLog.eventdata)])
+            data.append(nodedata)
+        
+        print("channel data ={0}".format(data))
         
         td = timezone.now() - eventtime       
         timediffstr = str(td.days) + "d " + str(td.seconds // 3600) + "h " + str(td.seconds // 60 % 60) + "m " + str(td.seconds % 60) + "s ago"
