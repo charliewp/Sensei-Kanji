@@ -78,7 +78,7 @@ def node(request):
                 {
                     "title"     : "Ping",
                     "ylabel"    : "ping",
-                    "yshow"     : "true",
+                    "yshow"     : "false",
                     "linecolor" : "green",
                     "ranges"    : [0, 25, 25, 50, 50, 100],
                     "fills"     : ['#ffe500 0.4', '#ffe500 0.4', '#dd2c00 0.4'],
@@ -120,7 +120,7 @@ def node(request):
         
         location = "{0}  Node:{1}".format(node.location.description, node.name)
         
-        timediffstr = str(td.days) + "d " + str(td.seconds // 3600) + "m " + str(td.seconds // 60 % 60) + "s"
+        timediffstr = str(td.days) + "D " + str(td.seconds // 3600) + "H " + str(td.seconds // 60 % 60) + "M"
         
         return render(request, 'node.html',  {'location': location, 'timedelta': timediffstr, 'chartdefs': chartdefs, 'data': data })
           
