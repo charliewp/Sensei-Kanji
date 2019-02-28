@@ -129,10 +129,10 @@ anychart.onDocumentReady(function () {
       var dataSet = anychart.data.set(data[n]);
       var seriesData = dataSet.mapAs({'x': 0, 'value': 1});
       chartSeries[n] = chart.line(seriesData);
-      chartSeries[n].name(chartdefs.charts[0]['title']);
+      chartSeries[n].name(chartdefs.charts[n]['title']);
       chartSeries[n].hovered().markers().enabled(true).type('circle').size(4);
       chartSeries[n].tooltip().position('right').anchor('left-center').offsetX(5).offsetY(5);
-      chartSeries[n].stroke(chartdefs.charts[0]['linecolor']);
+      chartSeries[n].stroke(chartdefs.charts[n]['linecolor']);
     }
     
     chart.container('container_1');      
