@@ -64,7 +64,6 @@ anychart.onDocumentReady(function () {
     // 3-dimensional array
     data = {{ data | safe }};
     annotations = {{ annotations | safe }};
-    eventmarkers = {{ eventmarkers | safe }}
     chartdefs = {{ chartdefs | safe}};
     
     //var numCharts = chartdefs['charts'].length;
@@ -111,11 +110,13 @@ anychart.onDocumentReady(function () {
     var controller = plot.annotations();
 
     // create a Label annotation
-    controller.label({
-      xAnchor: "02\/28\/2019 16:37",
-      valueAnchor: 17.24,
-      text: "Buy"
-    });
+    for (k=0; k<annotations.length; k++) {}
+      controller.label({
+        xAnchor: annotations[k][0],
+        valueAnchor: annotations[k][1],
+        text: annotations[k][2]
+      });
+    }
         
     
     //work on the time axis
