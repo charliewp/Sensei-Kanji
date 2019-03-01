@@ -68,7 +68,7 @@ def channel(request):
         chartdefs = { "charts": [] }
         
         now = datetime.today()
-        time24hoursago = now - timedelta(hours=1)
+        time24hoursago = now - timedelta(hours=24)
         log.debug(time24hoursago)
         #log.debug("debug")
         #log.info("info")
