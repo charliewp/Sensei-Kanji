@@ -113,7 +113,7 @@ def channel(request):
                 annotations.append([ date_time, float(eventLog.eventdata), "On"])
                 eventmarker = {}
                 eventmarker['date'] = date_time
-                eventmarker['description'] = "Call for fans.
+                eventmarker['description'] = "Call for fans."
                 eventmarkers.append(eventmarker)
             #print("node {0} data ={1}".format(node.name, nodedata))  
             data.append(nodedata)
