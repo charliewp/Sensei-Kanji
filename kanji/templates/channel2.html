@@ -79,6 +79,16 @@ anychart.onDocumentReady(function () {
     });
     */
     
+    var dataSet = anychart.data.set(data[0]);
+    var line = plot.line(dataSet.mapAs({'x': 0, 'value': 1}));
+      //line[n] = plot.line(dataSet.mapAs());
+    line.name(chartdefs.charts[0]['title']);
+    line.stroke(chartdefs.charts[0]['linecolor']);
+    line.tooltip().format(function () {
+        return tooltipFormatter(this, false)
+    });
+      
+    /*
     for (n=0; n<3; n++) {
       var dataSet = anychart.data.set(data[n]);
       line[n] = plot.line(dataSet.mapAs({'x': 0, 'value': 1}));
@@ -89,7 +99,7 @@ anychart.onDocumentReady(function () {
         return tooltipFormatter(this, false)
       });
     }
-
+    */
     /*
     var MSFT = plot.candlestick(msftDataTable.mapAs({
         'open': 1,
