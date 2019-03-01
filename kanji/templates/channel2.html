@@ -35,7 +35,8 @@ anychart.onDocumentReady(function () {
     data = {{ data | safe }};
     annotations = {{ annotations | safe }};
     chartdefs = {{ chartdefs | safe}};    
-    var line = new Array(3)
+    var line = new Array(2);
+    var datasset = new Array(2)
     
     // create data tables on loaded data
     var msftDataTable = anychart.data.table();
@@ -101,10 +102,10 @@ anychart.onDocumentReady(function () {
     });
       
     */
-    for (n=0; n<1; n++) {
-      var dataSet = anychart.data.table();
-      dataSet.addData(data[n]);
-      var line[n] = plot.line(dataSet.mapAs({'x': 0, 'value': 1}));
+    for (n=0; n<2; n++) {
+      dataSet[n] = anychart.data.table();
+      dataSet[n].addData(data[n]);
+      var line[n] = plot.line(dataSet[n].mapAs({'x': 0, 'value': 1}));
       //line[n] = plot.line(dataSet.mapAs());
       line[n].name(chartdefs.charts[n]['title']);
       line[n].stroke(chartdefs.charts[n]['linecolor']);

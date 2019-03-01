@@ -75,7 +75,7 @@ def channel(request):
         #log.warn("warn")
         #log.error("error")
         
-        nodes = Node.objects.all().filter(meshnetwork_id=meshnetwork_id).filter(channel_id=channel_id)
+        nodes = Node.objects.all().filter(meshnetwork_id=meshnetwork_id).filter(channel_id=channel_id).filter(coretype_id=10004)
         
         data = []
         
