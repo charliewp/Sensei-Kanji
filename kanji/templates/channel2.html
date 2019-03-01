@@ -79,7 +79,8 @@ anychart.onDocumentReady(function () {
     });
     */
     
-    var dataSet = anychart.data.set(data[0]);
+    //var dataSet = anychart.data.set(data[0]);
+    var dataSet = anychart.data.table(data[0]);
     var line = plot.line(dataSet.mapAs({'x': 0, 'value': 1}));
       //line[n] = plot.line(dataSet.mapAs());
     line.name(chartdefs.charts[0]['title']);
