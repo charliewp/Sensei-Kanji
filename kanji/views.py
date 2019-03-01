@@ -77,9 +77,20 @@ def channel(request):
         
         nodes = Node.objects.all().filter(meshnetwork_id=meshnetwork_id).filter(channel_id=channel_id).filter(coretype_id=10004)
         
-        data = []
-        
+        data = []        
         annotations = []
+        eventmarkers = []
+        
+        #eventMarkers.data([
+        #    {date: '2001-09-11', description: '9-11 attacks'},
+        #    {date: '2003-03-20', description: 'Iraq War'},
+        #    {date: '2008-08-20', description: 'Global financial collapse'},
+        #    {date: '2009-02-05', description: 'OPEC cuts production targets 4.2 mmbpd'},
+        #    {date: '2009-11-15', description: 'Greece\'s debt crisis'},
+        #    {date: '2011-03-11', description: 'Japan earthquake'},
+        #    {date: '2014-12-01', description: 'Russian financial crisis'},
+        #    {date: '2015-03-15', description: 'OPEC production quota unchanged'}
+        #]);
         
         state = 0
         
@@ -100,6 +111,10 @@ def channel(request):
               if state==0 and float(eventLog.eventdata)>80.0:
                 state = 1
                 annotations.append([ date_time, float(eventLog.eventdata), "On"])
+                eventmarker = {}
+                eventmarker['date'] = date_time
+                eventmarker['description'] = "Call for fans.
+                eventmarkers.append(eventmarker)
             #print("node {0} data ={1}".format(node.name, nodedata))  
             data.append(nodedata)
             
@@ -121,12 +136,13 @@ def channel(request):
             nodenumber = nodenumber + 1
         
         #print("chartdefs ={0}".format(chartdefs))
-        log.error("channel data ={0}".format(data[1]))
+        #log.error("channel data ={0}".format(data[1]))
+        log.error("eventmarkers ={0}".format(eventmarkers))
         td = timezone.now() - eventtime       
         timediffstr = str(td.days) + "d " + str(td.seconds // 3600) + "h " + str(td.seconds // 60 % 60) + "m " + str(td.seconds % 60) + "s ago"
         location = "mesh {0}/{1} channel".format(meshnetworkname, channelname)
         
-        return render(request, 'channel2.html',  {'location': location, 'timediff': timediffstr, 'chartdefs': chartdefs, 'data': data, 'annotations': annotations })
+        return render(request, 'channel2.html',  {'location': location, 'timediff': timediffstr, 'chartdefs': chartdefs, 'data': data, 'eventmarkers': eventmarkers, 'annotations': annotations })
           
     
 def node(request):

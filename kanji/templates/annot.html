@@ -1,0 +1,100 @@
+                     
+<html>
+<head>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js?hcode=be5162d915534272a57d0bb781d27f2b"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js?hcode=be5162d915534272a57d0bb781d27f2b"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js?hcode=be5162d915534272a57d0bb781d27f2b"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-stock.min.js?hcode=be5162d915534272a57d0bb781d27f2b"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-data-adapter.min.js?hcode=be5162d915534272a57d0bb781d27f2b"></script>
+  <link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css?hcode=be5162d915534272a57d0bb781d27f2b" type="text/css" rel="stylesheet">
+  <link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css?hcode=be5162d915534272a57d0bb781d27f2b" type="text/css" rel="stylesheet">
+  <style type="text/css">
+html, body, #container {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+</style>
+</head>
+<body>
+  <div id="container"></div>
+  <script>
+anychart.onDocumentReady(function () {
+    // The data used in this sample can be obtained from the CDN
+    // https://cdn.anychart.com/samples/stock-event-markers/stock-range-area-chart-with-multiple-events-markers-groups/data.csv
+    anychart.data.loadCsvFile('https://cdn.anychart.com/samples/stock-event-markers/stock-range-area-chart-with-multiple-events-markers-groups/data.csv', function (data) {
+        // create data table on loaded data
+        var dataTable = anychart.data.table();
+        dataTable.addData(data);
+
+        // map loaded data for the ohlc series
+        var seriesMapping = dataTable.mapAs({'high': 1, 'low': 2, 'value': 3});
+        var volumeMapping = dataTable.mapAs({'value': 6});
+
+        // create stock chart
+        var chart = anychart.stock();
+        chart.padding().left(75);
+
+        // set chart title
+        chart.title('USD/BITCOIN Exchange Rate');
+
+        // create first plot and set settings
+        var plot = chart.plot(0);
+        plot.yGrid(true)
+            .xGrid(true)
+            .yMinorGrid(true)
+            .xMinorGrid(true);
+
+        // create range-area series on first plot
+        plot.rangeArea()
+            .data(seriesMapping)
+            .name('USD/BITCOIN');
+
+        // The data used in this sample can be obtained from the CDN
+        // https://cdn.anychart.com/samples/stock-event-markers/stock-range-area-chart-with-multiple-events-markers-groups/markers-data.json
+        anychart.data.loadJsonFile('https://cdn.anychart.com/samples/stock-event-markers/stock-range-area-chart-with-multiple-events-markers-groups/markers-data.json', function (eventMarkersData) {
+            // create event markers
+            plot.eventMarkers({groups: eventMarkersData});
+            // get eventMarkers
+            var eventMarkers = plot.eventMarkers();
+
+            // set event markers settings
+            eventMarkers.position('series')
+                .fieldName('high')
+                .type('pin');
+
+            // set event markers tooltip settings
+            eventMarkers.tooltip().width(180);
+
+            // set hovered fill
+            eventMarkers.hovered().fill('#ff6e40');
+
+            // create scroller series with volume mapped data
+            chart.scroller().column(volumeMapping);
+
+            // set chart selected date/time range
+            chart.selectRange('2016-01-01', '2016-12-31');
+
+            // set container id for the chart
+            chart.container('container');
+            // initiate chart drawing
+            chart.draw();
+
+            // create range picker
+            var rangePicker = anychart.ui.rangePicker();
+            // init range picker
+            rangePicker.render(chart);
+
+            // create range selector
+            var rangeSelector = anychart.ui.rangeSelector();
+            // init range selector
+            rangeSelector.render(chart);
+        });
+    });
+});
+</script>
+</body>
+</html>
+
+                

@@ -34,6 +34,7 @@
 anychart.onDocumentReady(function () {
     data = {{ data | safe }};
     annotations = {{ annotations | safe }};
+    eventmarkers = {{ eventmarkers | safe }}
     chartdefs = {{ chartdefs | safe}};    
     var line = new Array(2);
     var dataSet = new Array(2)
@@ -114,6 +115,9 @@ anychart.onDocumentReady(function () {
         return tooltipFormatter(this, false)
       });
     }
+    
+    var eventMarkers = plot.eventMarkers();
+    eventMarkers.data = eventmarkers;
     
     /*
     var MSFT = plot.candlestick(msftDataTable.mapAs({
