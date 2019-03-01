@@ -90,6 +90,7 @@ anychart.onDocumentReady(function () {
 ['2016-01-01 10:50', 1.0873]
   ]);
   */
+  /*
     dataSet.addData(data[1]);
     var line = plot.line(dataSet.mapAs({'x': 0, 'value': 1}));
       //line[n] = plot.line(dataSet.mapAs());
@@ -99,18 +100,18 @@ anychart.onDocumentReady(function () {
         return tooltipFormatter(this, false)
     });
       
-    /*
+    */
     for (n=0; n<3; n++) {
-      var dataSet = anychart.data.set(data[n]);
-      line[n] = plot.line(dataSet.mapAs({'x': 0, 'value': 1}));
+      dataSet.addData(data[n]);
+      var line = plot.line(dataSet.mapAs({'x': 0, 'value': 1}));
       //line[n] = plot.line(dataSet.mapAs());
-      line[n].name(chartdefs.charts[n]['title']);
-      line[n].stroke(chartdefs.charts[n]['linecolor']);
-      line[n].tooltip().format(function () {
+      line.name(chartdefs.charts[n]['title']);
+      line.stroke(chartdefs.charts[n]['linecolor']);
+      line.tooltip().format(function () {
         return tooltipFormatter(this, false)
       });
     }
-    */
+    
     /*
     var MSFT = plot.candlestick(msftDataTable.mapAs({
         'open': 1,
