@@ -77,9 +77,7 @@ def channel(request):
         
         nodes = Node.objects.all().filter(meshnetwork_id=meshnetwork_id).filter(channel_id=channel_id).filter(coretype_id=10004)
         
-        data = []        
-        annotations = []
-        eventmarkers = []
+        data = []
         
         #eventMarkers.data([
         #    {date: '2001-09-11', description: '9-11 attacks'},
@@ -92,7 +90,7 @@ def channel(request):
         #    {date: '2015-03-15', description: 'OPEC production quota unchanged'}
         #]);
         
-        othermarkers = {"groups": [{"format": "FAN", "width": "35", "height": "35", "fill": "#ff6a00", "data": [] },
+        eventmarkers = {"groups": [{"format": "FAN", "width": "35", "height": "35", "fill": "#ff6a00", "data": [] },
                                    {"format": "FAN", "width": "35", "height": "35", "fill": "#00f700", "data": [] } ] }
         
         state = 0
@@ -118,16 +116,14 @@ def channel(request):
                   eventmarker = {}
                   eventmarker['date'] = date_time
                   eventmarker['description'] = "Fans On"
-                  eventmarkers.append(eventmarker)
-                  othermarkers['groups'][0]['data'].append(eventmarker)
+                  eventmarkers['groups'][0]['data'].append(eventmarker)
                 elif state==1 and float(eventLog.eventdata)<73.8:
                   state = 0
                   annotations.append([ date_time, float(eventLog.eventdata), "Off"])
                   eventmarker = {}
                   eventmarker['date'] = date_time
                   eventmarker['description'] = "Fans Off"
-                  eventmarkers.append(eventmarker)
-                  othermarkers['groups'][1]['data'].append(eventmarker)
+                  eventmarkers['groups'][1]['data'].append(eventmarker)
             #print("node {0} data ={1}".format(node.name, nodedata))  
             data.append(nodedata)
                         
@@ -155,7 +151,7 @@ def channel(request):
         timediffstr = str(td.days) + "d " + str(td.seconds // 3600) + "h " + str(td.seconds // 60 % 60) + "m " + str(td.seconds % 60) + "s ago"
         location = "mesh {0}/{1} channel".format(meshnetworkname, channelname)
         
-        return render(request, 'channel.html',  {'charttitle': 'Channel History', 'location': location, 'chartdefs': chartdefs, 'data': data, 'eventmarkers': othermarkers })
+        return render(request, 'channel.html',  {'charttitle': 'Channel History', 'location': location, 'chartdefs': chartdefs, 'data': data, 'eventmarkers': eventmarkers })
           
     
 def node(request):
