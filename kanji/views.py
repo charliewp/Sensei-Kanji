@@ -112,14 +112,12 @@ def channel(request):
               if nodenumber == 0:
                 if state==0 and float(eventLog.eventdata)>75.0:
                   state = 1
-                  annotations.append([ date_time, float(eventLog.eventdata), "On"])
                   eventmarker = {}
                   eventmarker['date'] = date_time
                   eventmarker['description'] = "Fans On"
                   eventmarkers['groups'][0]['data'].append(eventmarker)
                 elif state==1 and float(eventLog.eventdata)<73.8:
                   state = 0
-                  annotations.append([ date_time, float(eventLog.eventdata), "Off"])
                   eventmarker = {}
                   eventmarker['date'] = date_time
                   eventmarker['description'] = "Fans Off"
