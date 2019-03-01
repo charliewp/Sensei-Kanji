@@ -125,7 +125,7 @@ def channel(request):
         timediffstr = str(td.days) + "d " + str(td.seconds // 3600) + "h " + str(td.seconds // 60 % 60) + "m " + str(td.seconds % 60) + "s ago"
         location = "mesh {0}/{1} channel".format(meshnetworkname, channelname)
         
-        return render(request, 'channel.html',  {'location': location, 'timediff': timediffstr, 'chartdefs': chartdefs, 'data': data, 'annotations': annotations })
+        return render(request, 'channel2.html',  {'location': location, 'timediff': timediffstr, 'chartdefs': chartdefs, 'data': data, 'annotations': annotations })
           
     
 def node(request):
