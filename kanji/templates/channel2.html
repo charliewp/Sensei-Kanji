@@ -105,7 +105,7 @@ anychart.onDocumentReady(function () {
     for (n=0; n<2; n++) {
       dataSet[n] = anychart.data.table();
       dataSet[n].addData(data[n]);
-      var line[n] = plot.line(dataSet[n].mapAs({'x': 0, 'value': 1}));
+      line[n] = plot.line(dataSet[n].mapAs({'x': 0, 'value': 1}));
       //line[n] = plot.line(dataSet.mapAs());
       line[n].name(chartdefs.charts[n]['title']);
       line[n].stroke(chartdefs.charts[n]['linecolor']);
