@@ -191,7 +191,7 @@ anychart.onDocumentReady(function () {
 });
 
 function tooltipFormatter(item, is_ohlc) {
-    return '<span style="color: #ccc">' + item.seriesName + '</span>: ' + item.value;
+    return item.seriesName + ': ' + item.value;
 }
 </script>
 </body>
