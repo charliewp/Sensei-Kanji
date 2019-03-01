@@ -94,11 +94,11 @@ def channel(request):
             for eventLog in eventLogs:
               eventtime = eventLog.timestamp
               date_time = eventLog.timestamp.strftime("%m/%d/%Y %H:%M")
-              nodedata.append([date_time, float(eventLog.eventdata)])
+              nodedata.append([eventtime, float(eventLog.eventdata)])
               # synthetic controller input
               if state==0 and float(eventLog.eventdata)>80.0:
                 state = 1
-                annotations.append([ eventtime, float(eventLog.eventdata), "On"])
+                annotations.append([ date_time, float(eventLog.eventdata), "On"])
             #print("node {0} data ={1}".format(node.name, nodedata))  
             data.append(nodedata)
             
