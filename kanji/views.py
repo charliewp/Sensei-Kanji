@@ -92,6 +92,8 @@ def channel(request):
         #    {date: '2015-03-15', description: 'OPEC production quota unchanged'}
         #]);
         
+        othermarkers = {"format": "J", "fill": "#5e35b1", "data": []}
+        
         state = 0
         
         colors = ["red", "green", "blue"]
@@ -115,6 +117,7 @@ def channel(request):
                 eventmarker['date'] = date_time
                 eventmarker['description'] = "Call for fans."
                 eventmarkers.append(eventmarker)
+                othermarkers.append(eventmarker)
             #print("node {0} data ={1}".format(node.name, nodedata))  
             data.append(nodedata)
             
@@ -137,12 +140,12 @@ def channel(request):
         
         #print("chartdefs ={0}".format(chartdefs))
         #log.error("channel data ={0}".format(data[1]))
-        log.error("eventmarkers ={0}".format(eventmarkers))
+        log.error("eventmarkers ={0}".format(othermarkers))
         td = timezone.now() - eventtime       
         timediffstr = str(td.days) + "d " + str(td.seconds // 3600) + "h " + str(td.seconds // 60 % 60) + "m " + str(td.seconds % 60) + "s ago"
         location = "mesh {0}/{1} channel".format(meshnetworkname, channelname)
         
-        return render(request, 'channel2.html',  {'location': location, 'timediff': timediffstr, 'chartdefs': chartdefs, 'data': data, 'eventmarkers': eventmarkers, 'annotations': annotations })
+        return render(request, 'channel2.html',  {'location': location, 'timediff': timediffstr, 'chartdefs': chartdefs, 'data': data, 'eventmarkers': othermarkers, 'annotations': annotations })
           
     
 def node(request):
