@@ -92,7 +92,7 @@ def channel(request):
         #    {date: '2015-03-15', description: 'OPEC production quota unchanged'}
         #]);
         
-        othermarkers = {"format": "J", "fill": "#5e35b1", "data": []}
+        othermarkers = {"groups": [{"format": "A", "data": [] }] }
         
         state = 0
         
@@ -117,7 +117,7 @@ def channel(request):
                 eventmarker['date'] = date_time
                 eventmarker['description'] = "Call for fans."
                 eventmarkers.append(eventmarker)
-                othermarkers['data'].append(eventmarker)
+                othermarkers['groups'[0]['data'].append(eventmarker)
             #print("node {0} data ={1}".format(node.name, nodedata))  
             data.append(nodedata)
             
