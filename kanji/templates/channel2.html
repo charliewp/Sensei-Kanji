@@ -65,13 +65,13 @@ anychart.onDocumentReady(function () {
     });
     
     // create plot series with mapped data
-    var ORCL = plot.line(orclDataTable.mapAs({'value': 3}));
+    var ORCL = plot.line(orclDataTable.mapAs({'value': 1}));
     ORCL.name('ORCL').stroke('#3C8AD8');
     ORCL.tooltip().format(function () {
         return tooltipFormatter(this, false)
     });
 
-    var CSCO = plot.line(cscoDataTable.mapAs({'value': 2}));
+    var CSCO = plot.line(cscoDataTable.mapAs({'value': 1}));
     CSCO.name('CSCO').stroke('#96a6a6');
     CSCO.tooltip().format(function () {
         return tooltipFormatter(this, false)
