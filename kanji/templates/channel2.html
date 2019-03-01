@@ -39,6 +39,7 @@ anychart.onDocumentReady(function () {
     var dataSet = new Array(2)
     
     // create data tables on loaded data
+    /*
     var msftDataTable = anychart.data.table();
     msftDataTable.addData(get_msft_daily_short_data());
     var orclDataTable = anychart.data.table();
@@ -46,7 +47,7 @@ anychart.onDocumentReady(function () {
     var cscoDataTable = anychart.data.table();
     cscoDataTable.addData(get_csco_daily_short_data());
     cscoDataTable.addData(get_empty_data());
-
+    */
     // create stock chart
     var chart = anychart.stock();
     // set chart title
@@ -190,23 +191,7 @@ anychart.onDocumentReady(function () {
 });
 
 function tooltipFormatter(item, is_ohlc) {
-    if (is_ohlc) {
-        return '<br/><br/><span>' + item.seriesName + '</span><br/>' +
-            '<span style="color: #ccc">Open</span>: ' + item.open +
-            '<br/><span style="color: #ccc">High</span>: ' + item.high +
-            '<br/><span style="color: #ccc">Low</span>: ' + item.low +
-            '<br/><span style="color: #ccc">Close</span>: ' + item.close;
-    } else if (item.seriesName === 'CSCO') {
-        var value = item.value;
-        if (isNaN(item.value)) {
-            value = 'undefined';
-        }
-        return '<br/><span style="color: #ccc">' + item.seriesName + '</span>: ' +
-            value + '<br/>';
-    } else {
-        return '<span style="color: #ccc">' + item.seriesName + '</span>: ' +
-            item.value;
-    }
+    return '<span style="color: #ccc">' + item.seriesName + '</span>: ' + item.value;
 }
 </script>
 </body>
