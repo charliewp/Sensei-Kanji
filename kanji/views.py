@@ -117,7 +117,7 @@ def channel(request):
                 eventmarker['date'] = date_time
                 eventmarker['description'] = "Call for fans."
                 eventmarkers.append(eventmarker)
-                othermarkers['groups'[0]['data'].append(eventmarker)
+                othermarkers['groups'][0]['data'].append(eventmarker)
             #print("node {0} data ={1}".format(node.name, nodedata))  
             data.append(nodedata)
             

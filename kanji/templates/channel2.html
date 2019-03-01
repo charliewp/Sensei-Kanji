@@ -119,6 +119,8 @@ anychart.onDocumentReady(function () {
     var eventMarkers = plot.eventMarkers();
     eventMarkers.data(eventmarkers);
     
+    plot.eventMarkers({groups: eventMarkersData});
+    
     /*
     var MSFT = plot.candlestick(msftDataTable.mapAs({
         'open': 1,
