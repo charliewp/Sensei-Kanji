@@ -81,7 +81,7 @@ anychart.onDocumentReady(function () {
     
     //var dataSet = anychart.data.set(data[0]);
     var dataSet = anychart.data.table();
-    dataSet.addData(data[0]);
+    dataSet.addData(get_msft_daily_short_data());
     var line = plot.line(dataSet.mapAs({'x': 0, 'value': 1}));
       //line[n] = plot.line(dataSet.mapAs());
     line.name('title');
