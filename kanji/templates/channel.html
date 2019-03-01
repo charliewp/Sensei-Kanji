@@ -95,9 +95,9 @@ anychart.onDocumentReady(function () {
     */       
     //seriesData[n] = dataSet.mapAs({'x': 0, 'value': n+1});
     // create line chart
-    chart = anychart.line();
+    chart = anychart.stock(); //line();
     // access the annotations() object of the plot to work with annotations
-    var plot = chart.plot; 
+    var plot = chart.plot(0); 
     chart.xAxis().ticks().enabled(true);
     chart.yAxis().ticks().enabled(false);
     
