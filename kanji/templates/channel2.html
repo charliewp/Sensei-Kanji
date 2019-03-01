@@ -39,7 +39,7 @@ anychart.onDocumentReady(function () {
     eventmarkers = {{ eventmarkers | safe }}
     chartdefs = {{ chartdefs | safe}};    
     var line = new Array(data.length);
-    var dataSet = new Array(2)
+    var dataSet = new Array(data.length)
    
     var chart = anychart.stock();                                       // we're using the stock chart because of the extensive annotation features
     anychart.format.outputTimezone(600); 
@@ -54,7 +54,7 @@ anychart.onDocumentReady(function () {
         return items;
     });   
  
-    for (n=0; n<2; n++) {                                               // plot each series in data[]
+    for (n=0; n<data.length; n++) {                                               // plot each series in data[]
       dataSet[n] = anychart.data.table();
       dataSet[n].addData(data[n]);
       line[n] = plot.line(dataSet[n].mapAs({'x': 0, 'value': 1}));
