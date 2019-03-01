@@ -60,13 +60,10 @@ anychart.onDocumentReady(function () {
 
     // create stock chart
     var chart = anychart.stock();
-
     // set chart title
-    chart.title('Annotated Combination of Multiple Line Chart and Candlestick Chart');
-
+    chart.title('Temperature');
     // set chart padding
     chart.padding([15, 50, 57, 50]);
-
     // create plot on the chart
     var plot = chart.plot();
     // grid settings
@@ -83,24 +80,19 @@ anychart.onDocumentReady(function () {
     });
 
     // create plot series with mapped data
-    var ORCL = plot.line(orclDataTable.mapAs({
-        'value': 4
-    }));
-    ORCL.name('ORCL')
-        .stroke('#3C8AD8');
+    var ORCL = plot.line(orclDataTable.mapAs({'value': 4}));
+    ORCL.name('ORCL').stroke('#3C8AD8');
     ORCL.tooltip().format(function () {
         return tooltipFormatter(this, false)
     });
 
-    var CSCO = plot.line(cscoDataTable.mapAs({
-        'value': 4
-    }));
-    CSCO.name('CSCO')
-        .stroke('#96a6a6');
+    var CSCO = plot.line(cscoDataTable.mapAs({'value': 4}));
+    CSCO.name('CSCO').stroke('#96a6a6');
     CSCO.tooltip().format(function () {
         return tooltipFormatter(this, false)
     });
 
+    /*
     var MSFT = plot.candlestick(msftDataTable.mapAs({
         'open': 1,
         'high': 2,
@@ -112,6 +104,7 @@ anychart.onDocumentReady(function () {
     MSFT.tooltip().format(function () {
         return tooltipFormatter(this, true)
     });
+    */
 
     var annotation = plot.annotations();
     // create annotation horizontalLine
