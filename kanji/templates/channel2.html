@@ -28,8 +28,8 @@
 <body>			
 <div class="container">
     <div class="row" style="width:900px;">
-        <div class="column" id="timeline" style="text-align:center;width:600px;height:400px">{{ location }}</div>
-        <div class="column" id="timediff" style="text-align:center;width:300px;height:20px">{{ timediff }}</div>
+        <div class="column" id="timeline" style="text-align:center;width:900px;height:600px">{{ location }}</div>
+        <div class="column" id="timediff" style="text-align:center;width:900px;height:20px">{{ timediff }}</div>
     </div>    
 </div>
 <script>
@@ -40,17 +40,7 @@ anychart.onDocumentReady(function () {
     chartdefs = {{ chartdefs | safe}};    
     var line = new Array(2);
     var dataSet = new Array(2)
-    
-    // create data tables on loaded data
-    /*
-    var msftDataTable = anychart.data.table();
-    msftDataTable.addData(get_msft_daily_short_data());
-    var orclDataTable = anychart.data.table();
-    orclDataTable.addData(get_orcl_daily_short_data());
-    var cscoDataTable = anychart.data.table();
-    cscoDataTable.addData(get_csco_daily_short_data());
-    cscoDataTable.addData(get_empty_data());
-    */
+
     // create stock chart
     var chart = anychart.stock();
     // set chart title
@@ -69,43 +59,7 @@ anychart.onDocumentReady(function () {
         return items;
     });
     
-    /*
-    // create plot series with mapped data
-    var ORCL = plot.line(orclDataTable.mapAs({'x': 0, 'value': 4}));
-    ORCL.name('ORCL').stroke('#3C8AD8');
-    ORCL.tooltip().format(function () {
-        return tooltipFormatter(this, false)
-    });
-
-    var CSCO = plot.line(cscoDataTable.mapAs({'x': 0, 'value': 4}));
-    CSCO.name('CSCO').stroke('#96a6a6');
-    CSCO.tooltip().format(function () {
-        return tooltipFormatter(this, false)
-    });
-    */
-    
-    //var dataSet = anychart.data.set(data[0]);
-    
-    /*
-    dataSet.addData([
-['2016-01-01 10:46', 1.0860],
-['2016-01-01 10:47', 1.0832],
-['2016-01-01 10:48', 1.078],
-['2016-01-01 10:49', 1.0781],
-['2016-01-01 10:50', 1.0873]
-  ]);
-  */
-  /*
-    dataSet.addData(data[1]);
-    var line = plot.line(dataSet.mapAs({'x': 0, 'value': 1}));
-      //line[n] = plot.line(dataSet.mapAs());
-    line.name('title');
-    line.stroke('red');
-    line.tooltip().format(function () {
-        return tooltipFormatter(this, false)
-    });
-      
-    */
+ 
     for (n=0; n<2; n++) {
       dataSet[n] = anychart.data.table();
       dataSet[n].addData(data[n]);
@@ -117,82 +71,9 @@ anychart.onDocumentReady(function () {
         return tooltipFormatter(this, false)
       });
     }
-    
-    //var eventMarkers = plot.eventMarkers();
-    //eventMarkers.data(eventmarkers);
-    
-    //plot.eventMarkers({groups: eventMarkersData});
+  
     plot.eventMarkers(eventmarkers)
-    /*
-    var MSFT = plot.candlestick(msftDataTable.mapAs({
-        'open': 1,
-        'high': 2,
-        'low': 3,
-        'close': 4
-    }));
-    MSFT.name('MSFT');
-    MSFT.legendItem().iconType('rising-falling');
-    MSFT.tooltip().format(function () {
-        return tooltipFormatter(this, true)
-    });
-    */
 
-    /*
-    var annotation = plot.annotations();
-    // create annotation horizontalLine
-    // bottom dashed line
-    
-    annotation.horizontalLine({
-        // X - part of the first anchor
-        xAnchor: '2008-08-31',
-        // Y - part of the first anchor
-        valueAnchor: 14.18,
-        // X - part of the second anchor
-        secondXAnchor: '2010-01-01',
-        // Y - part of the second anchor
-        secondValueAnchor: 14.18,
-        // set stroke settings
-        stroke: {
-            thickness: 1,
-            color: '#60727B',
-            dash: '10 15'
-        }
-        // disable interaction with Annotation
-    }).allowEdit(false);
-    // create annotation line
-    // top dashed line
-    annotation.line({
-        // X - part of the first anchor
-        xAnchor: '2009-03-01',
-        // Y - part of the first anchor
-        valueAnchor: 31,
-        // X - part of the second anchor
-        secondXAnchor: '2010-05-09',
-        // Y - part of the second anchor
-        secondValueAnchor: 31,
-        // set stroke settings
-        stroke: {
-            thickness: 1,
-            color: '#60727B',
-            dash: '10 15'
-        }
-        // disable interaction with Annotation
-    }).allowEdit(false);
-    // create annotation line
-    // top solid line
-    annotation.line({
-        // X - part of the first anchor
-        xAnchor: '2008-08-10',
-        // Y - part of the first anchor
-        valueAnchor: 28.5,
-        // X - part of the second anchor
-        secondXAnchor: '2010-01-03',
-        // Y - part of the second anchor
-        secondValueAnchor: 28.5,
-        stroke: '2 #6E9C4E'
-        // disable interaction with Annotation
-    }).allowEdit(false); 
-    */
     chart.container('timeline');
     // initiate chart drawing
     chart.draw();
