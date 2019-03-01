@@ -65,36 +65,9 @@ anychart.onDocumentReady(function () {
     // 3-dimensional array
     data = {{ data | safe }};
     annotations = {{ annotations | safe }};
-    chartdefs = {{ chartdefs | safe}};
-    
-    //var numCharts = chartdefs['charts'].length;
-    //var dataSet = anychart.data.set(data);    
-    //var seriesData = new Array(numCharts);
-    //var chart = new Array(numCharts);
+    chartdefs = {{ chartdefs | safe}};    
     var chartSeries = new Array(3)
-    /*
-    var gauges = new Array(seriesData.length)
-    for (n=0; n<numCharts; n++) { 
-      if (chartdefs.charts[n]['gaugeshow']=="true") {
-        gauges[n] = anychart.gauges.circular();
-        gauges[n].fill('#fff').stroke(null).padding(0).margin(5).startAngle(270).sweepAngle(180);
-        gauges[n].axis().labels().padding(5).fontSize(1).position('outside').format('{%Value}');
-        point = data[data.length-1][n+1]
-        gauges[n].data([point]);
-        gauges[n].axis().scale().minimum(chartdefs.charts[n]['ranges'][0]).maximum(chartdefs.charts[n]['ranges'][5]).ticks({interval: 30}).minorTicks({interval: 15});
-        gauges[n].axis().fill('#545f69').width(1).ticks({type: 'line', fill: 'white', length: 2});
-        gauges[n].needle().stroke('0 #07090d').startRadius('75%').endRadius('100%').startWidth('5.5%').endWidth('0.5%').middleWidth('2.5%');
-        gauges[n].range(0, {from: chartdefs.charts[n]['ranges'][0], to: chartdefs.charts[n]['ranges'][1], position: 'inside', fill: chartdefs.charts[n]['fills'][0], startSize: 15, endSize: 15, radius: 100 });
-        gauges[n].range(1, { from: chartdefs.charts[n]['ranges'][2], to: chartdefs.charts[n]['ranges'][3], position: 'inside', fill: chartdefs.charts[n]['fills'][1], startSize: 15, endSize: 15, radius: 100 });
-        gauges[n].range(2, { from: chartdefs.charts[n]['ranges'][4], to: chartdefs.charts[n]['ranges'][5], position: 'inside', fill: chartdefs.charts[n]['fills'][2], startSize: 15, endSize: 15, radius: 100 });
-        gauges[n].container('speed_' + (n+1).toString());
-        displayvalue = point + chartdefs.charts[n]['units']
-        gauges[n].label(2).text(displayvalue).fontColor('#212121').fontSize(parseInt(chartdefs.charts[n]['gaugefont'])).offsetY(chartdefs.charts[n]['gaugeyoff']).offsetX(chartdefs.charts[n]['gaugexoff']).anchor('center');
-        gauges[n].draw(); 
-      }
-    } 
-    */       
-    //seriesData[n] = dataSet.mapAs({'x': 0, 'value': n+1});
+   
     // create line chart
     chart = anychart.line();
     // access the annotations() object of the plot to work with annotations
