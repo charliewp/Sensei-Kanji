@@ -44,6 +44,17 @@ anychart.onDocumentReady(function () {
     annotations = {{ annotations | safe }};
     chartdefs = {{ chartdefs | safe}};    
     var line = new Array(3)
+    
+    // create data tables on loaded data
+    var msftDataTable = anychart.data.table();
+    msftDataTable.addData(get_msft_daily_short_data());
+
+    var orclDataTable = anychart.data.table();
+    orclDataTable.addData(get_orcl_daily_short_data());
+
+    var cscoDataTable = anychart.data.table();
+    cscoDataTable.addData(get_csco_daily_short_data());
+    cscoDataTable.addData(get_empty_data());
 
     // create stock chart
     var chart = anychart.stock();
