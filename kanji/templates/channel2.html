@@ -171,26 +171,6 @@ anychart.onDocumentReady(function () {
     // initiate chart drawing
     chart.draw();
 });
-
-function tooltipFormatter(item, is_ohlc) {
-    if (is_ohlc) {
-        return '<br/><br/><span>' + item.seriesName + '</span><br/>' +
-            '<span style="color: #ccc">Open</span>: ' + item.open +
-            '<br/><span style="color: #ccc">High</span>: ' + item.high +
-            '<br/><span style="color: #ccc">Low</span>: ' + item.low +
-            '<br/><span style="color: #ccc">Close</span>: ' + item.close;
-    } else if (item.seriesName === 'CSCO') {
-        var value = item.value;
-        if (isNaN(item.value)) {
-            value = 'undefined';
-        }
-        return '<br/><span style="color: #ccc">' + item.seriesName + '</span>: ' +
-            value + '<br/>';
-    } else {
-        return '<span style="color: #ccc">' + item.seriesName + '</span>: ' +
-            item.value;
-    }
-}
 </script>
 </body>
 </html>
