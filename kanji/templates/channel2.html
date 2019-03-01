@@ -40,26 +40,10 @@
   </div>
   <script>
 anychart.onDocumentReady(function () {
-    // The data that have been used for this sample can be taken from the CDN
-    // https://cdn.anychart.com/csv-data/msft-daily-short.js
-    // https://cdn.anychart.com/csv-data/orcl-daily-short.js
-    // https://cdn.anychart.com/csv-data/csco-daily-short.js
-    // https://cdn.anychart.com/csv-data/empty_data(2009-2010).js
     data = {{ data | safe }};
     annotations = {{ annotations | safe }};
     chartdefs = {{ chartdefs | safe}};    
     var line = new Array(3)
-
-    // create data tables on loaded data
-    //var msftDataTable = anychart.data.table();
-    //msftDataTable.addData(get_msft_daily_short_data());
-
-    //var orclDataTable = anychart.data.table();
-    //orclDataTable.addData(get_orcl_daily_short_data());
-
-    //var cscoDataTable = anychart.data.table();
-    //cscoDataTable.addData(get_csco_daily_short_data());
-    //cscoDataTable.addData(get_empty_data());
 
     // create stock chart
     var chart = anychart.stock();
@@ -98,7 +82,8 @@ anychart.onDocumentReady(function () {
     for (n=0; n<3; n++) {
       var dataSet = anychart.data.set(data[n]);
       line[n] = plot.line(dataSet.mapAs({'x': 0, 'value': 1}));
-      line[n].name(chartdefs.charts[n]['title']).stroke(chartdefs.charts[n]['linecolor']);
+      line[n].name(chartdefs.charts[n]['title']);
+      line[n].stroke(chartdefs.charts[n]['linecolor']);
     }
 
     /*
@@ -115,9 +100,11 @@ anychart.onDocumentReady(function () {
     });
     */
 
+    /*
     var annotation = plot.annotations();
     // create annotation horizontalLine
     // bottom dashed line
+    
     annotation.horizontalLine({
         // X - part of the first anchor
         xAnchor: '2008-08-31',
@@ -167,132 +154,11 @@ anychart.onDocumentReady(function () {
         secondValueAnchor: 28.5,
         stroke: '2 #6E9C4E'
         // disable interaction with Annotation
-    }).allowEdit(false);
-    // create annotation line
-    // MSTF annotations line
-    /*
-    annotation.line({
-        // X - part of the first anchor
-        xAnchor: '2008-08-10',
-        // Y - part of the first anchor
-        valueAnchor: 27.86,
-        // X - part of the second anchor
-        secondXAnchor: '2009-03-01',
-        // Y - part of the second anchor
-        secondValueAnchor: 15.96,
-        stroke: '2 #EF730E'
-        // disable interaction with Annotation
-    }).allowEdit(false);
-    // create annotation line
-    // CSCO annotations line
-    annotation.line({
-        // X - part of the first anchor
-        xAnchor: '2008-08-10',
-        // Y - part of the first anchor
-        valueAnchor: 24.91,
-        // X - part of the second anchor
-        secondXAnchor: '2009-03-01',
-        // Y - part of the second anchor
-        secondValueAnchor: 14.18,
-        stroke: '2 #96a6a6'
-        // disable interaction with Annotation
-    }).allowEdit(false);
-    // create annotation line
-    // ORCL annotations line
-    annotation.line({
-        // X - part of the first anchor
-        xAnchor: '2008-08-10',
-        // Y - part of the first anchor
-        valueAnchor: 23.06,
-        // X - part of the second anchor
-        secondXAnchor: '2009-03-01',
-        // Y - part of the second anchor
-        secondValueAnchor: 14.47,
-        stroke: '2 #3C8AD8'
-        // disable interaction with Annotation
-    }).allowEdit(false);
+    }).allowEdit(false); 
     */
-    // create annotation triangle
-    /*
-    annotation.triangle({
-        // X - part of the first anchor
-        xAnchor: '2009-06-28',
-        // Y - part of the first anchor
-        valueAnchor: 23.6,
-        // X - part of the second anchor
-        secondXAnchor: '2009-06-28',
-        // Y - part of the second anchor
-        secondValueAnchor: 18.5,
-        // X - part of the third anchor
-        thirdXAnchor: '2010-01-03',
-        // Y - part of the third anchor
-        thirdValueAnchor: 28.5,
-        // set stroke settings
-        stroke: '2 #6E9C4E 0.75',
-        // set fill settings
-        fill: '#6E9C4E 0.3'
-        // disable interaction with Annotation
-    }).allowEdit(false);
-    // create annotation andrewsPitchfork
-    annotation.andrewsPitchfork({
-        // X - part of the first anchor
-        xAnchor: '2010-01-24',
-        // Y - part of the first anchor
-        valueAnchor: 29.5,
-        // X - part of the second anchor
-        secondXAnchor: '2010-01-03',
-        // Y - part of the second anchor
-        secondValueAnchor: 28.5,
-        // X - part of the third anchor
-        thirdXAnchor: '2010-03-14',
-        // Y - part of the third anchor
-        thirdValueAnchor: 28.5,
-        // set stroke settings
-        stroke: {
-            thickness: 2,
-            color: '#6E9C4E',
-            dash: '10 10'
-        },
-        // set hover stroke settings
-        hovered: {
-            stroke: {
-                thickness: 3,
-                color: 'green',
-                dash: '10 10'
-            }
-        }
-    });
-    */
-    // create scroller series with mapped data
-    /*
-    chart.scroller().candlestick(msftDataTable.mapAs({
-        'open': 1,
-        'high': 2,
-        'low': 3,
-        'close': 4
-    }));
-    chart.tooltip().useHtml(true);
-
-    // set chart selected date/time range
-    chart.selectRange('2008-06-29', '2010-06-27');
-    // set container id for the chart
-    */
-    
     chart.container('container');
     // initiate chart drawing
     chart.draw();
-
-    /*
-    // create range picker
-    var rangePicker = anychart.ui.rangePicker();
-    // init range picker
-    rangePicker.render(chart);
-
-    // create range selector
-    var rangeSelector = anychart.ui.rangeSelector();
-    // init range selector
-    rangeSelector.render(chart);
-    */
 });
 
 function tooltipFormatter(item, is_ohlc) {
