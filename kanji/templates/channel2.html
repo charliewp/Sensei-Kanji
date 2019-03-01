@@ -38,7 +38,7 @@ anychart.onDocumentReady(function () {
     //annotations = {{ annotations | safe }};
     eventmarkers = {{ eventmarkers | safe }}
     chartdefs = {{ chartdefs | safe}};    
-    var line = new Array(2);
+    var line = new Array(data.length);
     var dataSet = new Array(2)
    
     var chart = anychart.stock();                                       // we're using the stock chart because of the extensive annotation features
