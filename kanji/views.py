@@ -92,7 +92,7 @@ def channel(request):
         #    {date: '2015-03-15', description: 'OPEC production quota unchanged'}
         #]);
         
-        othermarkers = {"groups": [{"format": "A", "data": [] }] }
+        othermarkers = {"groups": [{"format": "F", "data": [] }] }
         
         state = 0
         
