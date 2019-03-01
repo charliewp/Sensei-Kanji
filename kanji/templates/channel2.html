@@ -253,6 +253,7 @@ anychart.onDocumentReady(function () {
     });
     */
     // create scroller series with mapped data
+    /*
     chart.scroller().candlestick(msftDataTable.mapAs({
         'open': 1,
         'high': 2,
@@ -263,12 +264,14 @@ anychart.onDocumentReady(function () {
 
     // set chart selected date/time range
     chart.selectRange('2008-06-29', '2010-06-27');
-
     // set container id for the chart
+    */
+    
     chart.container('container');
     // initiate chart drawing
     chart.draw();
 
+    /*
     // create range picker
     var rangePicker = anychart.ui.rangePicker();
     // init range picker
@@ -278,6 +281,7 @@ anychart.onDocumentReady(function () {
     var rangeSelector = anychart.ui.rangeSelector();
     // init range selector
     rangeSelector.render(chart);
+    */
 });
 
 function tooltipFormatter(item, is_ohlc) {
