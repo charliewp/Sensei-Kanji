@@ -80,7 +80,7 @@ anychart.onDocumentReady(function () {
     */
     
     //var dataSet = anychart.data.set(data[0]);
-    var dataSet = anychart.data.table();
+    
     /*
     dataSet.addData([
 ['2016-01-01 10:46', 1.0860],
@@ -102,6 +102,7 @@ anychart.onDocumentReady(function () {
       
     */
     for (n=0; n<3; n++) {
+      var dataSet = anychart.data.table();
       dataSet.addData(data[n]);
       var line[n] = plot.line(dataSet.mapAs({'x': 0, 'value': 1}));
       //line[n] = plot.line(dataSet.mapAs());
