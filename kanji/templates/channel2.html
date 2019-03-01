@@ -43,6 +43,7 @@ anychart.onDocumentReady(function () {
 
     // create stock chart
     var chart = anychart.stock();
+    anystock.format.outputTimezone(600); 
     // set chart title
     chart.title('Temperature');
     // set chart padding
@@ -77,7 +78,7 @@ anychart.onDocumentReady(function () {
     var eventMarkers = plot.eventMarkers();
 
     // set event markers settings
-    eventMarkers.position('high');
+    eventMarkers.position('series');
 
 
     chart.container('timeline');
