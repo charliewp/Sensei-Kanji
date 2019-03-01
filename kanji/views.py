@@ -39,8 +39,6 @@ log = logging.getLogger('KANJI-LOGGER')
 from django.views.decorators.csrf import ensure_csrf_cookie
 @ensure_csrf_cookie
 
-
-
 # Create your views here.
 def index(request):
     return HttpResponse("Hello, world. You're at the Sensei-Kanji index page.")
@@ -71,7 +69,8 @@ def channel(request):
         time24hoursago = now - timedelta(hours=24)
         #log.debug(time24hoursago)
         
-        nodes = Node.objects.all().filter(meshnetwork_id=meshnetwork_id).filter(channel_id=channel_id).filter(coretype_id=10004)
+        # we'll get data from the NodeType = sensors 
+        nodes = Node.objects.all().filter(meshnetwork_id=meshnetwork_id).filter(channel_id=channel_id).filter(nodetype_id=10000)
         
         data = []
         
