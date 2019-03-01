@@ -89,14 +89,14 @@ anychart.onDocumentReady(function () {
     CSCO.tooltip().format(function () {
         return tooltipFormatter(this, false)
     });
-    /*
+    
     for (n=0; n<3; n++) {
       var dataSet = anychart.data.set(data[n]);
       line[n] = plot.line(dataSet.mapAs({'value': 1}));
       line[n].name(chartdefs.charts[n]['title']);
       line[n].stroke(chartdefs.charts[n]['linecolor']);
     }
-*/
+
     /*
     var MSFT = plot.candlestick(msftDataTable.mapAs({
         'open': 1,
