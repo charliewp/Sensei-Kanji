@@ -73,6 +73,12 @@ anychart.onDocumentReady(function () {
     }
   
     plot.eventMarkers(eventmarkers)
+    
+    var eventMarkers = plot.eventMarkers();
+
+    // set event markers settings
+    eventMarkers.position('xenon_01');
+
 
     chart.container('timeline');
     // initiate chart drawing
