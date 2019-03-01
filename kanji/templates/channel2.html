@@ -35,37 +35,29 @@
 <script>
 anychart.onDocumentReady(function () {
     data = {{ data | safe }};
-    annotations = {{ annotations | safe }};
+    //annotations = {{ annotations | safe }};
     eventmarkers = {{ eventmarkers | safe }}
     chartdefs = {{ chartdefs | safe}};    
     var line = new Array(2);
     var dataSet = new Array(2)
-
-    // create stock chart
-    var chart = anychart.stock();
+   
+    var chart = anychart.stock();                                       // we're using the stock chart because of the extensive annotation features
     anychart.format.outputTimezone(600); 
-    // set chart title
-    chart.title('Temperature');
-    // set chart padding
-    chart.padding([15, 50, 57, 50]);
-    // create plot on the chart
-    var plot = chart.plot();
-    // grid settings
-    plot.yGrid(true).xGrid(true).xMinorGrid(true).yMinorGrid(true);
-
-    // format legend items
-    plot.legend().itemsFormatter(function (items) {
-        items.splice(3, 1);
-        // return items array
-        return items;
-    });
     
+    chart.title('Temperature');                                         // set chart title    
+    chart.padding([15, 50, 57, 50]);
+    
+    var plot = chart.plot();                                            // create plot on the chart
+    plot.yGrid(true).xGrid(true).xMinorGrid(true).yMinorGrid(true);    
+    plot.legend().itemsFormatter(function (items) {                     // format legend items
+        items.splice(3, 1);                                             // return items array
+        return items;
+    });   
  
-    for (n=0; n<2; n++) {
+    for (n=0; n<2; n++) {                                               // plot each series in data[]
       dataSet[n] = anychart.data.table();
       dataSet[n].addData(data[n]);
       line[n] = plot.line(dataSet[n].mapAs({'x': 0, 'value': 1}));
-      //line[n] = plot.line(dataSet.mapAs());
       line[n].name(chartdefs.charts[n]['title']);
       line[n].stroke(chartdefs.charts[n]['linecolor']);
       line[n].tooltip().format(function () {
@@ -73,16 +65,11 @@ anychart.onDocumentReady(function () {
       });
     }
   
-    plot.eventMarkers(eventmarkers)
-    
+    plot.eventMarkers(eventmarkers)                                     // plot the eventmarkers    
     var eventMarkers = plot.eventMarkers();
+    eventMarkers.position('series');                                    // position the eventmarkers
 
-    // set event markers settings
-    eventMarkers.position('series');
-
-
-    chart.container('timeline');
-    // initiate chart drawing
+    chart.container('timeline');                                        // locate and draw the chart
     chart.draw();
 });
 
