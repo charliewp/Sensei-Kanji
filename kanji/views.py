@@ -111,25 +111,26 @@ def channel(request):
               date_time = eventLog.timestamp.strftime("%Y-%m-%d %H:%M")
               nodedata.append([date_time, float(eventLog.eventdata)])
               # synthetic controller input
-              if state==0 and float(eventLog.eventdata)>75.0:
-                state = 1
-                annotations.append([ date_time, float(eventLog.eventdata), "On"])
-                eventmarker = {}
-                eventmarker['date'] = date_time
-                eventmarker['description'] = "Fans On"
-                eventmarkers.append(eventmarker)
-                othermarkers['groups'][0]['data'].append(eventmarker)
-              elif state==1 and float(eventLog.eventdata)<73.8:
-                state = 0
-                annotations.append([ date_time, float(eventLog.eventdata), "Off"])
-                eventmarker = {}
-                eventmarker['date'] = date_time
-                eventmarker['description'] = "Fans Off"
-                eventmarkers.append(eventmarker)
-                othermarkers['groups'][1]['data'].append(eventmarker)
+              if nodenumber == 0:
+                if state==0 and float(eventLog.eventdata)>75.0:
+                  state = 1
+                  annotations.append([ date_time, float(eventLog.eventdata), "On"])
+                  eventmarker = {}
+                  eventmarker['date'] = date_time
+                  eventmarker['description'] = "Fans On"
+                  eventmarkers.append(eventmarker)
+                  othermarkers['groups'][0]['data'].append(eventmarker)
+                elif state==1 and float(eventLog.eventdata)<73.8:
+                  state = 0
+                  annotations.append([ date_time, float(eventLog.eventdata), "Off"])
+                  eventmarker = {}
+                  eventmarker['date'] = date_time
+                  eventmarker['description'] = "Fans Off"
+                  eventmarkers.append(eventmarker)
+                  othermarkers['groups'][1]['data'].append(eventmarker)
             #print("node {0} data ={1}".format(node.name, nodedata))  
             data.append(nodedata)
-            
+                        
             chartdef = {
                     "title"     : node.name,
                     "ylabel"    : node.name,
