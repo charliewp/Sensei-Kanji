@@ -25,7 +25,13 @@
 				}
   </style>
 </head>
-<body>			
+<body>	
+<script type="text/javascript">
+    window.setTimeout("reloadpage();", 60000);    
+    function reloadpage() {    // page automatically reloads every 60seconds
+      location.reload(true)
+    }
+</script>		
 <div class="container">
     <div class="row" style="width:900px;">
         <div class="column" id="channel-timeline" style="text-align:center;width:900px;height:600px">{{ location }}</div>
