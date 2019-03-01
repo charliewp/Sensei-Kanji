@@ -45,18 +45,21 @@ anychart.onDocumentReady(function () {
     // https://cdn.anychart.com/csv-data/orcl-daily-short.js
     // https://cdn.anychart.com/csv-data/csco-daily-short.js
     // https://cdn.anychart.com/csv-data/empty_data(2009-2010).js
-
+    data = {{ data | safe }};
+    annotations = {{ annotations | safe }};
+    chartdefs = {{ chartdefs | safe}};    
+    var line = new Array(3)
 
     // create data tables on loaded data
-    var msftDataTable = anychart.data.table();
-    msftDataTable.addData(get_msft_daily_short_data());
+    //var msftDataTable = anychart.data.table();
+    //msftDataTable.addData(get_msft_daily_short_data());
 
-    var orclDataTable = anychart.data.table();
-    orclDataTable.addData(get_orcl_daily_short_data());
+    //var orclDataTable = anychart.data.table();
+    //orclDataTable.addData(get_orcl_daily_short_data());
 
-    var cscoDataTable = anychart.data.table();
-    cscoDataTable.addData(get_csco_daily_short_data());
-    cscoDataTable.addData(get_empty_data());
+    //var cscoDataTable = anychart.data.table();
+    //cscoDataTable.addData(get_csco_daily_short_data());
+    //cscoDataTable.addData(get_empty_data());
 
     // create stock chart
     var chart = anychart.stock();
@@ -78,7 +81,7 @@ anychart.onDocumentReady(function () {
         // return items array
         return items;
     });
-
+    /*
     // create plot series with mapped data
     var ORCL = plot.line(orclDataTable.mapAs({'value': 4}));
     ORCL.name('ORCL').stroke('#3C8AD8');
@@ -91,6 +94,12 @@ anychart.onDocumentReady(function () {
     CSCO.tooltip().format(function () {
         return tooltipFormatter(this, false)
     });
+    */
+    for (n=0; n<3; n++) {
+      var dataSet = anychart.data.set(data[n]);
+      line[n] = plot.line(dataSet.mapAs({'x': 0, 'value': 1}));
+      line[n].name(chartdefs.charts[n]['title']).stroke(chartdefs.charts[n]['linecolor']);
+    }
 
     /*
     var MSFT = plot.candlestick(msftDataTable.mapAs({
