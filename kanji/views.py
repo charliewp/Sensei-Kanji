@@ -92,7 +92,7 @@ def channel(request):
         #    {date: '2015-03-15', description: 'OPEC production quota unchanged'}
         #]);
         
-        othermarkers = {"groups": [{"format": "F-ON", "width": "50", "height": "50", "fill": "#ff6a00", "data": [] }] }
+        othermarkers = {"groups": [{"format": "FAN", "width": "35", "height": "35", "fill": "#ff6a00", "data": [] }] }
         
         state = 0
         
@@ -115,7 +115,15 @@ def channel(request):
                 annotations.append([ date_time, float(eventLog.eventdata), "On"])
                 eventmarker = {}
                 eventmarker['date'] = date_time
-                eventmarker['description'] = "Call for fans."
+                eventmarker['description'] = "Fans On"
+                eventmarkers.append(eventmarker)
+                othermarkers['groups'][0]['data'].append(eventmarker)
+              elif state==1 and float(eventLog.eventdata)<80.0:
+                state = 0
+                annotations.append([ date_time, float(eventLog.eventdata), "Off"])
+                eventmarker = {}
+                eventmarker['date'] = date_time
+                eventmarker['description'] = "Fans Off"
                 eventmarkers.append(eventmarker)
                 othermarkers['groups'][0]['data'].append(eventmarker)
             #print("node {0} data ={1}".format(node.name, nodedata))  
