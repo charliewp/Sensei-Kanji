@@ -268,6 +268,8 @@ def webhook(request):
    for pin in pins:
       log.error("ERROR view/webhook pin={0}".format(pin))
    
+   eventtype = 10000
+   sensorid = pin["t"]
 
        
    # query = "INSERT INTO sensordb_event (timestamp, device_id, publishtopic_id, sensortype_id, doc, ack_time) \
@@ -277,8 +279,8 @@ def webhook(request):
    eventlog = EventLog()
    eventlog.timestamp = timestamp
    eventlog.node = Node.objects.all().filter(coreid=coreid).first()
-   eventlog.eventtype = EventType.objects.get(pk=int(dataParts[3]))
-   eventlog.sensortype = SensorType.objects.get(pk=int(dataParts[2]))
+   eventlog.eventtype = EventType.objects.get(pk=eventtype))
+   eventlog.sensortype = SensorType.objects.get(pk=sensorid)
    eventlog.eventdata = doc
    eventlog.meshacktimemillis = int(acktime)  
    
