@@ -256,10 +256,18 @@ def webhook(request):
     
    dataParts = data.split("/")
     
-   sensorid = dataParts[2]
-   eventtype = dataParts[3]
-   doc = dataParts[4]
-   acktime = dataParts[5]
+   #sensorid = dataParts[2]
+   #eventtype = dataParts[3]
+   #doc = dataParts[4]
+   #acktime = dataParts[5]
+   
+   doc = dataParts[0]   
+   acktime = dataParts[1]
+   
+   pins = json.loads(doc)   
+   for pin in pins:
+      log.error("ERROR view/webhook pin={0}".format(pin))
+   
 
        
    # query = "INSERT INTO sensordb_event (timestamp, device_id, publishtopic_id, sensortype_id, doc, ack_time) \
