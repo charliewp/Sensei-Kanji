@@ -114,7 +114,7 @@ class EventLog(models.Model):
     node = models.ForeignKey(Node,on_delete=models.PROTECT, default=1)
     eventtype = models.ForeignKey(EventType,on_delete=models.PROTECT, default=1)
     sensortype = models.ForeignKey(SensorType,on_delete=models.PROTECT, default=1)
-    eventdata = models.CharField(max_length=24)
+    eventdata = models.CharField(max_length=622)
     meshacktimemillis = models.IntegerField(default=0)    
 
 class PingLog(models.Model):
