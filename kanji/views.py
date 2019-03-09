@@ -288,6 +288,7 @@ def webhook(request):
    
    eventlog.save()
    
+   log.error("ERROR view/webhook data={0}".format(data))
    log.error("ERROR view/webhook ackTime={0}".format(acktime))
    log.error("ERROR view/webhook core={0}".format(eventlog.node.name))
    log.error("ERROR view/webhook iddevice={0}".format(coreid))
