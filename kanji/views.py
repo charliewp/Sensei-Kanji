@@ -264,7 +264,7 @@ def webhook(request):
    
    doc = dataParts[0]   
    acktime = dataParts[1]
-   print("ackTime={0}".format(acktime))
+   
    
    pins = json.loads(doc)   
    for pin in pins:
@@ -288,6 +288,7 @@ def webhook(request):
    
    eventlog.save()
    
+   log.error("ERROR view/webhook ackTime={0}".format(acktime))
    log.error("ERROR view/webhook core={0}".format(eventlog.node.name))
    log.error("ERROR view/webhook iddevice={0}".format(coreid))
    log.error("ERROR view/webhook publishtopic={0}".format(eventtype))
