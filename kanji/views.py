@@ -241,6 +241,7 @@ def webhook(request):
    # get the data and put it in the Database
    #content = request.get_json()
    #event = content['event']
+   #print("event={0}".format(event))
    #data = content['data']
    #coreid = content['coreid']
    #published_at = content['published_at']
@@ -263,6 +264,7 @@ def webhook(request):
    
    doc = dataParts[0]   
    acktime = dataParts[1]
+   print("ackTime={0}".format(acktime))
    
    pins = json.loads(doc)   
    for pin in pins:
