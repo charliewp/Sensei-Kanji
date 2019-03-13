@@ -53,7 +53,7 @@ def channel(request):
     #  request url ~ /channel/meshnetwork_id/channel_id
     if request.method == 'GET':
         #return HttpResponse("Hello, world. You're at the Sensei-Kanji index page.") 
-        html = Template('{% load static %}<img src="{% static "channel.png" %}" />')
+        html = Template('{% load static %}<img src="{% static "images/channel.png" %}" />')
         return HttpResponse(html.render(Context(request)))
     
 def node(request):
