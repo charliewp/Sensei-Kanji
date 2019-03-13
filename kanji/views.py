@@ -33,6 +33,8 @@ from .models import SensorType
 from .models import MeshNetwork
 from .models import Channel
 
+from django.template import RequestContext, Template, Context
+
 import logging
 log = logging.getLogger('KANJI-LOGGER')
 
