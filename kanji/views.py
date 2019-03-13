@@ -42,8 +42,9 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 # Create your views here.
 
 def chart(request):
-    html = Template('{% load static %}<img src="{% static "channel.png" %}" />')
-    return HttpResponse(html.render(Context(request)))
+    #html = Template('{% load static %}<img src="{% static "channel.png" %}" />')
+    #return HttpResponse(html.render(Context(request)))
+    return HttpResponse("Hello, world. You're at the Sensei-Kanji index page.")
     
 def index(request):
     return HttpResponse("Hello, world. You're at the Sensei-Kanji index page.")
