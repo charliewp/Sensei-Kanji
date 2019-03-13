@@ -212,6 +212,8 @@ def node(request):
         eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).filter(timestamp__gte = time24hoursago).order_by('timestamp')
         # eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).order_by('timestamp')
         
+        eventtime = timezone.now()
+        
         data = []
         for eventLog in eventLogs:
             eventtime = eventLog.timestamp
