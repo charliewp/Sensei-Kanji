@@ -206,7 +206,7 @@ def node(request):
            
         node = Node.objects.all().filter(coreid=coreid).first()
         now = datetime.today()
-        time24hoursago = now - timedelta(hours=24)
+        time24hoursago = now - timedelta(days=24)
         log.debug(time24hoursago)
         # get last 24hours       
         eventLogs = EventLog.objects.all().filter(node=node).filter(sensortype_id=7).filter(timestamp__gte = time24hoursago).order_by('timestamp')
@@ -226,6 +226,7 @@ def node(request):
                 data.append([date_time, float(eventLog.eventdata), ackTime, pingLog.pingstate.idonlinestate])
             else:
                 data.append([date_time, float(eventLog.eventdata), ackTime, 500])
+        
         
         td = timezone.now() - eventtime       
         timediffstr = str(td.days) + "d " + str(td.seconds // 3600) + "h " + str(td.seconds // 60 % 60) + "m " + str(td.seconds % 60) + "s ago"
