@@ -52,9 +52,7 @@ def channel(request):
     #
     #  request url ~ /channel/meshnetwork_id/channel_id
     if request.method == 'GET':
-        #return HttpResponse("Hello, world. You're at the Sensei-Kanji index page.") 
-        html = Template('{% load static %}<img src="{% static "media/default.jpg" %}" />')
-        return HttpResponse(html.render(Context(request)))
+        return render(request, 'channelchart.html')
     
 def node(request):
     if request.method == 'GET':
