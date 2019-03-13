@@ -52,7 +52,11 @@ def channel(request):
     #
     #  request url ~ /channel/meshnetwork_id/channel_id
     if request.method == 'GET':
-        return render(request, 'channelchart.html')
+        url = request.path_info
+        print("image={0}".format(url))
+        pathParts = url.split("/")
+        image = pathParts[len(pathParts)-1]
+        return render(request, 'channelchart.html', { 'image': image} )
     
 def node(request):
     if request.method == 'GET':
