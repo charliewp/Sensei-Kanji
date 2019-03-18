@@ -71,7 +71,7 @@ class Customer(models.Model):
     
 class Location(models.Model):
     idlocation  = models.BigAutoField(primary_key=True)
-    description = models.CharField(max_length=24)
+    description = models.CharField(max_length=64)
     zipcode = models.CharField(max_length=10, null=True)
     customer = models.ForeignKey(Customer,on_delete=models.PROTECT, default=10000) 
     def __str__(self):
@@ -79,7 +79,7 @@ class Location(models.Model):
 
 class Channel(models.Model):
     idchannel = models.BigAutoField(primary_key=True)
-    #name = models.CharField(max_length=24, null=True)
+    name = models.CharField(max_length=24, null=True)
     uplink = models.IntegerField(null=False)
     dnlink = models.IntegerField(null=False)
     
