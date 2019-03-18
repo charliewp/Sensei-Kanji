@@ -79,7 +79,7 @@ class Location(models.Model):
 
 class Channel(models.Model):
     idchannel = models.BigAutoField(primary_key=True)
-    name = models.CharField(max_length=24, null=True)
+    #name = models.CharField(max_length=24, null=True)
     uplink = models.IntegerField(null=False)
     dnlink = models.IntegerField(null=False)
     
