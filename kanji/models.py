@@ -72,6 +72,7 @@ class Customer(models.Model):
 class Location(models.Model):
     idlocation  = models.BigAutoField(primary_key=True)
     description = models.CharField(max_length=24)
+    zipcode = description = models.CharField(max_length=10, null=True)
     customer = models.ForeignKey(Customer,on_delete=models.PROTECT, default=10000) 
     def __str__(self):
         return self.description
