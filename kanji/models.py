@@ -97,6 +97,7 @@ class Node(models.Model):
     deploystate = models.ForeignKey(DeployState,on_delete=models.PROTECT,  null=True)
     channel = models.ForeignKey(Channel,on_delete=models.PROTECT,  null=True)
     meshnetwork = models.ForeignKey(MeshNetwork,on_delete=models.PROTECT,  null=True)
+    setupstring = models.CharField(max_length=64, null=True)
     startofservicedate = models.DateField(null=True, blank=True)
     endofservicedate = models.DateField(null=True, blank=True)
     firmware =  models.ForeignKey(Firmware,on_delete=models.PROTECT, null=True)
