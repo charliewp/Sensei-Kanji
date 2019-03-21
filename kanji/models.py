@@ -66,6 +66,7 @@ class Application(models.Model):
 class Customer(models.Model):
     idcustomer  = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=24)
+    slacktoken = models.CharField(max_length=64, null=True)
     def __str__(self):
         return self.name
     
@@ -75,6 +76,7 @@ class Location(models.Model):
     zipcode = models.CharField(max_length=10, null=True)
     imageurl = models.CharField(max_length=128, null=True)
     customer = models.ForeignKey(Customer,on_delete=models.PROTECT, default=10000) 
+    slackchannel = models.CharField(max_length=32, null=True)
     def __str__(self):
         return self.description
 
