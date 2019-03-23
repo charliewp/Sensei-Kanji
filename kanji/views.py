@@ -156,7 +156,7 @@ def webhook(request):
    #
    # /kanji/webhooks will bring you here
    # this is for posting data only from the Particle Cloud
-    
+   log.error("ERROR view/webhook has been called!") 
    # get the data and put it in the Database
    #content = request.get_json()
    #event = content['event']
