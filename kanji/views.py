@@ -149,7 +149,8 @@ def node(request):
       
 def slackwebhook(request):
    #POST from Slack when a user selects a button
-   log.error("ERROR view/slackwebhook has been called!")   
+   log.error("ERROR view/slackwebhook has been called!")
+   return HttpResponse("Thanks, Sensei/Kanji/SlackWebHook")   
    
 def webhook(request):
    #
