@@ -9,5 +9,5 @@ urlpatterns = [
     url(r'node/*', views.node, name='node'),
     url(r'channel/*', views.channel, name='channel'),
     url(r'webhook', views.webhook, name='webhook'),
-    url(r'slackwebhook', views.slackwebhook, name='slackwebhook'),    
+    url(r'slack', views.slack, name='slack'),    
 ]
