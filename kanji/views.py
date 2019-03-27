@@ -170,9 +170,9 @@ def slack(request):
    #we lookup the coreid of the action target and call the function named in 'actionname'
    
    device = Node.objects.get(pk=int(actiontarget))
-   slackToken = device.location.customer.slacktoken
-   slackChannel = device.location.slackchannel
-   log.error("slackChannel={0} slackToken={1}".format(slackChannel,slackToken))
+   _SLACK_TOKEN = device.location.customer.slacktoken
+   slackchannel = device.location.slackchannel
+   log.error("slackChannel={0} slackToken={1}".format(slackchannel,_SLACK_TOKEN))
    
    config = configparser.ConfigParser()
    config.read('secrets.conf')
@@ -189,7 +189,6 @@ def slack(request):
    response = resp.json()
    log.error("response={0}".format(response))
    
-   _SLACK_TOKEN = config['DEFAULT']['_SLACK_TOKEN']
    log.error("secrets _SLACK_TOKEN {0}".format(_SLACK_TOKEN))    
    
    messagestring = "[\
@@ -217,7 +216,7 @@ def slack(request):
 
    
    sc = SlackClient(_SLACK_TOKEN)
-   response = sc.api_call("chat.postMessage", channel="building-1", blocks=blockmessage)
+   response = sc.api_call("chat.postMessage", channel=slackchannel, blocks=blockmessage)
     
    if not 'ok' in response or not response['ok']:
       print("Error posting message to Slack channel")
