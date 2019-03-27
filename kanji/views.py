@@ -158,9 +158,11 @@ def slack(request):
    #payload = re.sub('payload=','', payload)
    #payload = payload.replace("'",'"')
    #payload = json.loads(payload)
-   payload = urllib.parse.parse_qs(request.body.decode("utf-8"))
+   payload = request.body.decode("utf-8")
    payload = payload.replace("True",'"True"')
    payload = payload.replace("False",'"False"')
+   payload = urllib.parse.parse_qs(payload)
+   
    payload = json.loads(payload['payload'][0])
    #log.error(payload) 
    log.error(payload["actions"])
