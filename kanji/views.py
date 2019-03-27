@@ -36,6 +36,8 @@ from .models import Channel
 from django.template import RequestContext, Template, Context
 
 from slackclient import SlackClient
+from urllib import unquote_plus
+import re
 
 import logging
 log = logging.getLogger('KANJI-LOGGER')
@@ -152,7 +154,10 @@ def node(request):
 def slack(request):
    #POST from Slack when a user selects a button
    log.info("INFO view/slackwebhook has been called!")
-   str_content = request.body.decode("utf-8")
+   payload = request.get_data()
+   payload = unquote_plus(payload)
+   payload = re.sub('payload=','', payload)
+   payload = json.loads(payload)
    log.error(str_content) 
    #sc = SlackClient(_SLACK_TOKEN)
    #response = sc.api_call("chat.postMessage", channel=_CHANNEL_NAME, blocks=blockmessage)
