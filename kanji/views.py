@@ -159,7 +159,7 @@ def slack(request):
    payload = request.body.decode("utf-8")
    payload = urllib.parse.parse_qs(payload)
    payload = json.loads(payload['payload'][0])
-   
+   log.error(payload)
    log.error("payload {0}".format(payload["actions"][0]))
    action = payload["actions"][0]
    log.error(action)
@@ -167,8 +167,7 @@ def slack(request):
    actionname = action["value"]
    actiontarget = action["action_id"]
    
-   #we lookup the coreid of the action target and call the function named in 'actionname'
-   
+   #we lookup the coreid of the action target and call the function named in 'actionname'   
    device = Node.objects.get(pk=int(actiontarget))
    
    if device:
