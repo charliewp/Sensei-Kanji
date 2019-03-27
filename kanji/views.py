@@ -204,4 +204,6 @@ def webhook(request):
    log.debug("DEBUG view/webhook sensorid={0}".format(sensorid))
    log.debug("DEBUG view/webhook doc={0}".format(doc))
    
+   log.error("view/webhook called by core {0}".format(coreid))
+   
    return HttpResponse("Thanks, Sensei/Kanji")
