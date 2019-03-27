@@ -172,7 +172,7 @@ def slack(request):
    device = Node.objects.get(pk=int(actiontarget))
    slackToken = device.location.customer.slacktoken
    slackChannel = device.location.slackchannel
-   print("slackChannel={0} slackToken={1}".format(slackChannel,slackToken))
+   log.error("slackChannel={0} slackToken={1}".format(slackChannel,slackToken))
    
    config = configparser.ConfigParser()
    config.read('secrets.conf')
