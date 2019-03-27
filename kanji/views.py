@@ -36,7 +36,7 @@ from .models import Channel
 from django.template import RequestContext, Template, Context
 
 from slackclient import SlackClient
-from urllib import unquote_plus
+import urllib
 import re
 
 import logging
