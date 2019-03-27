@@ -149,14 +149,14 @@ def node(request):
       
 def slack(request):
    #POST from Slack when a user selects a button
-   log.error("ERROR view/slackwebhook has been called!")
+   log.info("INFO view/slackwebhook has been called!")
    return HttpResponse("Thanks, Sensei/Kanji/SlackWebHook", status=200)   
    
 def webhook(request):
    #
    # /kanji/webhooks will bring you here
    # this is for posting data only from the Particle Cloud
-   log.error("ERROR view/webhook has been called!") 
+   log.debug("DEBUG view/webhook has been called!") 
    # get the data and put it in the Database
    #content = request.get_json()
    #event = content['event']
@@ -174,28 +174,17 @@ def webhook(request):
    published_at = json_data['published_at']
    timestamp = datetime.strptime(published_at, '%Y-%m-%dT%H:%M:%S.%fZ')
     
-   dataParts = data.split("/")
-    
-   #sensorid = dataParts[2]
-   #eventtype = dataParts[3]
-   #doc = dataParts[4]
-   #acktime = dataParts[5]
+   dataParts = data.split("/")  
    
    doc = dataParts[0]   
-   acktime = dataParts[1]
-   
+   acktime = dataParts[1]   
    
    pins = json.loads(doc)   
    for pin in pins:
-      log.error("ERROR view/webhook pin={0}".format(pin))
+      log.debug("DEBUG view/webhook pin={0}".format(pin))
    
    eventtype = 10000
-   sensorid = pin["t"]
-
-       
-   # query = "INSERT INTO sensordb_event (timestamp, device_id, publishtopic_id, sensortype_id, doc, ack_time) \
-   #      VALUES ('{0}', {1}, {2}, {3}, '{4}', {5})"\
-   #      .format(dt.now(), iddevice, publishtopic, sensorid, doc, acktime)
+   sensorid = pin["t"]   
 
    eventlog = EventLog()
    eventlog.timestamp = timestamp
@@ -207,12 +196,12 @@ def webhook(request):
    
    eventlog.save()
    
-   log.error("ERROR view/webhook data={0}".format(data))
-   log.error("ERROR view/webhook ackTime={0}".format(acktime))
-   log.error("ERROR view/webhook core={0}".format(eventlog.node.name))
-   log.error("ERROR view/webhook iddevice={0}".format(coreid))
-   log.error("ERROR view/webhook publishtopic={0}".format(eventtype))
-   log.error("ERROR view/webhook sensorid={0}".format(sensorid))
-   log.error("ERROR view/webhook doc={0}".format(doc))
+   log.debug("DEBUG view/webhook data={0}".format(data))
+   log.debug("DEBUG view/webhook ackTime={0}".format(acktime))
+   log.debug("DEBUG view/webhook core={0}".format(eventlog.node.name))
+   log.debug("DEBUG view/webhook iddevice={0}".format(coreid))
+   log.debug("DEBUG view/webhook publishtopic={0}".format(eventtype))
+   log.debug("DEBUG view/webhook sensorid={0}".format(sensorid))
+   log.debug("DEBUG view/webhook doc={0}".format(doc))
    
    return HttpResponse("Thanks, Sensei/Kanji")
