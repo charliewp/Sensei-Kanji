@@ -161,7 +161,17 @@ def slack(request):
    log.error("payload {0}".format(payload["actions"][0]))
    action = payload["actions"][0]
    log.error(action)
-   log.error("Action={0} on device {1}".format(action["value"], action["action_id"]))
+   
+   actionname = action["value"]
+   actiontarget = action["action_id"]
+   
+   #we lookup the coreid of the action target and call the function named in 'actionname'
+   
+   device = Node.objects.get(pk=int(actiontarget)
+   
+   if device is not None:
+     log.error("Calling {0} on coreid={1}".format(actioname,device.coreid))
+   
    #sc = SlackClient(_SLACK_TOKEN)
    #response = sc.api_call("chat.postMessage", channel=_CHANNEL_NAME, blocks=blockmessage)
     
