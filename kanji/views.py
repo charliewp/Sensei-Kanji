@@ -170,6 +170,9 @@ def slack(request):
    #we lookup the coreid of the action target and call the function named in 'actionname'
    
    device = Node.objects.get(pk=int(actiontarget))
+   slackToken = device.location.customer.slacktoken
+   slackChannel = device.location.slackchannel
+   print("slackChannel={0} slackToken={1}".format(slackChannel,slackToken))
    
    config = configparser.ConfigParser()
    config.read('secrets.conf')
