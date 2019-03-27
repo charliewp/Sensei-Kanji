@@ -161,8 +161,8 @@ def slack(request):
    #   print("Error posting message to Slack channel")
    #   print(blockmessage)
    #   print(response)
-else:
-    print("Ok posting message to Slack channel")
+   #else:
+   #print("Ok posting message to Slack channel")
    return HttpResponse("Thanks, Sensei/Kanji/SlackWebHook", status=200)   
    
 def webhook(request):
