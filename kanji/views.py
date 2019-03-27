@@ -160,7 +160,7 @@ def slack(request):
    #payload = json.loads(payload)
    payload = request.body.decode("utf-8")
    payload = urllib.parse.parse_qs(payload)
-   payload = json.loads(payload['payload'][0])
+   payload = json.loads(payload['payload'])
    #log.error(payload) 
    log.error(payload["actions"])
    for action in payload["actions"]:
