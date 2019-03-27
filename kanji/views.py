@@ -162,7 +162,7 @@ def slack(request):
    #log.error(payload) 
    log.error(payload["actions"])
    for action in payload["actions"]:
-     print(action["value"])
+     print(action)
    #sc = SlackClient(_SLACK_TOKEN)
    #response = sc.api_call("chat.postMessage", channel=_CHANNEL_NAME, blocks=blockmessage)
     
