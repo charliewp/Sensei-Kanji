@@ -201,11 +201,11 @@ def slack(request):
     blockmessage = json.loads(messagestring)
     #print(blockmessage[0]["accessory"]["image_url"])
     #blockmessage[0]["accessory"]["image_url"] = locationimageurl
-    blockmessage[0]["text"]["text"] = "*{0}*.format("The test was successful")
+    blockmessage[0]["text"]["text"] = "*{0}*".format("The test was successful")
 
    
    sc = SlackClient(_SLACK_TOKEN)
-   response = sc.api_call("chat.postMessage", channel=_CHANNEL_NAME, blocks=blockmessage)
+   response = sc.api_call("chat.postMessage", channel="building-1", blocks=blockmessage)
     
    if not 'ok' in response or not response['ok']:
       print("Error posting message to Slack channel")
