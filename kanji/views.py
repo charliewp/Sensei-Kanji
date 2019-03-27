@@ -195,12 +195,10 @@ def slack(request):
 	}, \	
    	{ \
 		\"type\": \"divider\" \
-	}, \    
+	} \    
     ]"
     
     blockmessage = json.loads(messagestring)
-    #print(blockmessage[0]["accessory"]["image_url"])
-    #blockmessage[0]["accessory"]["image_url"] = locationimageurl
     blockmessage[0]["text"]["text"] = "*{0}*".format("The test was successful")
 
    
