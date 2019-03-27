@@ -173,11 +173,12 @@ def slack(request):
    
    config = configparser.ConfigParser()
    config.read('secrets.conf')
-   log.error("secrets {0}".format(config['DEFAULT']['_SLACK_TOKEN']))
-
-   
+        
    log.error("Calling {0} on coreid={1}".format(actionname,device.coreid))
+   
    _PARTICLE_TOKEN = config['DEFAULT']['_PARTICLE_TOKEN']
+   log.error("secrets _PARTICLE_TOKEN {0}".format(_PARTICLE_TOKEN))
+   
    actionurl = "https://api.particle.io/v1/devices/{0}/{1}".format(device.coreid,actionname)
    log.error(actionurl)
    data = {'access_token' : _PARTICLE_TOKEN, 'arg' : ""}
@@ -186,6 +187,7 @@ def slack(request):
    log.error("response={0}".format(response))
    
    _SLACK_TOKEN = config['DEFAULT']['_SLACK_TOKEN']
+   log.error("secrets _SLACK_TOKEN {0}".format(_SLACK_TOKEN))    
    
    messagestring = "[\
    {\"type\": \"section\", \
