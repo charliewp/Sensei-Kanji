@@ -169,7 +169,7 @@ def slack(request):
    
    device = Node.objects.get(pk=int(actiontarget))
    
-   log.error("Calling {0} on coreid={1}".format(actioname,device.coreid))
+   log.error("Calling {0} on coreid={1}".format(actionname,device.coreid))
    
    #sc = SlackClient(_SLACK_TOKEN)
    #response = sc.api_call("chat.postMessage", channel=_CHANNEL_NAME, blocks=blockmessage)
