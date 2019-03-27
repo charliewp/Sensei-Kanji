@@ -161,7 +161,7 @@ def slack(request):
    log.error(payload["actions"][0]["value"])
    
    for action in payload["actions"]:
-     print("Action={0}".format(action["value"]))
+     print("Action={0} on device {1}".format(action["value"], action["action_id"]))
    #sc = SlackClient(_SLACK_TOKEN)
    #response = sc.api_call("chat.postMessage", channel=_CHANNEL_NAME, blocks=blockmessage)
     
