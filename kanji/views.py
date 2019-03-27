@@ -156,6 +156,7 @@ def slack(request):
    log.info("INFO view/slackwebhook has been called!")
    payload = request.body.decode("utf-8")
    payload = re.sub('payload=','', payload)
+   payload = payload.replace("'",'"')
    payload = json.loads(payload)
    log.error(payload) 
    #sc = SlackClient(_SLACK_TOKEN)
