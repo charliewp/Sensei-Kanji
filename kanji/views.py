@@ -154,7 +154,7 @@ def node(request):
 def slack(request):
    #POST from Slack when a user selects a button
    log.info("INFO view/slackwebhook has been called!")
-   payload = request.get_data()
+   payload = request.body.decode("utf-8")
    payload = unquote_plus(payload)
    payload = re.sub('payload=','', payload)
    payload = json.loads(payload)
