@@ -36,7 +36,7 @@ from .models import Channel
 from django.template import RequestContext, Template, Context
 
 from slackclient import SlackClient
-import urllib.parse
+from urllib.parse import urlparse
 
 import logging
 log = logging.getLogger('KANJI-LOGGER')
