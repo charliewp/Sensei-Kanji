@@ -36,6 +36,7 @@ from .models import Channel
 from django.template import RequestContext, Template, Context
 
 from slackclient import SlackClient
+import urllib
 from urllib.parse import urlparse
 
 import logging
@@ -157,7 +158,7 @@ def slack(request):
    #payload = re.sub('payload=','', payload)
    #payload = payload.replace("'",'"')
    #payload = json.loads(payload)
-   payload = json.loads(urlparse.parse_qs(request.get_data())['payload'][0])
+   payload = json.loads(urllib.parse.parse_qs(request.get_data())['payload'][0])
    log.error(payload) 
    #sc = SlackClient(_SLACK_TOKEN)
    #response = sc.api_call("chat.postMessage", channel=_CHANNEL_NAME, blocks=blockmessage)
