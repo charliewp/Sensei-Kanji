@@ -192,14 +192,70 @@ def slack(request):
 			\"image_url\": \"https://api.slack.com/img/blocks/bkb_template_images/notifications.png\", \
 			\"alt_text\": \"calendar thumbnail\" \
 		} \
-	}, \	
+	}, \
+	{\"type\": \"context\", \
+		\"elements\": [ \
+			{ \
+				\"type\": \"image\", \
+				\"image_url\": \"https://www.dropbox.com/s/o2gjgfsph2cxgds/thermometer.jpg?raw=1\", \
+				\"alt_text\": \"notifications warning icon\" \
+			}, \
+			{ \
+				\"type\": \"mrkdwn\", \
+				\"text\": \"*Conflicts with Team Huddle: 4:15-4:30pm*\" \
+			} \
+		] \
+	}, \
+    {\"type\": \"context\", \
+		\"elements\": [ \
+			{ \
+				\"type\": \"image\", \
+				\"image_url\": \"https://www.dropbox.com/s/pw6329yc2ge05cr/gear.png?raw=1\", \
+				\"alt_text\": \"notifications warning icon\" \
+			}, \
+			{ \
+				\"type\": \"mrkdwn\", \
+				\"text\": \"*Conflicts with Team Huddle: 4:15-4:30pm*\" \
+			} \
+		] \
+	}, \
+    {\"type\": \"context\", \
+		\"elements\": [ \
+			{ \
+				\"type\": \"image\", \
+				\"image_url\": \"https://api.slack.com/img/blocks/bkb_template_images/notificationsWarningIcon.png\", \
+				\"alt_text\": \"notifications warning icon\" \
+			}, \
+			{ \
+				\"type\": \"mrkdwn\", \
+				\"text\": \"*Controller is in SUPERVISORY MODE*\" \
+			} \
+		] \
+	}, \
    	{ \
 		\"type\": \"divider\" \
-	} \    
-    ]"
+	}, \
+    { \
+		\"type\": \"section\", \
+		\"text\": { \
+			\"type\": \"mrkdwn\", \
+			\"text\": \"*Accessory text.*\" \
+		}, \
+		\"accessory\": { \
+			\"type\": \"button\", \
+			\"text\": { \
+				\"type\": \"plain_text\", \
+				\"text\": \"BUTTON_TEXT\" \
+			}, \
+			\"value\": \"BUTTON_VALUE\", \
+			\"action_id\": \"button\" \
+		} \
+	} \
+]"
+
     
-    blockmessage = json.loads(messagestring)
-    blockmessage[0]["text"]["text"] = "*{0}*".format("The test was successful")
+   blockmessage = json.loads(messagestring)
+   blockmessage[0]["text"]["text"] = "*{0}*".format("The test was successful")
 
    
    sc = SlackClient(_SLACK_TOKEN)
