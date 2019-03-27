@@ -39,6 +39,7 @@ from slackclient import SlackClient
 import urllib
 from urllib.parse import urlparse
 import requests
+import configparser
 
 import logging
 log = logging.getLogger('KANJI-LOGGER')
@@ -170,8 +171,13 @@ def slack(request):
    
    device = Node.objects.get(pk=int(actiontarget))
    
+   config = configparser.ConfigParser()
+   config.read('secrets.conf')
+   log.error("secrets {0}".format(config['DEFAULT']['_SLACK_TOKEN']))
+
+   
    log.error("Calling {0} on coreid={1}".format(actionname,device.coreid))
-   _PARTICLE_TOKEN = '790261410d6873b994fb6041553b5a99a7f7ed0e'
+   _PARTICLE_TOKEN = config['DEFAULT']['_PARTICLE_TOKEN']
    actionurl = "https://api.particle.io/v1/devices/{0}/{1}".format(device.coreid,actionname)
    log.error(actionurl)
    data = {'access_token' : _PARTICLE_TOKEN, 'arg' : ""}
@@ -179,7 +185,7 @@ def slack(request):
    response = resp.json()
    log.error("response={0}".format(response))
    
-   _SLACK_TOKEN = "xoxp-565796905971-565875952996-565171872688-7c596833100ecbfd4841a3f666c15be6"
+   _SLACK_TOKEN = config['DEFAULT']['_SLACK_TOKEN']
    
    messagestring = "[\
    {\"type\": \"section\", \
