@@ -206,10 +206,10 @@ def slack(request):
    blockmessage = json.loads(messagestring)
    
    if response["return_value"] ==0:
-     blockmessage[0]["accessory"]["image_url"] = "https://www.dropbox.com/s/2vvxy36e3jblulb/check.png?dl=0"
+     blockmessage[0]["accessory"]["image_url"] = "https://www.dropbox.com/s/2vvxy36e3jblulb/check.png?raw=1"
      blockmessage[0]["text"]["text"] = "*{0}*".format("The test was successful!")
    else:
-     blockmessage[0]["accessory"]["image_url"] = "https://www.dropbox.com/s/lzgeet9bqqw1ftw/fail.png?dl=0"
+     blockmessage[0]["accessory"]["image_url"] = "https://www.dropbox.com/s/lzgeet9bqqw1ftw/fail.png?raw=1"
      blockmessage[0]["text"]["text"] = "*{0}*".format("The test failed.")
 
    
