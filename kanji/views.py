@@ -167,7 +167,7 @@ def slack(request):
    
    #we lookup the coreid of the action target and call the function named in 'actionname'
    
-   device = Node.objects.get(pk=int(actiontarget)
+   device = Node.objects.get(pk=int(actiontarget))
    
    log.error("Calling {0} on coreid={1}".format(actioname,device.coreid))
    
