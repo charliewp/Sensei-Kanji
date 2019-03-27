@@ -38,6 +38,7 @@ from django.template import RequestContext, Template, Context
 from slackclient import SlackClient
 import urllib
 from urllib.parse import urlparse
+import requests
 
 import logging
 log = logging.getLogger('KANJI-LOGGER')
@@ -170,6 +171,13 @@ def slack(request):
    device = Node.objects.get(pk=int(actiontarget))
    
    log.error("Calling {0} on coreid={1}".format(actionname,device.coreid))
+   _PARTICLE_TOKEN = '790261410d6873b994fb6041553b5a99a7f7ed0e'
+   actionurl = "https://api.particle.io/v1/devices/{0}/{1}".format(device.coreid,actionname)
+   log.error(actionurl)
+   data = {'access_token' : _PARTICLE_TOKEN, 'arg' : ""}
+   resp = requests.post(actionurl, data = data, timeout=(15, 30))
+   response = resp.json()
+   log.error("response={0}".format(response))
    
    #sc = SlackClient(_SLACK_TOKEN)
    #response = sc.api_call("chat.postMessage", channel=_CHANNEL_NAME, blocks=blockmessage)
