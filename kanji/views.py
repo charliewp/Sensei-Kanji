@@ -170,60 +170,61 @@ def slack(request):
    #we lookup the coreid of the action target and call the function named in 'actionname'
    
    device = Node.objects.get(pk=int(actiontarget))
-   _SLACK_TOKEN = device.location.customer.slacktoken
-   slackchannel = device.location.slackchannel
-   log.error("slackChannel={0} slackToken={1}".format(slackchannel,_SLACK_TOKEN))
    
-   config = configparser.ConfigParser()
-   config.read('secrets.conf')
+   if device:
+     _SLACK_TOKEN = device.location.customer.slacktoken
+     slackchannel = device.location.slackchannel
+     log.error("slackChannel={0} slackToken={1}".format(slackchannel,_SLACK_TOKEN))
+   
+     config = configparser.ConfigParser()
+     config.read('secrets.conf')
         
-   log.error("Calling {0} on coreid={1}".format(actionname,device.coreid))
+     log.error("Calling {0} on coreid={1}".format(actionname,device.coreid))
    
-   _PARTICLE_TOKEN = config['DEFAULT']['_PARTICLE_TOKEN']
-   log.error("secrets _PARTICLE_TOKEN {0}".format(_PARTICLE_TOKEN))
+     _PARTICLE_TOKEN = config['DEFAULT']['_PARTICLE_TOKEN']
+     log.error("secrets _PARTICLE_TOKEN {0}".format(_PARTICLE_TOKEN))
    
-   actionurl = "https://api.particle.io/v1/devices/{0}/{1}".format(device.coreid,actionname)
-   log.error(actionurl)
-   data = {'access_token' : _PARTICLE_TOKEN, 'arg' : ""}
-   resp = requests.post(actionurl, data = data, timeout=(15, 30))
-   response = resp.json()
-   log.error("response={0}".format(response))
+     actionurl = "https://api.particle.io/v1/devices/{0}/{1}".format(device.coreid,actionname)
+     log.error(actionurl)
+     data = {'access_token' : _PARTICLE_TOKEN, 'arg' : ""}
+     resp = requests.post(actionurl, data = data, timeout=(15, 30))
+     response = resp.json()
+     log.error("response={0}".format(response))
    
-   log.error("secrets _SLACK_TOKEN {0}".format(_SLACK_TOKEN))    
+     log.error("secrets _SLACK_TOKEN {0}".format(_SLACK_TOKEN))    
    
-   messagestring = "[\
-   {\"type\": \"section\", \
-		\"text\": { \
+     messagestring = "[\
+       {\"type\": \"section\", \
+		 \"text\": { \
 			\"type\": \"mrkdwn\", \
 			\"text\": \"*<fakeLink.toUserProfiles.com|Iris / Zelda 1-1>*\\nTuesday, January 21 4:00-4:30pm\\nBuilding 2 - Havarti Cheese (3)\\n2 guests\" \
-		}, \
-		\"accessory\": { \
+		 }, \
+		 \"accessory\": { \
 			\"type\": \"image\", \
 			\"image_url\": \"https://api.slack.com/img/blocks/bkb_template_images/notifications.png\", \
 			\"alt_text\": \"calendar thumbnail\" \
-		} \
-   }]"
-
+		 } \
+     }]"
     
-   blockmessage = json.loads(messagestring)
+     blockmessage = json.loads(messagestring)
    
-   if response["return_value"] ==0:
-     blockmessage[0]["accessory"]["image_url"] = "https://www.dropbox.com/s/2vvxy36e3jblulb/check.png?raw=1"
-     blockmessage[0]["text"]["text"] = "*{0}*".format("The test was successful!")
-   else:
-     blockmessage[0]["accessory"]["image_url"] = "https://www.dropbox.com/s/lzgeet9bqqw1ftw/fail.png?raw=1"
-     blockmessage[0]["text"]["text"] = "*{0}*".format("The test failed.")
+     if response["return_value"] ==0:
+       blockmessage[0]["accessory"]["image_url"] = "https://www.dropbox.com/s/2vvxy36e3jblulb/check.png?raw=1"
+       blockmessage[0]["text"]["text"] = "*{0}*".format("The test was successful!")
+     else:
+       blockmessage[0]["accessory"]["image_url"] = "https://www.dropbox.com/s/lzgeet9bqqw1ftw/fail.png?raw=1"
+       blockmessage[0]["text"]["text"] = "*{0}*".format("The test failed.")
 
    
-   sc = SlackClient(_SLACK_TOKEN)
-   response = sc.api_call("chat.postMessage", channel=slackchannel, blocks=blockmessage)
+     sc = SlackClient(_SLACK_TOKEN)
+     response = sc.api_call("chat.postMessage", channel=slackchannel, blocks=blockmessage)
     
-   if not 'ok' in response or not response['ok']:
-      print("Error posting message to Slack channel")
-      print(blockmessage)
-      print(response)
-   else:
-      print("Ok posting message to Slack channel")
+     if not 'ok' in response or not response['ok']:
+       print("Error posting message to Slack channel")
+       print(blockmessage)
+       print(response)
+     else:
+       print("Ok posting message to Slack channel")
       
    return HttpResponse("Thanks, Sensei/Kanji/SlackWebHook", status=200)   
    
