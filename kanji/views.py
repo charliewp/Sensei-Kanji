@@ -157,7 +157,7 @@ def slack(request):
    payload = request.body.decode("utf-8")
    payload = re.sub('payload=','', payload)
    payload = payload.replace("'",'"')
-   payload = json.loads(payload)
+   #payload = json.loads(payload)
    log.error(payload) 
    #sc = SlackClient(_SLACK_TOKEN)
    #response = sc.api_call("chat.postMessage", channel=_CHANNEL_NAME, blocks=blockmessage)
