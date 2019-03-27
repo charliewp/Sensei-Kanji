@@ -199,21 +199,21 @@ def slack(request):
     ]"
 
     
-    blockmessage = json.loads(messagestring)
-    blockmessage[0]["text"]["text"] = "*{0}*".format("The test was successful")
+   blockmessage = json.loads(messagestring)
+   blockmessage[0]["text"]["text"] = "*{0}*".format("The test was successful")
 
    
-    sc = SlackClient(_SLACK_TOKEN)
-    response = sc.api_call("chat.postMessage", channel="building-1", blocks=blockmessage)
+   sc = SlackClient(_SLACK_TOKEN)
+   response = sc.api_call("chat.postMessage", channel="building-1", blocks=blockmessage)
     
-    if not 'ok' in response or not response['ok']:
+   if not 'ok' in response or not response['ok']:
       print("Error posting message to Slack channel")
       print(blockmessage)
       print(response)
-    else:
+   else:
       print("Ok posting message to Slack channel")
       
-    return HttpResponse("Thanks, Sensei/Kanji/SlackWebHook", status=200)   
+   return HttpResponse("Thanks, Sensei/Kanji/SlackWebHook", status=200)   
    
 def webhook(request):
    #
