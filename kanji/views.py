@@ -179,15 +179,41 @@ def slack(request):
    response = resp.json()
    log.error("response={0}".format(response))
    
-   #sc = SlackClient(_SLACK_TOKEN)
-   #response = sc.api_call("chat.postMessage", channel=_CHANNEL_NAME, blocks=blockmessage)
+   _SLACK_TOKEN = "xoxp-565796905971-565875952996-565171872688-7c596833100ecbfd4841a3f666c15be6"
+   
+   messagestring = "[\
+   {\"type\": \"section\", \
+		\"text\": { \
+			\"type\": \"mrkdwn\", \
+			\"text\": \"*<fakeLink.toUserProfiles.com|Iris / Zelda 1-1>*\\nTuesday, January 21 4:00-4:30pm\\nBuilding 2 - Havarti Cheese (3)\\n2 guests\" \
+		}, \
+		\"accessory\": { \
+			\"type\": \"image\", \
+			\"image_url\": \"https://api.slack.com/img/blocks/bkb_template_images/notifications.png\", \
+			\"alt_text\": \"calendar thumbnail\" \
+		} \
+	}, \	
+   	{ \
+		\"type\": \"divider\" \
+	}, \    
+    ]"
     
-   #if not 'ok' in response or not response['ok']:
-   #   print("Error posting message to Slack channel")
-   #   print(blockmessage)
-   #   print(response)
-   #else:
-   #print("Ok posting message to Slack channel")
+    blockmessage = json.loads(messagestring)
+    #print(blockmessage[0]["accessory"]["image_url"])
+    #blockmessage[0]["accessory"]["image_url"] = locationimageurl
+    blockmessage[0]["text"]["text"] = "*{0}*.format("The test was successful")
+
+   
+   sc = SlackClient(_SLACK_TOKEN)
+   response = sc.api_call("chat.postMessage", channel=_CHANNEL_NAME, blocks=blockmessage)
+    
+   if not 'ok' in response or not response['ok']:
+      print("Error posting message to Slack channel")
+      print(blockmessage)
+      print(response)
+   else:
+      print("Ok posting message to Slack channel")
+      
    return HttpResponse("Thanks, Sensei/Kanji/SlackWebHook", status=200)   
    
 def webhook(request):
