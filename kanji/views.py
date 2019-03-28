@@ -65,7 +65,7 @@ def index(request):
       nodestatus["availpct"] = pctVisible
       networkstatus.append(nodestatus)
     #return HttpResponse("Hello, world. You're at the Sensei-Kanji index page.")
-    return render(request, 'meshio.html', {"nodecount": nodecount})
+    return render(request, 'meshio.html', {"nodecount": nodecount, "networkstatus": networkstatus})
     
 def channel(request):
     #
