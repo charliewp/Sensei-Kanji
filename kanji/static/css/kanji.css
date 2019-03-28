@@ -15,6 +15,17 @@ div.fixed {
   border: 0px solid #73AD21;
 }
 
+div.fixedtable1 {
+  position: fixed;
+  top: 400px;
+  left: 10px;
+  width: 600px;
+  color: #FFF;
+  font-family: "Arial";
+  font-size: 14px;
+  border: 0px solid #73AD21;
+}
+
 body {
    /*image files are in css/images folder*/
    background: url("images/meshio-2.png") repeat;    
