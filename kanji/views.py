@@ -55,15 +55,11 @@ def index(request):
     time24hoursago = now - timedelta(hours=24)
     nodecount = 0
     for node in nodes:
-      node = {}
       totalPings  = PingLog.objects.all().filter(node=node).filter(timestamp__gte = time24hoursago).count()
       pingSuccess = PingLog.objects.all().filter(node=node).filter(timestamp__gte = time24hoursago).filter(pingstate_id=10000).count()
       pctVisible = 100.0 * float(pingSuccess/totalPings)
       nodecount += 1
       log.error("Node {0} is {1:.1f}%".format(node.name, pctVisible))
-      node["name"] = node.name
-      node["availpct"] = pctVisible
-      networkstatus.append(node)
     #return HttpResponse("Hello, world. You're at the Sensei-Kanji index page.")
     return render(request, 'meshio.html', {"nodecount": nodecount})
     
