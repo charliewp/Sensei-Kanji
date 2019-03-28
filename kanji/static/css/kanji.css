@@ -17,13 +17,14 @@ div.fixed {
 
 div.fixedtable1 {
   position: fixed;
+  padding: 10px 14px;
   top: 400px;
   left: 10px;
   width: 600px;
   color: #FFF;
   font-family: "Arial";
   font-size: 14px;
-  border: 0px solid #73AD21;
+  border: 2px solid #ffffff;
 }
 
 body {
