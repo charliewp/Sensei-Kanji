@@ -18,9 +18,9 @@ div.fixed {
 div.fixedtable1 {
   position: fixed;
   padding: 10px 14px;
-  top: 400px;
+  top: 300px;
   left: 10px;
-  width: 600px;
+  width: 400px;
   color: #FFF;
   font-family: "Arial";
   font-size: 14px;
