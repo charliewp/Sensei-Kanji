@@ -52,6 +52,7 @@ def index(request):
     nodes = Node.objects.all().filter(deploystate_id=10001).order_by('name')
     networkstatus = []
     now = datetime.today()
+    timestamp = now.strftime("%I:%M %p %A, %B %e, %Y")
     time24hoursago = now - timedelta(hours=24)
     nodecount = 0
     nodestatus = {}
@@ -69,7 +70,7 @@ def index(request):
       nodestatus["availpct"] = "{0:.1f}%".format(pctVisible)
       networkstatus.append(nodestatus)
     #return HttpResponse("Hello, world. You're at the Sensei-Kanji index page.")
-    return render(request, 'meshio.html', {"nodecount": nodecount, "networkstatus": networkstatus})
+    return render(request, 'meshio.html', {"nodecount": nodecount, "networkstatus": networkstatus, "timstamp": timestamp})
     
 def channel(request):
     #
