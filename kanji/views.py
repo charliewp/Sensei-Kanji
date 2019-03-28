@@ -59,7 +59,7 @@ def index(request):
       pctVisible = float(pingSuccess/totalPings)
     log.error("Node {0} is {1}%".format(node.name, pctVisible))
     #return HttpResponse("Hello, world. You're at the Sensei-Kanji index page.")
-    return render(request, 'meshio.html', {"nodecount": nodecount})
+    return render(request, 'meshio.html', {"nodecount": len(nodes)})
     
 def channel(request):
     #
