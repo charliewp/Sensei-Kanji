@@ -54,8 +54,8 @@ def index(request):
     now = datetime.today()
     time24hoursago = now - timedelta(hours=24)
     for node in nodes:
-      totalPings  = PingLog.objects.all().filter(node=node).filter(timestamp__gte = time24hoursago)
-      pingSuccess = PingLog.objects.all().filter(node=node).filter(timestamp__gte = time24hoursago).filter(pingstate_id=10000)
+      totalPings  = PingLog.objects.all().filter(node=node).filter(timestamp__gte = time24hoursago).count()
+      pingSuccess = PingLog.objects.all().filter(node=node).filter(timestamp__gte = time24hoursago).filter(pingstate_id=10000).count()
       pctVisible = float(pingSuccess/totalPings)
     log.error("Node {0} is {1}%".format(node.name, pctVisible))
     #return HttpResponse("Hello, world. You're at the Sensei-Kanji index page.")
