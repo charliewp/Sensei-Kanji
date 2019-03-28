@@ -54,6 +54,10 @@ def index(request):
     now = datetime.today()
     time24hoursago = now - timedelta(hours=24)
     nodecount = 0
+    nodestatus = {}
+    nodestatus["name"] = "Node"
+    nodestatus["availpct"] = "Availability"
+    networkstatus.append(nodestatus)
     for node in nodes:
       nodestatus = {}
       totalPings  = PingLog.objects.all().filter(node=node).filter(timestamp__gte = time24hoursago).count()
