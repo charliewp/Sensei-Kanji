@@ -49,7 +49,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 
 # Create your views here.
 def index(request):
-    nodes = Node.objects.all().filter(deploystate_id=10001)
+    nodes = Node.objects.all().filter(deploystate_id=10001).order_by('name')
     networkstatus = []
     now = datetime.today()
     time24hoursago = now - timedelta(hours=24)
