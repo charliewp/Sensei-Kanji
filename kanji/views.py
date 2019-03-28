@@ -56,7 +56,7 @@ def index(request):
     nodecount = 0
     nodestatus = {}
     nodestatus["name"] = "Node"
-    nodestatus["availpct"] = "Could Availability"
+    nodestatus["availpct"] = "Cloud Availability"
     networkstatus.append(nodestatus)
     for node in nodes:
       nodestatus = {}
