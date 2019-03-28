@@ -49,8 +49,9 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 
 # Create your views here.
 def index(request):
+    nodecount = Node.objects.all().filter(deploystate_id=10001).count()
     #return HttpResponse("Hello, world. You're at the Sensei-Kanji index page.")
-    return render(request, 'meshio.html')
+    return render(request, 'meshio.html', {"nodecount": nodecount})
     
 def channel(request):
     #
