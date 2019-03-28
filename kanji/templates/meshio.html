@@ -2,7 +2,13 @@
 <html>
 <head>
     <title>MeshIO Sensor Network</title>
-    <link rel="stylesheet" href="{% static 'css/kanji.css' %}">    
+    <link rel="stylesheet" href="{% static 'css/kanji.css' %}"> 
+    <script type="text/javascript">
+    window.setTimeout("redirectpage();", 30000);    
+    function redirectpage(){
+    window.top.location.href = '/kanji/';
+    }
+</script>    
 </head>
 <body>
 <div class="container">
