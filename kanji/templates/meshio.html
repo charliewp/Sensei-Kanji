@@ -11,13 +11,13 @@ Watching {{nodecount}} nodes working nicely on the network!
 </div>
 <div class="divTable" style="width:100%">
                                 <div class="divTableBody" name="aliasInfo">
-                                    {% for name, pctavail in {{networkstatus}} %}
+                                    {% for node in networkstatus %}
                                     <div class="divTableRow">                           
                                         <div class="divTableCell">
-                                           {{name}}
+                                           {{node.0}}
                                         </div>
                                         <div class="divTableCell">
-                                           {{pctavail}}
+                                           {{node.1}}
                                         </div>
                                     </div>
                                     {% endfor %}
