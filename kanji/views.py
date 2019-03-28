@@ -62,7 +62,7 @@ def index(request):
       nodecount += 1
       log.error("Node {0} is {1:.1f}%".format(node.name, pctVisible))
       nodestatus["name"] = node.name
-      nodestatus["availpct"] = pctVisible
+      nodestatus["availpct"] = "{1:.1f}%".format(pctVisible)
       networkstatus.append(nodestatus)
     #return HttpResponse("Hello, world. You're at the Sensei-Kanji index page.")
     return render(request, 'meshio.html', {"nodecount": nodecount, "networkstatus": networkstatus})
