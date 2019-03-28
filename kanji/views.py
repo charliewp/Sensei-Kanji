@@ -61,11 +61,11 @@ def index(request):
       pctVisible = 100.0 * float(pingSuccess/totalPings)
       nodecount += 1
       log.error("Node {0} is {1:.1f}%".format(node.name, pctVisible))
-      #node["name"] = node.name
-      #node["pctavail"] = pctVisible
-      #networkstatus.append(node)
+      node["name"] = node.name
+      node["availpct"] = pctVisible
+      networkstatus.append(node)
     #return HttpResponse("Hello, world. You're at the Sensei-Kanji index page.")
-    return render(request, 'meshio.html', {"nodecount": nodecount, "networkstatus": networkstatus})
+    return render(request, 'meshio.html', {"nodecount": nodecount})
     
 def channel(request):
     #
