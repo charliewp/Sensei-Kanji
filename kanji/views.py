@@ -49,7 +49,8 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 
 # Create your views here.
 def index(request):
-    return HttpResponse("Hello, world. You're at the Sensei-Kanji index page.")
+    #return HttpResponse("Hello, world. You're at the Sensei-Kanji index page.")
+    return render(request, 'meshio.html')
     
 def channel(request):
     #
@@ -117,9 +118,6 @@ def node(request):
                 
             ]
         }
-        
-              
-        
            
         node = Node.objects.all().filter(coreid=coreid).first()
         now = datetime.today()
@@ -144,8 +142,7 @@ def node(request):
             if pingLog:
                 data.append([date_time, float(eventLog.eventdata), ackTime, pingLog.pingstate.idonlinestate])
             else:
-                data.append([date_time, float(eventLog.eventdata), ackTime, 500])
-        
+                data.append([date_time, float(eventLog.eventdata), ackTime, 500])        
         
         td = timezone.now() - eventtime       
         timediffstr = str(td.days) + "d " + str(td.seconds // 3600) + "h " + str(td.seconds // 60 % 60) + "m " + str(td.seconds % 60) + "s ago"
@@ -155,7 +152,7 @@ def node(request):
       
 def slack(request):
    #POST from Slack when a user selects a button
-   log.error("INFO view/slackwebhook has been called!")
+   log.error("INFO view/slack has been called!")
    payload = request.body.decode("utf-8")
    payload = urllib.parse.parse_qs(payload)
    payload = json.loads(payload['payload'][0])
@@ -171,6 +168,8 @@ def slack(request):
    device = Node.objects.get(pk=int(actiontarget))
    
    if device:
+     now = datetime.now()
+     timestamp = now.strftime("%I:%M %p %A, %B %e, %Y")
      _SLACK_TOKEN = device.location.customer.slacktoken
      slackchannel = device.location.slackchannel
      log.error("slackChannel={0} slackToken={1}".format(slackchannel,_SLACK_TOKEN))
@@ -209,10 +208,12 @@ def slack(request):
    
      if response["return_value"] ==0:
        blockmessage[0]["accessory"]["image_url"] = "https://www.dropbox.com/s/2vvxy36e3jblulb/check.png?raw=1"
-       blockmessage[0]["text"]["text"] = "*{0}*".format("The test was successful!")
+       blockmessage[0]["accessory"]["alt_text"] = "Ok thumbnail"
+       blockmessage[0]["text"]["text"] = "*At {0} {1}*".format(timestamp, "The test was successful!")
      else:
        blockmessage[0]["accessory"]["image_url"] = "https://www.dropbox.com/s/lzgeet9bqqw1ftw/fail.png?raw=1"
-       blockmessage[0]["text"]["text"] = "*{0}*".format("The test failed.")
+       blockmessage[0]["accessory"]["alt_text"] = "Failed thumbnail"
+       blockmessage[0]["text"]["text"] = "*At {0} {1}*".format(timestamp, "The test failed.")
 
    
      sc = SlackClient(_SLACK_TOKEN)
@@ -230,15 +231,9 @@ def slack(request):
 def webhook(request):
    #
    # /kanji/webhooks will bring you here
-   # this is for posting data only from the Particle Cloud
+   # this is for posting event data only from the Particle Cloud
    log.debug("DEBUG view/webhook has been called!") 
-   # get the data and put it in the Database
-   #content = request.get_json()
-   #event = content['event']
-   #print("event={0}".format(event))
-   #data = content['data']
-   #coreid = content['coreid']
-   #published_at = content['published_at']
+ 
    str_content = request.body.decode("utf-8")
    print(str_content)
    json_data = json.loads(str_content.replace("'",'"'))
