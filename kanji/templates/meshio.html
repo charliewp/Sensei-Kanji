@@ -9,14 +9,14 @@
 <div class="fixed">
 Watching {{nodecount}} nodes working nicely on the network!
 </div>
-<div class="fixedtable1" style="width:100%">
+<div class="fixedtable1" style="width:20%">
     <div class="divTableBody" name="aliasInfo">
         {% for node in networkstatus %}
-            <div class="divTableRow">                           
+            <div class="divTableRow" style="width:50%">                           
                 <div class="divTableCell">
                     {{node.name}}
                 </div>
-                <div class="divTableCell">
+                <div class="divTableCell" style="width:50%">
                     {{node.availpct}}
                 </div>
             </div>
