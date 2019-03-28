@@ -6,7 +6,7 @@
 
 div.fixed {
   position: fixed;
-  top: 100px;
+  top: 150px;
   left: 10px;
   width: 600px;
   color: #FFF;
@@ -18,9 +18,9 @@ div.fixed {
 div.fixedtable1 {
   position: fixed;
   padding: 10px 14px;
-  top: 140px;
+  top: 190px;
   left: 10px;
-  width: 400px;
+  width: 250px;
   color: #FFF;
   font-family: "Arial";
   font-size: 14px;
