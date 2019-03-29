@@ -5,7 +5,7 @@ from django.conf.urls import include, url
 from . import views
 
 urlpatterns = [ 
-	url(r'^$', views.index, name='index'),
+	url(r'kanji/*', views.index, name='index'),
     url(r'node/*', views.node, name='node'),
     url(r'channel/*', views.channel, name='channel'),
     url(r'webhook', views.webhook, name='webhook'),
