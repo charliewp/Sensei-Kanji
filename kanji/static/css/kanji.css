@@ -11,7 +11,7 @@ div.fixed {
   width: 600px;
   color: #FFF;
   font-family: "Arial";
-  font-size: 14px;
+  font-size: 24px;
   border: 0px solid #73AD21;
 }
 
@@ -20,10 +20,10 @@ div.fixedtable1 {
   padding: 10px 14px;
   top: 190px;
   left: 10px;
-  width: 250px;
+  width: 400px;
   color: #FFF;
   font-family: "Arial";
-  font-size: 14px;
+  font-size: 24px;
   border: 2px solid #ffffff;
 }
 
