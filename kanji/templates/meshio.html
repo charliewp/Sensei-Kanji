@@ -17,6 +17,17 @@ At {{timestamp}} watching {{nodecount}} nodes:
 </div>
 <div class="fixedtable1" style="width:40%">
     <div class="divTableBody" name="aliasInfo">
+        <div class="divTableRow">                           
+                <div class="divTableCell" style="width:15%">
+                    <h3>Name</h3>
+                </div>                
+                <div class="divTableCell" style="align:center;width:28%">
+                    <h3>Cloud Availability</h3>
+                </div>
+                <div class="divTableCell" style="align:center;width:37%">
+                    <h3>Application</h3>
+                </div>
+        </div>
         {% for node in networkstatus %}
             <div class="divTableRow">                           
                 <div class="divTableCell" style="width:15%">
