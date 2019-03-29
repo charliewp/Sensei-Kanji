@@ -73,7 +73,7 @@ def index(request):
       nodestatus["availpct"] = "{0:.1f}%".format(pctVisible)
       networkstatus.append(nodestatus)
     #return HttpResponse("Hello, world. You're at the Sensei-Kanji index page.")
-    return render(request, 'meshio.html', {"nodecount": nodecount, "networkstatus": networkstatus, "timestamp": timestamp})
+    return render(request, 'meshio.html', {"nodecount": nodecount, "networkstatus": networkstatus, "timestamp": timestamp, "customerid": customerid})
     
 def channel(request):
     #
