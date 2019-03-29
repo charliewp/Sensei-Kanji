@@ -49,7 +49,9 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 
 # Create your views here.
 def index(request):
-    nodes = Node.objects.all().filter(deploystate_id=10001).order_by('name')
+    pathParts = url.split("/")
+    customerid = int(pathParts[len(pathParts)-1])
+    nodes = Node.objects.all().filter(deploystate_id=10001).filter(customer_id=customerid).order_by('name')
     networkstatus = []
     now = datetime.today()
     timestamp = now.strftime("%I:%M %p %A, %B %e, %Y")
