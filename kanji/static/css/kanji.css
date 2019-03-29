@@ -27,6 +27,13 @@ div.fixedtable1 {
   border: 2px solid #ffffff;
 }
 
+h3 {
+    color: #FFF;
+    padding: 0px 0px;
+    font-family: "Arial";
+    font-size: 20
+}
+
 body {
    /*image files are in css/images folder*/
    background: url("images/meshio-2.png") repeat;    
