@@ -49,6 +49,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 
 # Create your views here.
 def index(request):
+    url = request.path_info
     pathParts = url.split("/")
     customerid = int(pathParts[len(pathParts)-1])
     nodes = Node.objects.all().filter(deploystate_id=10001).filter(customer_id=customerid).order_by('name')
