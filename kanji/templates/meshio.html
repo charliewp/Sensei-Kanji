@@ -15,17 +15,17 @@
 <div class="fixed">
 At {{timestamp}} watching {{nodecount}} nodes:
 </div>
-<div class="fixedtable1" style="width:45%">
+<div class="fixedtable1" style="width:50%">
     <div class="divTableBody" name="aliasInfo">
         {% for node in networkstatus %}
             <div class="divTableRow">                           
-                <div class="divTableCell" style="width:25%">
+                <div class="divTableCell" style="width:15%">
                     {{node.name}}
                 </div>                
                 <div class="divTableCell" style="width:28%">
                     {{node.availpct}}
                 </div>
-                <div class="divTableCell" style="width:27%">
+                <div class="divTableCell" style="width:37%">
                     {{node.application}}
                 </div>
             </div>
