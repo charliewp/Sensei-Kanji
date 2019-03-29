@@ -4,6 +4,12 @@
 */
 {% load staticfiles %}
 
+body {
+   /*image files are in css/images folder*/
+   background: url("images/meshio-2.png") repeat;    
+    padding-left: 0px;
+}
+
 div.fixed {
   position: fixed;
   top: 100px;
@@ -31,14 +37,10 @@ h3 {
     color: #FFF;
     padding: 0px 0px;
     font-family: "Arial";
-    font-size: 20
+    font-size: 24
 }
 
-body {
-   /*image files are in css/images folder*/
-   background: url("images/meshio-2.png") repeat;    
-    padding-left: 0px;
-}
+/* meshio stuff above this line */
 
 .transparent_btn {
 	display: inline-block;
@@ -546,14 +548,6 @@ notavailable {
     color:#8a8a5c;
     font-size: smaller;
 }
-
-h3 {
-    /* color: #FCA205; */
-    color: #ffff99;
-    font-family: "Arial";
-    font-size: 20
-}
-
 
 
 h1 {
