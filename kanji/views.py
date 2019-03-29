@@ -61,6 +61,7 @@ def index(request):
     nodestatus = {}
     nodestatus["name"] = "Node"
     nodestatus["availpct"] = "Cloud Availability"
+    nodestatus["application"] = "Applications"
     networkstatus.append(nodestatus)
     for node in nodes:
       nodestatus = {}
@@ -71,6 +72,7 @@ def index(request):
       log.error("Node {0} is {1:.1f}%".format(node.name, pctVisible))
       nodestatus["name"] = node.name
       nodestatus["availpct"] = "{0:.1f}%".format(pctVisible)
+      nodestatus["application"] = node.application.description
       networkstatus.append(nodestatus)
     #return HttpResponse("Hello, world. You're at the Sensei-Kanji index page.")
     return render(request, 'meshio.html', {"nodecount": nodecount, "networkstatus": networkstatus, "timestamp": timestamp, "customerid": customerid})

@@ -1,7 +1,7 @@
 {% load staticfiles %}
 <html>
 <head>
-    <title>MeshIO Sensor Network</title>
+    <title>meshio.net</title>
     <link rel="stylesheet" href="{% static 'css/kanji.css' %}"> 
     <script type="text/javascript">
     window.setTimeout("redirectpage();", 30000);    
@@ -26,6 +26,9 @@ At {{timestamp}} watching {{nodecount}} nodes:
                 </div>
                 <div class="divTableCell" style="width:55%">
                     {{node.availpct}}
+                </div>
+                <div class="divTableCell" style="width:55%">
+                    {{node.application}}
                 </div>
             </div>
         {% endfor %}
