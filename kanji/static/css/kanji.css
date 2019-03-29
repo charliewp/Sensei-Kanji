@@ -5,8 +5,8 @@
 {% load staticfiles %}
 
 body {
-   /*image files are in css/images folder*/
-   background: url("images/meshio-2.png") repeat;    
+   /*image files are in kanji/static/css/images folder*/
+   background: url("images/meshio-2.png");    
     padding-left: 0px;
 }
 
