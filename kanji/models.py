@@ -94,6 +94,7 @@ class MeshNetwork(models.Model):
 class Node(models.Model):
     idnode  = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=24)
+    friendlyname = models.CharField(max_length=32, null=True)
     coreid = models.CharField(max_length=24)
     coretype = models.ForeignKey(CoreType,on_delete=models.PROTECT,  null=True)
     nodetype = models.ForeignKey(NodeType,on_delete=models.PROTECT,  null=True, default=10000)
