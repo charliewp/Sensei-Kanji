@@ -67,6 +67,9 @@ class Customer(models.Model):
     idcustomer  = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=24)
     slacktoken = models.CharField(max_length=128, null=True)
+    slackworkspace = models.CharField(max_length=128, null=True)
+    slackadminuser = models.CharField(max_length=64, null=True)
+    slackadminpass = models.CharField(max_length=64, null=True)
     def __str__(self):
         return self.name
     

@@ -1,0 +1,25 @@
+{% load staticfiles %}
+<html>
+<head>
+    <title>MeshIO Sensor Network</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">     
+</head>
+<body> 
+<div class="container">
+                            <div class="divTableBody">
+                               {% for row in rows %}
+                                   {% with rowcount=forloop.counter %} 
+                                   <div class="row"> 
+                                   {% for col in row %}                                     
+                                       <div class="box">
+                                         <a><img src="{% static 'images/' %}{{col.0}}" alt="Flying Kites"></a>
+                                         <div class="text">{{col.1}}</div>
+                                       </div>                                                                          
+                                   {% endfor %}
+                                   </div>
+                                   {% endwith %}
+                               {% endfor %}                        
+                            </div>
+</div>
+</body>
+</html>

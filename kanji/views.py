@@ -35,7 +35,7 @@ from .models import Channel
 
 from django.template import RequestContext, Template, Context
 
-from slackclient import SlackClient
+#from slackclient import SlackClient
 import urllib
 from urllib.parse import urlparse
 import requests
@@ -70,6 +70,24 @@ def index(request):
       nodestatus["application"] = node.application.description
       networkstatus.append(nodestatus)
     return render(request, 'meshio.html', {"nodecount": nodecount, "networkstatus": networkstatus, "timestamp": timestamp, "customerid": customerid})
+    
+def dashboard(request):
+    url = request.path_info
+    print(url)
+    pathParts = url.split("/")
+    dashboardname = pathParts[3]
+    rows = []
+    for row in range(6):
+       cols = []
+       for col in range(10): 
+         gridindex = row*10 + col + 1       
+         imagename = "{}/image_part_{:0>3d}.png".format(dashboardname, row*10 + col + 1)
+         thistuple = (imagename, gridindex)         
+         #print(thistuple)
+         cols.append(thistuple)
+       rows.append(cols)
+    
+    return render(request, 'dashboard.html', {'width':range(10), 'height':range(6), 'rows':rows})
     
 def channel(request):
     #

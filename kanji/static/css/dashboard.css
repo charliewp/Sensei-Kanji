@@ -1,0 +1,52 @@
+/*!
+ * Meshio-Kanji v1.2.0 
+ * Copyright 2019
+*/
+{% load staticfiles %}
+
+body {
+   /*image files are in kanji/static/css/images folder*/
+   /*background: url("images/meshio-2.png");    */
+    padding-left: 0px;
+}
+
+a:hover {
+    opacity: 0.5;
+}
+
+.row {
+  
+  padding: 0 0px;
+}
+
+/* Create two equal columns that sits next to each other */
+.column {
+  padding: 1 1px;
+}
+
+.column img {
+  margin-top: 0px;
+  vertical-align: left;
+}
+
+    .box{
+        position: relative;
+        display: inline-block; /* Make the width of box same as image */
+    }
+    .box .text{
+        position: absolute;
+        z-index: 999;
+        margin: 0 0;
+        left: 5px;
+        right: 0; 
+        font-size: 20px;        
+        text-align: center;
+        top: 5%; /* Adjust this value to move the positioned div up and down */
+        /*background: rgba(0, 0, 0, 0.8);*/
+        font-family: Arial,sans-serif;
+        color: #000;
+        opacity: 0.95;
+        width: 5%; /* Set the width of the positioned div */
+    }
+
+
