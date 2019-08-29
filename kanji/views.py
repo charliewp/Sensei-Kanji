@@ -93,22 +93,21 @@ def squealer(request):
     return render(request, 'squealers.html', {'timestamp': now, 'squealers': squeals})   
     
 def dashboard(request):
+    # read data                                                                                                  
+    print("dashboard view")
     url = request.path_info
-    print(url)
     pathParts = url.split("/")
-    dashboardname = pathParts[3]
-    rows = []
-    for row in range(6):
-       cols = []
-       for col in range(10): 
-         gridindex = row*10 + col + 1       
-         imagename = "{}/image_part_{:0>3d}.png".format(dashboardname, row*10 + col + 1)
-         thistuple = (imagename, gridindex)         
-         #print(thistuple)
-         cols.append(thistuple)
-       rows.append(cols)
+    print(pathParts)
+    categories = ["A", "B", "C"]
+    values = [1,2,3]
     
-    return render(request, 'dashboard.html', {'width':range(10), 'height':range(6), 'rows':rows})
+    table_content = []
+    charttitle = "'Squeals'"
+    chartseries = "'Squeals/hour'"
+    chartunits = "'Squeals'"
+	
+    context = {"categories": categories, 'values': values, 'charttitle': charttitle, 'chartseries': chartseries, 'chartunits': chartunits, 'table_data': table_content}
+    return render(request, 'dashboard.html', context=context)
     
 def channel(request):
     #
