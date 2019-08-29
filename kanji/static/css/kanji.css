@@ -31,7 +31,7 @@ div.fixedtable1 {
   color: #FFF;
   font-family: "Arial";
   font-size: 24px;
-  border: 2px solid #ffffff;
+  border: 2px solid #000000;
 }
 
 h3 {
@@ -231,7 +231,7 @@ kiosk-touch-c3 {
 
 h2 {
     /* color: #FCA205; */
-    color: #ffff99;
+    color: #000000;
     font-family: "Arial";
     font-size: 24
 }
