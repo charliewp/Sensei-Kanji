@@ -8,6 +8,7 @@ import operator
 import json
 import random
 import html
+import wave
 
 from django import forms
 from django.db import models
@@ -45,6 +46,8 @@ import logging
 log = logging.getLogger('KANJI-LOGGER')
 
 from django.views.decorators.csrf import ensure_csrf_cookie
+
+    
 @ensure_csrf_cookie
 
 # Create your views here.
@@ -70,6 +73,23 @@ def index(request):
       nodestatus["application"] = node.application.description
       networkstatus.append(nodestatus)
     return render(request, 'meshio.html', {"nodecount": nodecount, "networkstatus": networkstatus, "timestamp": timestamp, "customerid": customerid})
+   
+
+def squealer(request):
+    url = request.path_info
+    print(url)
+    now = datetime.now()
+    #timestamp = now.strftime("%I:%M %p %A, %B %e, %Y")
+    squealevents = EventLog.objects.all().filter(sensortype_id=100)
+    squeals = []
+    for squealevent in squealevents:
+      squeal = {}
+      squeal['time'] = squealevent.timestamp
+      squeal['tape'] = "squealtape_" + squealevent.timestamp.strftime("%m%d%Y__%H%M%S") + ".wav"
+      print(squealevent.timestamp)
+      squeals.append(squeal)
+              
+    return render(request, 'squealers.html', {'timestamp': now, 'squealers': squeals})   
     
 def dashboard(request):
     url = request.path_info

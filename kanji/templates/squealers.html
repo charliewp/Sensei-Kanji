@@ -1,0 +1,35 @@
+{% load staticfiles %}
+<html>
+<head>
+    <title>PigFarm Squealers</title>
+    <link rel="stylesheet" href="{% static 'css/kanji.css' %}"> 
+    <script type="text/javascript">
+      window.setTimeout("redirectpage();", 30000);    
+      function redirectpage() {
+        window.top.location.href = '/kanji/squealers';
+      }
+    </script>    
+</head>
+<body>
+<div class="container">
+<div class="fixed">
+</div>
+<div class="fixedtable1" style="width:40%">
+    <div class="divTableBody" name="aliasInfo">
+        {% for squeal in squealers %}
+            <div class="divTableRow">                           
+                <div class="divTableCell" style="width:30%">
+                    <h2>{{squeal.time}}</h2>
+                </div>
+                <div class="divTableCell" style="width:30%">
+                    <audio controls>
+                      <source src="{% static 'media/' %}{{squeal.tape}}" />
+                    </audio>
+                </div>                              
+            </div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+</body>
+</html>
