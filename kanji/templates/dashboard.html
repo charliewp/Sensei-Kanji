@@ -1,121 +1,37 @@
 {% load staticfiles %}
 <!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
   <head>
-    <title>PorterFarms Analytics</title>
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
   </head>
   <body>
-    <!-- Top Bar -->
-    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">PorterFarms Analytics</a>
-      <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-      <ul class="navbar-nav px-3">
-	<li class="nav-item text-nowrap">
-	  <a class="nav-link" href="#">Sign out</a>
-	</li>
-      </ul>
-    </nav>
-
-    <div class="container-fluid">
-      <div class="row">
-
-	<!-- Left Pane -->
-	<nav class="col-md-2 d-none d-md-block bg-light sidebar">
-	  <div class="sidebar-sticky">
-            <ul class="nav flex-column">
-              <li class="nav-item">
-		        <a class="nav-link active" href="pig">
-		           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-		           Pig Farm 
-		        </a>
-              </li>
-              <li class="nav-item">
-		        <a class="nav-link" href="pullet">
-		           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-		           Pullet Farm
-		        </a>
-              </li>
-              <li class="nav-item">
-		        <a class="nav-link" href="laying">
-		           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-		           Laying Farm
-		        </a>
-              </li>
-            </ul> 
-	  </div>
-      
-      </div>
-      </div>
-
-	  <!-- Highcharts display -->
-	  <div class="border" id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-
-	  <!-- Table data -->
-	  <h2 class="pt-4">Section Details</h2>
-	  <p class="text-danger">This table will be upated by Django objects, hence leaving it as it is.</p>
-	  <div class="table-responsive">
-	    {{table_data|safe}}
-	  </div>
-	
-    <!-- Chartjs libraries -->
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>    
+    <div id="map"></div>
     <script>
-      _categories = {{categories|safe}};
-      _values = {{values|safe}};
-      _charttitle = {{charttitle|safe}};
-      _chartunits = {{chartunits|safe}};
-      _chartseries = {{chartseries|safe}}
-      
-      Highcharts.chart('container', {
-	  chart: {
-              type: 'column'
-	  },
-	  title: {
-              text: _charttitle
-	  },
-	  subtitle: {
-              text: ')'
-	  },
-	  xAxis: {
-              categories:_categories,
-              crosshair: true
-	  },
-	  yAxis: {
-              min: 0,
-              title: {
-		  text: _charttitle
-              }
-	  },
-	  tooltip: {
-              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-              pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-		  '<td style="padding:0"><b>{point.y:.1f} {{hartunits|safe} </b></td></tr>',
-              footerFormat: '</table>',
-              shared: true,
-              useHTML: true
-	  },
-	  plotOptions: {
-              column: {
-		  pointPadding: 0.2,
-		  borderWidth: 0
-        }
-	  },
-	  series: [{
-              name: _chartseries,
-              data: _values
-	      
-	  }]
-      });
-      </script>
-    
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-    
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 8
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
+    async defer></script>
   </body>
 </html>

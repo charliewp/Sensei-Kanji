@@ -19,10 +19,10 @@
         </div>
         {% for squeal in squealers %}
             <div class="divTableRow">                           
-                <div class="divTableCell" style="width:30%">
+                <div class="divTableCell" style="width:40%">
                     <h2>{{squeal.time}}</h2>
                 </div>
-                <div class="divTableCell" style="width:30%">
+                <div class="divTableCell" style="width:60%">
                     <audio controls>
                       <source src="{% static 'media/' %}{{squeal.tape}}" />
                     </audio>

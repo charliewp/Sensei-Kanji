@@ -80,6 +80,8 @@ class Location(models.Model):
     imageurl = models.CharField(max_length=128, null=True)
     customer = models.ForeignKey(Customer,on_delete=models.PROTECT, default=10000) 
     slackchannel = models.CharField(max_length=32, null=True)
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
     def __str__(self):
         return self.description
 
