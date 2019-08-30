@@ -22,16 +22,18 @@ div.fixed {
   border: 0px solid #73AD21;
 }
 
-div.fixedtable1 {
-  position: fixed;
+div.fixedtable1 {  
   padding: 10px 14px;
-  top: 140px;
+  top: 250px;
   left: 10px;
   width: 500px;
+  height: 200px;
   color: #FFF;
   font-family: "Arial";
   font-size: 24px;
   border: 2px solid #000000;
+  overflow-y: auto;
+  display: block;
 }
 
 h3 {
@@ -786,7 +788,7 @@ h2 {
 	font-weight: bold;
 }
 .divTableBody {
-	display: table-row-group;
+	display: table-row-group;    
 }
 
 /* RADIO BUTTONS*/
