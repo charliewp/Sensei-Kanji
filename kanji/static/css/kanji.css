@@ -6,7 +6,8 @@
 
 body {
    /*image files are in kanji/static/css/images folder*/
-   background: url("images/pigops_porterfarms.png");    
+   background: url("images/pigops_porterfarms.png"); 
+   /*background: url("https://www.mapquestapi.com/staticmap/v5/map?key=5FW2qUWgNqOLSu6Gw7iOH71WdX1MUhnZ&locations=35.353422,-80.442447|circle-sm-87%C2%BA||35.353675,-80.442447|marker-sm-7&size=1100,500@2x&type=hyb&zoom=18");     */
     padding-left: 0px;
 }
 
@@ -24,10 +25,10 @@ div.fixed {
 
 div.fixedtable1 {  
   padding: 10px 14px;
-  top: 250px;
+  top: 50px;
   left: 10px;
   width: 500px;
-  height: 200px;
+  height: 500px;
   color: #FFF;
   font-family: "Arial";
   font-size: 24px;
