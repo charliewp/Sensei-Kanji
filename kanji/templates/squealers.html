@@ -12,17 +12,17 @@
 </head>
 <body>
 <div class="container" style="width:100%;padding:150px 50px;">
-<div class="fixedtable1" style="width:80%;">
+<div class="fixedtable1" style="width:100%;">
     <div class="divTableBody" name="aliasInfo">
         <div class="divTableRow">
           <h2>Squeal Alerts (24hrs)</h2>
         </div>
         {% for squeal in squealers %}
             <div class="divTableRow">                           
-                <div class="divTableCell" style="width:50%">
+                <div class="divTableCell" style="width:60%">
                     <h2>{{squeal.location}} {{squeal.time}}</h2>
                 </div>
-                <div class="divTableCell" style="width:50%">
+                <div class="divTableCell" style="width:40%">
                     <audio controls >
                       <source src="{% static 'media/' %}{{squeal.tape}}" />
                     </audio>
