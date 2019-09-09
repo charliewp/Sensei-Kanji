@@ -84,7 +84,8 @@ def squealer(request):
     squealevents = EventLog.objects.all().filter(sensortype_id=100).filter(timestamp__gte = time24hoursago).order_by('-timestamp')
     squeals = []
     for squealevent in squealevents:
-      filename = squealevent.eventdata[0]['f']
+      eventdata = json.loads(squealevent.eventdata)
+      filename = eventdata[0]['f']
       squeal = {}
       squeal['time'] = squealevent.timestamp
       squeal['tape'] = "squealtape_" + filename
