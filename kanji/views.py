@@ -79,7 +79,7 @@ def squealer(request):
     url = request.path_info
     print(url)
     now = datetime.today()
-    timehoursago = now - timedelta(hours=6)
+    timehoursago = now - timedelta(hours=2)
     #timestamp = now.strftime("%I:%M %p %A, %B %e, %Y")
     squealevents = EventLog.objects.filter(sensortype_id=100).filter(timestamp__gte = timehoursago).order_by('-timestamp')
     squeals = []
