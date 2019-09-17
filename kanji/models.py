@@ -117,7 +117,7 @@ class User(models.Model):
     
 class Issue(models.Model):
     idissue = models.BigAutoField(primary_key=True)
-    description = models.CharField(max_length=128)
+    description = models.CharField(max_length=128, null=True)
     location = models.ForeignKey(Location,on_delete=models.PROTECT, null=True)
     opentimestamp = models.DateTimeField(("DateTime"),auto_now_add=True)
     status = models.ForeignKey(IssueStatus, on_delete=models.PROTECT, null=True)
