@@ -21,7 +21,13 @@ class Urgency(models.Model):
     idurgency = models.BigAutoField(primary_key=True)
     description = models.CharField(max_length=24)
     def __str__(self):
-        return self.description        
+        return self.description
+
+class IssueStatus(models.Model):
+    idissuestatus = models.BigAutoField(primary_key=True)
+    description = models.CharField(max_length=24)
+    def __str__(self):
+        return self.description               
     
 class SensorType(models.Model):
     idsensortype  = models.BigAutoField(primary_key=True)
@@ -108,6 +114,16 @@ class User(models.Model):
     lastname = models.CharField(max_length=24)
     slackuserid = models.CharField(max_length=24)
     password = models.CharField(max_length=24)
+    
+class Issue(models.Model):
+    idissue = models.BigAutoField(primary_key=True)
+    opentimestamp = models.DateTimeField(("DateTime"),auto_now_add=True)
+    status = models.ForeignKey(IssueStatus, on_delete=models.PROTECT, null=True)
+    impact = models.ForeignKey(Impact, on_delete=models.PROTECT, null=True)
+    urgency = models.ForeignKey(Urgency, on_delete=models.PROTECT, null=True)
+    acktimestamp = models.DateTimeField(("DateTime"), null=True)
+    ackuser = models.ForeignKey(User, on_delete=models.PROTECT, null=True)    
+    closetimestamp = models.DateTimeField(("DateTime"), null=True)
 
 class Node(models.Model):
     idnode  = models.BigAutoField(primary_key=True)
@@ -137,10 +153,10 @@ class EventLog(models.Model):
     ideventlog = models.BigAutoField(primary_key=True)
     timestamp = models.DateTimeField(("DateTime"),auto_now_add=True)
     node = models.ForeignKey(Node,on_delete=models.PROTECT, default=1)
-    impact = models.ForeignKey(Impact, on_delete=models.PROTECT, null=True)
-    urgency = models.ForeignKey(Urgency, on_delete=models.PROTECT, null=True)
-    acktimestamp = models.DateTimeField(("DateTime"), null=True)
-    ackuser = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
+    #impact = models.ForeignKey(Impact, on_delete=models.PROTECT, null=True)
+    #urgency = models.ForeignKey(Urgency, on_delete=models.PROTECT, null=True)
+    #acktimestamp = models.DateTimeField(("DateTime"), null=True)
+    #ackuser = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
     sensortype = models.ForeignKey(SensorType,on_delete=models.PROTECT, default=1)
     eventdata = models.CharField(max_length=622)
     meshacktimemillis = models.IntegerField(default=0)    

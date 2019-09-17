@@ -295,7 +295,7 @@ def oldslack(request):
 #  Acknowledge Events
 #   
 def slack(request):
-   #process POST requests from Slack when a user selects a button
+   #process POST requests from Slack when a user selects a button to accept or close an issue
    log.error("INFO view/slack has been called!")
    payload = request.body.decode("utf-8")
    payload = urllib.parse.parse_qs(payload)
