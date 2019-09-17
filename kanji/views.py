@@ -305,8 +305,8 @@ def slack(request):
    action = payload["actions"][0]
    #log.error(action)
    log.error(payload["user"])
-   username = payload["user"]['username']
-   log.error("Event acked by {}".format(username))
+   userid = payload["user"]['id']
+   log.error("Event acked by {}".format(userid))
    
    actionname = action["value"]
    actiontarget = action["action_id"]
