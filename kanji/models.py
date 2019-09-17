@@ -106,7 +106,7 @@ class User(models.Model):
     iduser = models.BigAutoField(primary_key=True)
     firstname = models.CharField(max_length=24)
     lastname = models.CharField(max_length=24)
-    username = models.CharField(max_length=24)
+    slackuserid = models.CharField(max_length=24)
     password = models.CharField(max_length=24)
 
 class Node(models.Model):
