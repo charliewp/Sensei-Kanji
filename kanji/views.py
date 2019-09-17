@@ -214,7 +214,7 @@ def node(request):
         return render(request, 'node.html',  {'location': location, 'timediff': timediffstr, 'chartdefs': chartdefs, 'data': data })
       
 def slack(request):
-   #POST from Slack when a user selects a button
+   #process POST requests from Slack when a user selects a button
    log.error("INFO view/slack has been called!")
    payload = request.body.decode("utf-8")
    payload = urllib.parse.parse_qs(payload)
@@ -316,16 +316,20 @@ def webhook(request):
    for pin in pins:
       log.debug("DEBUG view/webhook pin={0}".format(pin))
    
-   eventtype = 10000
+   #eventtype = 10000
    sensorid = pin["t"]   
 
    eventlog = EventLog()
    eventlog.timestamp = timestamp
    eventlog.node = Node.objects.all().filter(coreid=coreid).first()
-   eventlog.eventtype = EventType.objects.get(pk=eventtype)
+   #eventlog.eventtype = EventType.objects.get(pk=eventtype)
    eventlog.sensortype = SensorType.objects.get(pk=sensorid)
    eventlog.eventdata = doc
-   eventlog.meshacktimemillis = int(acktime)  
+   eventlog.meshacktimemillis = int(acktime)
+   
+   #  09-17-2019  Urgency & Impact
+   #  Event impact & urgency are set by the EventScanner script
+   #   
    
    eventlog.save()
    
