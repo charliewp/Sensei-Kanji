@@ -361,7 +361,7 @@ def slack(request):
    
      blockmessage[0]["accessory"]["image_url"] = "https://www.dropbox.com/s/2vvxy36e3jblulb/check.png?raw=1"
      blockmessage[0]["accessory"]["alt_text"] = "Ok thumbnail"
-     blockmessage[0]["text"]["text"] = "*at {} {} {} acknowledged ##{}## event #{}*".format(timestamp, user.firstname, user.lastname, event.node.location.description, event.ideventlog)
+     blockmessage[0]["text"]["text"] = "at *{}* {} {} acknowledged *{}* event #{}".format(timestamp, user.firstname, user.lastname, event.node.location.description, event.ideventlog)
         
      sc = SlackClient(_SLACK_TOKEN)
      response = sc.api_call("chat.postMessage", channel=slackchannel, blocks=blockmessage)
