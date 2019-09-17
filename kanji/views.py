@@ -400,7 +400,7 @@ def slack(request):
      blockmessage[0]["text"]["text"] = "*{}* \
          \nAt {} \
          \nnode {} *reported an impact={} urgency={} event with eventdata={}.* \
-         \nAt *{}* {} {} acknowledged *{}* event #{}" 
+         \nAt *{}* {} {} acknowledged *{}* event #{}" \
          .format(event.node.location, event.timestamp.strftime("%-I:%M %p %A, %B %e, %Y"), event.node.name, event.impact, event.urgency, event.eventdata, timestamp, user.firstname, user.lastname, event.node.location.description, event.ideventlog)
 
      blockmessage[2]["text"]["text"] = "*To close this issue, click the button...*"
