@@ -213,7 +213,7 @@ def node(request):
         
         return render(request, 'node.html',  {'location': location, 'timediff': timediffstr, 'chartdefs': chartdefs, 'data': data })
       
-def slack(request):
+def oldslack(request):
    #process POST requests from Slack when a user selects a button
    log.error("INFO view/slack has been called!")
    payload = request.body.decode("utf-8")
@@ -290,6 +290,85 @@ def slack(request):
        print("Ok posting message to Slack channel")
       
    return HttpResponse("Thanks, Sensei/Kanji/SlackWebHook", status=200)   
+
+#  09-17-2019 
+#  Acknowledge Events
+#   
+def slack(request):
+   #process POST requests from Slack when a user selects a button
+   log.error("INFO view/slack has been called!")
+   payload = request.body.decode("utf-8")
+   payload = urllib.parse.parse_qs(payload)
+   payload = json.loads(payload['payload'][0])
+   log.error(payload)
+   log.error("payload {0}".format(payload["actions"][0]))
+   action = payload["actions"][0]
+   log.error(action)
+   
+   actionname = action["value"]
+   actiontarget = action["action_id"]
+   
+   #we lookup the event of the action target and set the act fields'   
+   event = EventLog.objects.get(pk=int(actiontarget))
+   
+   if event:
+     now = datetime.now()
+     timestamp = now.strftime("%I:%M %p %A, %B %e, %Y")
+     _SLACK_TOKEN = event.node.location.customer.slacktoken
+     slackchannel = event.node.location.slackchannel
+     log.error("slackChannel={0} slackToken={1}".format(slackchannel,_SLACK_TOKEN))
+   
+     config = configparser.ConfigParser()
+     config.read('secrets.conf')
+        
+     #log.error("Calling {0} on coreid={1}".format(actionname,device.coreid))
+   
+     #_PARTICLE_TOKEN = config['DEFAULT']['_PARTICLE_TOKEN']
+     #log.error("secrets _PARTICLE_TOKEN {0}".format(_PARTICLE_TOKEN))
+   
+     #actionurl = "https://api.particle.io/v1/devices/{0}/{1}".format(device.coreid,actionname)
+     #log.error(actionurl)
+     #data = {'access_token' : _PARTICLE_TOKEN, 'arg' : ""}
+     #resp = requests.post(actionurl, data = data, timeout=(15, 30))
+     #response = resp.json()
+     #log.error("response={0}".format(response))
+   
+     #log.error("secrets _SLACK_TOKEN {0}".format(_SLACK_TOKEN)) 
+
+     # set the event acktimestamp
+     event.acktimestamp = now
+     event.save()
+   
+     messagestring = "[\
+       {\"type\": \"section\", \
+		 \"text\": { \
+			\"type\": \"mrkdwn\", \
+			\"text\": \"*<fakeLink.toUserProfiles.com|Iris / Zelda 1-1>*\\nTuesday, January 21 4:00-4:30pm\\nBuilding 2 - Havarti Cheese (3)\\n2 guests\" \
+		 }, \
+		 \"accessory\": { \
+			\"type\": \"image\", \
+			\"image_url\": \"https://api.slack.com/img/blocks/bkb_template_images/notifications.png\", \
+			\"alt_text\": \"calendar thumbnail\" \
+		 } \
+     }]"
+    
+     blockmessage = json.loads(messagestring)
+   
+     blockmessage[0]["accessory"]["image_url"] = "https://www.dropbox.com/s/2vvxy36e3jblulb/check.png?raw=1"
+     blockmessage[0]["accessory"]["alt_text"] = "Ok thumbnail"
+     blockmessage[0]["text"]["text"] = "*At {0} {1}*".format(timestamp, "The event was updated!")
+        
+     sc = SlackClient(_SLACK_TOKEN)
+     response = sc.api_call("chat.postMessage", channel=slackchannel, blocks=blockmessage)
+    
+     if not 'ok' in response or not response['ok']:
+       print("Error posting message to Slack channel")
+       print(blockmessage)
+       print(response)
+     else:
+       print("Ok posting message to Slack channel")
+      
+   return HttpResponse("Thanks, Sensei/Kanji/SlackWebHook", status=200)   
    
 def webhook(request):
    #
@@ -316,13 +395,11 @@ def webhook(request):
    for pin in pins:
       log.debug("DEBUG view/webhook pin={0}".format(pin))
    
-   #eventtype = 10000
    sensorid = pin["t"]   
 
    eventlog = EventLog()
    eventlog.timestamp = timestamp
    eventlog.node = Node.objects.all().filter(coreid=coreid).first()
-   #eventlog.eventtype = EventType.objects.get(pk=eventtype)
    eventlog.sensortype = SensorType.objects.get(pk=sensorid)
    eventlog.eventdata = doc
    eventlog.meshacktimemillis = int(acktime)
@@ -337,7 +414,6 @@ def webhook(request):
    log.debug("DEBUG view/webhook ackTime={0}".format(acktime))
    log.debug("DEBUG view/webhook core={0}".format(eventlog.node.name))
    log.debug("DEBUG view/webhook iddevice={0}".format(coreid))
-   #log.debug("DEBUG view/webhook publishtopic={0}".format(eventtype))
    log.debug("DEBUG view/webhook sensorid={0}".format(sensorid))
    log.debug("DEBUG view/webhook doc={0}".format(doc))
    
