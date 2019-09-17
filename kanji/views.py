@@ -396,7 +396,7 @@ def slack(request):
      #blockmessage[0]["accessory"]["alt_text"] = "Ok thumbnail"
      #blockmessage[0]["text"]["text"] = "at *{}* {} {} acknowledged *{}* event #{}".format(timestamp, user.firstname, user.lastname, event.node.location.description, event.ideventlog)
      
-     blockmessage[0]["accessory"]["image_url"] = locationimageurl
+     blockmessage[0]["accessory"]["image_url"] = event.node.location.imageurl
      blockmessage[0]["text"]["text"] = "*{}* \
          \nAt {} \
          \nnode {} *reported an impact={} urgency={} event with eventdata={}.* \
