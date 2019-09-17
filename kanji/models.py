@@ -94,6 +94,19 @@ class Location(models.Model):
     slackchannel = models.CharField(max_length=32, null=True)
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
+    
+    #some fields to impose range limits on sensors
+    maxtempf = models.IntegerField(null=False, default=95) 
+    mintempf  = models.IntegerField(null=False, default=32) 
+    maxpsi = models.IntegerField(null=False, default=100) 
+    minpsi = models.IntegerField(null=False, default=30) 
+    maxrssidb = models.IntegerField(null=False, default=0) 
+    minrssidb = models.IntegerField(null=False, default=-78) 
+    maxvolts = models.IntegerField(null=False, default=140) 
+    minvolts = models.IntegerField(null=False, default=100) 
+    maxo2pct = models.IntegerField(null=False, default=100) 
+    mino2pct = models.IntegerField(null=False, default=20) 
+    
     def __str__(self):
         return self.description
 
