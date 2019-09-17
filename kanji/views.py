@@ -304,6 +304,8 @@ def slack(request):
    log.error("payload {0}".format(payload["actions"][0]))
    action = payload["actions"][0]
    log.error(action)
+   user = payload["user"][0]
+   log.error(user)
    
    actionname = action["value"]
    actiontarget = action["action_id"]
