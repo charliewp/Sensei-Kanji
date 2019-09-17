@@ -360,7 +360,7 @@ def slack(request):
    
      blockmessage[0]["accessory"]["image_url"] = "https://www.dropbox.com/s/2vvxy36e3jblulb/check.png?raw=1"
      blockmessage[0]["accessory"]["alt_text"] = "Ok thumbnail"
-     blockmessage[0]["text"]["text"] = "*At {0} {1}*".format(timestamp, "The event was updated!")
+     blockmessage[0]["text"]["text"] = "*At {} {} {} {}*".format(timestamp, user.firstname, user.lastname, "acknowledged the issue.")
         
      sc = SlackClient(_SLACK_TOKEN)
      response = sc.api_call("chat.postMessage", channel=slackchannel, blocks=blockmessage)
