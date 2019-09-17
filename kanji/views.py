@@ -29,7 +29,9 @@ from django.contrib.auth import authenticate
 from .models import EventLog
 from .models import PingLog
 from .models import Node
-from .models import EventType
+from .models import Urgency
+from .models import Impact
+from .models import User
 from .models import SensorType
 from .models import MeshNetwork
 from .models import Channel
