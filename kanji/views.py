@@ -304,7 +304,7 @@ def slack(request):
    #log.error("payload {0}".format(payload["actions"][0]))
    action = payload["actions"][0]
    #log.error(action)
-   user = payload["user"]['username']
+   username = payload["user"]['username']
    log.error("Event acked by {}".format(username))
    
    actionname = action["value"]
@@ -312,7 +312,7 @@ def slack(request):
    
    #we lookup the event of the action target and set the act fields'   
    event = EventLog.objects.get(pk=int(actiontarget))
-   user = User.objects.filter(username=user)[0]
+   user = User.objects.filter(username=username)[0]
    
    if event:
      now = datetime.now()
