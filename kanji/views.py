@@ -337,7 +337,7 @@ def webhook(request):
    log.debug("DEBUG view/webhook ackTime={0}".format(acktime))
    log.debug("DEBUG view/webhook core={0}".format(eventlog.node.name))
    log.debug("DEBUG view/webhook iddevice={0}".format(coreid))
-   log.debug("DEBUG view/webhook publishtopic={0}".format(eventtype))
+   #log.debug("DEBUG view/webhook publishtopic={0}".format(eventtype))
    log.debug("DEBUG view/webhook sensorid={0}".format(sensorid))
    log.debug("DEBUG view/webhook doc={0}".format(doc))
    
