@@ -300,11 +300,12 @@ def slack(request):
    payload = request.body.decode("utf-8")
    payload = urllib.parse.parse_qs(payload)
    payload = json.loads(payload['payload'][0])
-   log.error(payload)
-   log.error("payload {0}".format(payload["actions"][0]))
+   #log.error(payload)
+   #log.error("payload {0}".format(payload["actions"][0]))
    action = payload["actions"][0]
-   log.error(action)
-   
+   #log.error(action)
+   user = payload["user"]
+   log.error(user)
    
    actionname = action["value"]
    actiontarget = action["action_id"]
