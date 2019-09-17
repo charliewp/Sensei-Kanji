@@ -304,14 +304,15 @@ def slack(request):
    #log.error("payload {0}".format(payload["actions"][0]))
    action = payload["actions"][0]
    #log.error(action)
-   user = payload["user"]
-   log.error(user)
+   user = payload["user"]['username']
+   log.error("Event acked by {}".format(username))
    
    actionname = action["value"]
    actiontarget = action["action_id"]
    
    #we lookup the event of the action target and set the act fields'   
    event = EventLog.objects.get(pk=int(actiontarget))
+   user = User.objects.filter(username=user)[0]
    
    if event:
      now = datetime.now()
@@ -339,6 +340,7 @@ def slack(request):
 
      # set the event acktimestamp
      event.acktimestamp = now
+     event.ackuser = user
      event.save()
    
      messagestring = "[\
