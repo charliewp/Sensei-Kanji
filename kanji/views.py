@@ -356,13 +356,58 @@ def slack(request):
 			\"alt_text\": \"calendar thumbnail\" \
 		 } \
      }]"
+     
+     messagestring2 = "[\
+       {\"type\": \"section\", \
+		\"text\": { \
+			\"type\": \"mrkdwn\", \
+			\"text\": \"*<fakeLink.toUserProfiles.com|Iris / Zelda 1-1>*\\nTuesday, January 21 4:00-4:30pm\\nBuilding 2 - Havarti Cheese (3)\\n2 guests\" \
+		}, \
+		\"accessory\": { \
+			\"type\": \"image\", \
+			\"image_url\": \"https://api.slack.com/img/blocks/bkb_template_images/notifications.png\", \
+			\"alt_text\": \"calendar thumbnail\" \
+		} \
+	   }, \
+       { \
+		\"type\": \"divider\" \
+	   }, \
+       { \
+		\"type\": \"section\", \
+		\"text\": { \
+			\"type\": \"mrkdwn\", \
+			\"text\": \"*Accessory text.*\" \
+		}, \
+		\"accessory\": { \
+			\"type\": \"button\", \
+			\"text\": { \
+				\"type\": \"plain_text\", \
+				\"text\": \"BUTTON_TEXT\" \
+			}, \
+			\"value\": \"BUTTON_VALUE\", \
+			\"action_id\": \"button\" \
+		} \
+	   } \
+     ]"
     
-     blockmessage = json.loads(messagestring)
+     blockmessage = json.loads(messagestring2)
    
-     blockmessage[0]["accessory"]["image_url"] = "https://www.dropbox.com/s/2vvxy36e3jblulb/check.png?raw=1"
-     blockmessage[0]["accessory"]["alt_text"] = "Ok thumbnail"
-     blockmessage[0]["text"]["text"] = "at *{}* {} {} acknowledged *{}* event #{}".format(timestamp, user.firstname, user.lastname, event.node.location.description, event.ideventlog)
-        
+     #blockmessage[0]["accessory"]["image_url"] = "https://www.dropbox.com/s/2vvxy36e3jblulb/check.png?raw=1"
+     #blockmessage[0]["accessory"]["alt_text"] = "Ok thumbnail"
+     #blockmessage[0]["text"]["text"] = "at *{}* {} {} acknowledged *{}* event #{}".format(timestamp, user.firstname, user.lastname, event.node.location.description, event.ideventlog)
+     
+     blockmessage[0]["accessory"]["image_url"] = locationimageurl
+     blockmessage[0]["text"]["text"] = "*{}* \
+         \nAt {} \
+         \nnode {} *reported an impact={} urgency={} event with eventdata={}.* \
+         \n"At *{}* {} {} acknowledged *{}* event #{}" 
+         .format(event.node.location, event.timestamp.strftime("%-I:%M %p %A, %B %e, %Y"), event.node.name, event.impact, event.urgency, event.eventdata, timestamp, user.firstname, user.lastname, event.node.location.description, event.ideventlog)
+
+     blockmessage[2]["text"]["text"] = "*To close this issue, click the button...*"
+     blockmessage[2]["accessory"]["text"]["text"] = "Issue Resolved!"
+     blockmessage[2]["accessory"]["value"] = "close"
+     blockmessage[2]["accessory"]["action_id"] = "{0}".format(event.eventlogid)     
+     
      sc = SlackClient(_SLACK_TOKEN)
      response = sc.api_call("chat.postMessage", channel=slackchannel, blocks=blockmessage)
     
