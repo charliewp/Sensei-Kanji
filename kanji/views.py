@@ -31,6 +31,7 @@ from .models import PingLog
 from .models import Node
 from .models import Urgency
 from .models import Impact
+from .models import Ticket
 from .models import User
 from .models import SensorType
 from .models import MeshNetwork
