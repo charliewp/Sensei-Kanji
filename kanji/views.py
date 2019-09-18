@@ -388,12 +388,20 @@ def slack(request):
      #blockmessage[0]["accessory"]["alt_text"] = "Ok thumbnail"
      #blockmessage[0]["text"]["text"] = "at *{}* {} {} acknowledged *{}* event #{}".format(timestamp, user.firstname, user.lastname, event.node.location.description, event.ideventlog)
      
-     blockmessage[0]["accessory"]["image_url"] = event.node.location.imageurl
+     blockmessage[0]["accessory"]["image_url"] = ticket.location.imageurl
      blockmessage[0]["text"]["text"] = "*{}* \
          \nAt {} \
-         \nnode {} *reported an impact={} urgency={} event with eventdata={}.* \
-         \nAt *{}* {} {} acknowledged *{}* event #{}" \
-         .format(event.node.location, event.timestamp.strftime("%-I:%M %p %A, %B %e, %Y"), event.node.name, event.impact, event.urgency, event.eventdata, timestamp, user.firstname, user.lastname, event.node.location.description, event.ideventlog)
+         \n*{}* \
+         \nAt *{}* impact {} urgency {} {} {} accepted ticket #{}" \
+         .format(ticket.location, 
+                 ticket.opentimestamp.strftime("%-I:%M %p %A, %B %e, %Y"), \
+                 ticket.description, \
+                 ticket.acktimestamp, \
+                 ticket.impact, \
+                 ticket.urgency, \
+                 user.firstname,\
+                 user.lastname, \
+                 ticket.idticket)
 
      blockmessage[2]["text"]["text"] = "*To close this issue, click the button...*"
      blockmessage[2]["accessory"]["text"]["text"] = "Issue Resolved!"
