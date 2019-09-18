@@ -295,7 +295,7 @@ def oldslack(request):
 #  Acknowledge Events
 #   
 def slack(request):
-   #process POST requests from Slack when a user selects a button to accept or close an issue
+   #process POST requests from Slack when a user selects a button to accept or to close a ticket
    log.error("INFO view/slack has been called!")
    payload = request.body.decode("utf-8")
    payload = urllib.parse.parse_qs(payload)
@@ -306,16 +306,16 @@ def slack(request):
    #log.error(action)
    log.error(payload["user"])
    slackuserid = payload["user"]['id']
-   log.error("Event acked by {}".format(slackuserid))
-   
    actionname = action["value"]
    actiontarget = action["action_id"]
    
-   #we lookup the event of the action target and set the act fields'   
-   event = EventLog.objects.get(pk=int(actiontarget))
+   log.error("Ticket {} accepted by {}".format(actiontarget, slackuserid))
+   
+   #we lookup the Ticket referenced by the action target   
+   ticket = Ticket.objects.get(pk=int(actiontarget))
    user = User.objects.filter(slackuserid=slackuserid)[0]
    
-   if event:
+   if ticket:
      now = datetime.now()
      timestamp = now.strftime("%I:%M %p %A, %B %e, %Y")
      _SLACK_TOKEN = event.node.location.customer.slacktoken
@@ -323,27 +323,18 @@ def slack(request):
      log.error("slackChannel={0} slackToken={1}".format(slackchannel,_SLACK_TOKEN))
    
      config = configparser.ConfigParser()
-     config.read('secrets.conf')
-        
-     #log.error("Calling {0} on coreid={1}".format(actionname,device.coreid))
-   
-     #_PARTICLE_TOKEN = config['DEFAULT']['_PARTICLE_TOKEN']
-     #log.error("secrets _PARTICLE_TOKEN {0}".format(_PARTICLE_TOKEN))
-   
-     #actionurl = "https://api.particle.io/v1/devices/{0}/{1}".format(device.coreid,actionname)
-     #log.error(actionurl)
-     #data = {'access_token' : _PARTICLE_TOKEN, 'arg' : ""}
-     #resp = requests.post(actionurl, data = data, timeout=(15, 30))
-     #response = resp.json()
-     #log.error("response={0}".format(response))
-   
-     #log.error("secrets _SLACK_TOKEN {0}".format(_SLACK_TOKEN)) 
-
-     # set the event acktimestamp
-     event.acktimestamp = now
-     event.ackuser = user
-     event.save()
-   
+     config.read('secrets.conf')        
+ 
+     # set the Ticket acktimestamp and user
+     if action=="accept":
+       ticket.acktimestamp = now
+       ticket.ackuser = user
+       ticket.save()
+     elif action=="close":
+       ticket.closetimestamp = now
+       ticket.ackuser = user
+       ticket.save()
+       
      messagestring = "[\
        {\"type\": \"section\", \
 		 \"text\": { \
