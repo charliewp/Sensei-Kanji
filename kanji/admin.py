@@ -5,7 +5,7 @@ from .models import Urgency
 from .models import Impact
 from .models import User
 from .models import IssueStatus
-from .models import Issue
+from .models import Ticket
 from .models import SensorType
 from .models import CoreType
 from .models import OnlineState
@@ -22,7 +22,7 @@ admin.site.register(Urgency)
 admin.site.register(Impact)
 admin.site.register(User)
 admin.site.register(IssueStatus)
-admin.site.register(Issue)
+admin.site.register(Ticket)
 admin.site.register(SensorType)
 admin.site.register(CoreType)
 admin.site.register(OnlineState)

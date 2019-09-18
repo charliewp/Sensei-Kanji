@@ -38,7 +38,7 @@ from .models import Channel
 
 from django.template import RequestContext, Template, Context
 
-from slackclient import SlackClient
+#from slackclient import SlackClient
 import urllib
 from urllib.parse import urlparse
 import requests

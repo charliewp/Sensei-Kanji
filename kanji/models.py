@@ -128,7 +128,7 @@ class User(models.Model):
     slackuserid = models.CharField(max_length=24)
     password = models.CharField(max_length=24)
     
-class Issue(models.Model):
+class Ticket(models.Model):
     idissue = models.BigAutoField(primary_key=True)
     description = models.CharField(max_length=128, null=True)
     location = models.ForeignKey(Location,on_delete=models.PROTECT, null=True)
