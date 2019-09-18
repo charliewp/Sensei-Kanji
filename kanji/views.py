@@ -327,11 +327,11 @@ def slack(request):
      config.read('secrets.conf')        
  
      # set the Ticket acktimestamp and user
-     if action=="accept":
+     if actionname=="accept":
        ticket.acktimestamp = now
        ticket.ackuser = user
        ticket.save()
-     elif action=="close":
+     elif actionname=="close":
        ticket.closetimestamp = now
        ticket.ackuser = user
        ticket.save()
