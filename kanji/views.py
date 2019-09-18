@@ -406,7 +406,7 @@ def slack(request):
      blockmessage[2]["text"]["text"] = "*To close this issue, click the button...*"
      blockmessage[2]["accessory"]["text"]["text"] = "Issue Resolved!"
      blockmessage[2]["accessory"]["value"] = "close"
-     blockmessage[2]["accessory"]["action_id"] = "{0}".format(event.ideventlog)     
+     blockmessage[2]["accessory"]["action_id"] = "{0}".format(ticket.idticket)     
      
      sc = SlackClient(_SLACK_TOKEN)
      response = sc.api_call("chat.postMessage", channel=slackchannel, blocks=blockmessage)
