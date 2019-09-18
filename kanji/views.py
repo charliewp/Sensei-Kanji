@@ -396,7 +396,7 @@ def slack(request):
          .format(ticket.location, 
                  ticket.opentimestamp.strftime("%-I:%M %p %A, %B %e, %Y"), \
                  ticket.description, \
-                 ticket.acktimestamp, \
+                 timestamp, \
                  ticket.impact, \
                  ticket.urgency, \
                  user.firstname,\
