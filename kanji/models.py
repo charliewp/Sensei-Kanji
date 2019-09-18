@@ -24,7 +24,7 @@ class Urgency(models.Model):
         return self.description
 
 class TicketStatus(models.Model):
-    idissuestatus = models.BigAutoField(primary_key=True)
+    idticketstatus = models.BigAutoField(primary_key=True)
     description = models.CharField(max_length=24)
     def __str__(self):
         return self.description               
@@ -129,7 +129,7 @@ class User(models.Model):
     password = models.CharField(max_length=24)
     
 class Ticket(models.Model):
-    idissue = models.BigAutoField(primary_key=True)
+    idticket = models.BigAutoField(primary_key=True)
     description = models.CharField(max_length=128, null=True)
     location = models.ForeignKey(Location,on_delete=models.PROTECT, null=True)
     opentimestamp = models.DateTimeField(("DateTime"),auto_now_add=True)
