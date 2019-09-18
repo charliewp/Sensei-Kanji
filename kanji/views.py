@@ -319,8 +319,8 @@ def slack(request):
    if ticket:
      now = datetime.now()
      timestamp = now.strftime("%I:%M %p %A, %B %e, %Y")
-     _SLACK_TOKEN = event.node.location.customer.slacktoken
-     slackchannel = event.node.location.slackchannel
+     _SLACK_TOKEN = ticket.location.customer.slacktoken
+     slackchannel = ticket.location.slackchannel
      log.error("slackChannel={0} slackToken={1}".format(slackchannel,_SLACK_TOKEN))
    
      config = configparser.ConfigParser()
