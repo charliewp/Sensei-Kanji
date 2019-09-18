@@ -23,7 +23,7 @@ class Urgency(models.Model):
     def __str__(self):
         return self.description
 
-class IssueStatus(models.Model):
+class TicketStatus(models.Model):
     idissuestatus = models.BigAutoField(primary_key=True)
     description = models.CharField(max_length=24)
     def __str__(self):
@@ -133,7 +133,7 @@ class Ticket(models.Model):
     description = models.CharField(max_length=128, null=True)
     location = models.ForeignKey(Location,on_delete=models.PROTECT, null=True)
     opentimestamp = models.DateTimeField(("DateTime"),auto_now_add=True)
-    status = models.ForeignKey(IssueStatus, on_delete=models.PROTECT, null=True)
+    status = models.ForeignKey(TicketStatus, on_delete=models.PROTECT, null=True)
     impact = models.ForeignKey(Impact, on_delete=models.PROTECT, null=True)
     urgency = models.ForeignKey(Urgency, on_delete=models.PROTECT, null=True)
     acktimestamp = models.DateTimeField(("DateTime"), null=True)
