@@ -293,9 +293,11 @@ def oldslack(request):
    return HttpResponse("Thanks, Sensei/Kanji/SlackWebHook", status=200)   
 
 #  09-17-2019 
-#  Acknowledge Events
+#  Accept and Close Tickets
 #   
 def slack(request):
+   _TICKET_STATUS_WORKING = 10001
+   _TICKET_STATUS_CLOSED  = 10003
    #process POST requests from Slack when a user selects a button to accept or to close a ticket
    log.error("INFO view/slack has been called!")
    payload = request.body.decode("utf-8")
@@ -326,30 +328,19 @@ def slack(request):
      config = configparser.ConfigParser()
      config.read('secrets.conf')        
  
-     # set the Ticket acktimestamp and user
+     # set the Ticket acktimestamp, user, and status
      if actionname=="accept":
        ticket.acktimestamp = now
        ticket.ackuser = user
+       ticket.status = _TICKET_STATUS_WORKING
        ticket.save()
      elif actionname=="close":
        ticket.closetimestamp = now
        ticket.ackuser = user
+       ticket.status =  _TICKET_STATUS_CLOSED
        ticket.save()
        
      messagestring = "[\
-       {\"type\": \"section\", \
-		 \"text\": { \
-			\"type\": \"mrkdwn\", \
-			\"text\": \"*<fakeLink.toUserProfiles.com|Iris / Zelda 1-1>*\\nTuesday, January 21 4:00-4:30pm\\nBuilding 2 - Havarti Cheese (3)\\n2 guests\" \
-		 }, \
-		 \"accessory\": { \
-			\"type\": \"image\", \
-			\"image_url\": \"https://api.slack.com/img/blocks/bkb_template_images/notifications.png\", \
-			\"alt_text\": \"calendar thumbnail\" \
-		 } \
-     }]"
-     
-     messagestring2 = "[\
        {\"type\": \"section\", \
 		\"text\": { \
 			\"type\": \"mrkdwn\", \
@@ -382,12 +373,7 @@ def slack(request):
 	   } \
      ]"
     
-     blockmessage = json.loads(messagestring2)
-   
-     #blockmessage[0]["accessory"]["image_url"] = "https://www.dropbox.com/s/2vvxy36e3jblulb/check.png?raw=1"
-     #blockmessage[0]["accessory"]["alt_text"] = "Ok thumbnail"
-     #blockmessage[0]["text"]["text"] = "at *{}* {} {} acknowledged *{}* event #{}".format(timestamp, user.firstname, user.lastname, event.node.location.description, event.ideventlog)
-     
+     blockmessage = json.loads(messagestring)   
      blockmessage[0]["accessory"]["image_url"] = ticket.location.imageurl
      blockmessage[0]["text"]["text"] = "*{}* \
          \nAt {} \
