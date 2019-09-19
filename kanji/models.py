@@ -132,19 +132,6 @@ class TicketType(models.Model):
     idtickettype = models.BigAutoField(primary_key=True)
     description = models.CharField(max_length=64, null=True)
     
-class Ticket(models.Model):
-    idticket = models.BigAutoField(primary_key=True)
-    description = models.CharField(max_length=128, null=True)
-    type = location = models.ForeignKey(TicketType,on_delete=models.PROTECT, null=True)
-    location = models.ForeignKey(Location,on_delete=models.PROTECT, null=True)
-    opentimestamp = models.DateTimeField(("DateTime"),auto_now_add=True)
-    status = models.ForeignKey(TicketStatus, on_delete=models.PROTECT, null=True)
-    impact = models.ForeignKey(Impact, on_delete=models.PROTECT, null=True)
-    urgency = models.ForeignKey(Urgency, on_delete=models.PROTECT, null=True)
-    acktimestamp = models.DateTimeField(("DateTime"), null=True)
-    ackuser = models.ForeignKey(User, on_delete=models.PROTECT, null=True)    
-    closetimestamp = models.DateTimeField(("DateTime"), null=True)
-
 class Node(models.Model):
     idnode  = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=24)
@@ -168,6 +155,20 @@ class Node(models.Model):
     pingintervalmillis = models.IntegerField(null=False)
     def __str__(self):
         return self.name 
+        
+class Ticket(models.Model):
+    idticket = models.BigAutoField(primary_key=True)
+    node = models.ForeignKey(Node,on_delete=models.PROTECT, null=True)
+    description = models.CharField(max_length=128, null=True)
+    type = models.ForeignKey(TicketType,on_delete=models.PROTECT, null=True)
+    location = models.ForeignKey(Location,on_delete=models.PROTECT, null=True)
+    opentimestamp = models.DateTimeField(("DateTime"),auto_now_add=True)
+    status = models.ForeignKey(TicketStatus, on_delete=models.PROTECT, null=True)
+    impact = models.ForeignKey(Impact, on_delete=models.PROTECT, null=True)
+    urgency = models.ForeignKey(Urgency, on_delete=models.PROTECT, null=True)
+    acktimestamp = models.DateTimeField(("DateTime"), null=True)
+    ackuser = models.ForeignKey(User, on_delete=models.PROTECT, null=True)    
+    closetimestamp = models.DateTimeField(("DateTime"), null=True)
     
 class EventLog(models.Model):
     ideventlog = models.BigAutoField(primary_key=True)
