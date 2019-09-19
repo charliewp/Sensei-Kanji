@@ -332,12 +332,14 @@ def slack(request):
      if actionname=="accept":
        ticket.acktimestamp = now
        ticket.ackuser = user
-       ticket.status = _TICKET_STATUS_WORKING
+       workingstatus = TicketStatus.objects.get(pk=_TICKET_STATUS_WORKING)
+       ticket.status = workingstatus
        ticket.save()
      elif actionname=="close":
        ticket.closetimestamp = now
        ticket.ackuser = user
-       ticket.status =  _TICKET_STATUS_CLOSED
+       closedstatus = TicketStatus.objects.get(pk=_TICKET_STATUS_CLOSED)
+       ticket.status =  closedstatus
        ticket.save()
        
      messagestring = "[\
