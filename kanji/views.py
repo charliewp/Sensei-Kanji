@@ -343,7 +343,7 @@ def slack(request):
        ticket.status =  closedstatus
        ticket.save()
        
-     messagestring = "[\
+     acceptstring = "[\
        {\"type\": \"section\", \
 		\"text\": { \
 			\"type\": \"mrkdwn\", \
@@ -375,10 +375,36 @@ def slack(request):
 		} \
 	   } \
      ]"
+     
+     closestring = "[\
+       {\"type\": \"section\", \
+		\"text\": { \
+			\"type\": \"mrkdwn\", \
+			\"text\": \"*<fakeLink.toUserProfiles.com|Iris / Zelda 1-1>*\\nTuesday, January 21 4:00-4:30pm\\nBuilding 2 - Havarti Cheese (3)\\n2 guests\" \
+		}, \
+		\"accessory\": { \
+			\"type\": \"image\", \
+			\"image_url\": \"https://api.slack.com/img/blocks/bkb_template_images/notifications.png\", \
+			\"alt_text\": \"calendar thumbnail\" \
+		} \
+	   }, \
+       { \
+		\"type\": \"divider\" \
+	   }, \
+       { \
+		\"type\": \"section\", \
+		\"text\": { \
+			\"type\": \"mrkdwn\", \
+			\"text\": \"*Accessory text.*\" \
+		}, \		
+	   } \
+     ]"
     
-     blockmessage = json.loads(messagestring)   
-     blockmessage[0]["accessory"]["image_url"] = ticket.location.imageurl
-     blockmessage[0]["text"]["text"] = "*{}* \
+     
+     if actionname=="accept": 
+       blockmessage = json.loads(acceptstring)     
+       blockmessage[0]["accessory"]["image_url"] = ticket.location.imageurl
+       blockmessage[0]["text"]["text"] = "*{}* \
          \nAt {} \
          \n*{}* \
          \nAt *{}* impact {} urgency {} {} {} accepted ticket #{}" \
@@ -392,11 +418,27 @@ def slack(request):
                  user.lastname, \
                  ticket.idticket)
 
-     blockmessage[2]["text"]["text"] = "*To close this issue, click the button...*"
-     blockmessage[2]["accessory"]["text"]["text"] = "Issue Resolved!"
-     blockmessage[2]["accessory"]["value"] = "close"
-     blockmessage[2]["accessory"]["action_id"] = "{0}".format(ticket.idticket)     
-     
+       blockmessage[2]["text"]["text"] = "*To close this issue, click the button...*"
+       blockmessage[2]["accessory"]["text"]["text"] = "Issue Resolved!"
+       blockmessage[2]["accessory"]["value"] = "close"
+       blockmessage[2]["accessory"]["action_id"] = "{0}".format(ticket.idticket)     
+     elif actionname=="close":
+       blockmessage = json.loads(closestring)
+       blockmessage[0]["accessory"]["image_url"] = ticket.location.imageurl
+       blockmessage[0]["text"]["text"] = "*{}* \
+         \nAt {} \
+         \n*{}* \
+         \nAt *{}* impact {} urgency {} {} {} closed ticket #{}" \
+         .format(ticket.location, 
+                 ticket.opentimestamp.strftime("%-I:%M %p %A, %B %e, %Y"), \
+                 ticket.description, \
+                 ticker.closetimestamp, \
+                 ticket.impact, \
+                 ticket.urgency, \
+                 user.firstname,\
+                 user.lastname, \
+                 ticket.idticket)       
+       
      sc = SlackClient(_SLACK_TOKEN)
      response = sc.api_call("chat.postMessage", channel=slackchannel, blocks=blockmessage)
     
