@@ -396,7 +396,7 @@ def slack(request):
 		\"text\": { \
 			\"type\": \"mrkdwn\", \
 			\"text\": \"*Accessory text.*\" \
-		}, \		
+		} \		
 	   } \
      ]"
     
