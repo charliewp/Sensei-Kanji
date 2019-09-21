@@ -390,14 +390,7 @@ def slack(request):
 	   }, \
        { \
 		\"type\": \"divider\" \
-	   }, \
-       { \
-		\"type\": \"section\", \
-		\"text\": { \
-			\"type\": \"mrkdwn\", \
-			\"text\": \"*Accessory text.*\" \
-		} \		
-	   } \
+	   }, \       
      ]"
     
      
