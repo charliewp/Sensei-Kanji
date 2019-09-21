@@ -390,7 +390,7 @@ def slack(request):
 	   }, \
        { \
 		\"type\": \"divider\" \
-	   }, \       
+	   } \       
      ]"
     
      
