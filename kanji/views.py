@@ -416,10 +416,11 @@ def slack(request):
        blockmessage[0]["accessory"]["image_url"] = ticket.location.imageurl
        blockmessage[0]["text"]["text"] = "*{}* \
          \nAt {} \
-         \n*was {}* \
+         \n*{} was {}* \
          \nAt *{}* impact {} urgency {} {} {} closed ticket #{}" \
          .format(ticket.location, 
                  ticket.opentimestamp.strftime("%-I:%M %p %A, %B %e, %Y"), \
+                 ticket.node.name, \
                  ticket.description, \
                  ticket.closetimestamp, \
                  ticket.impact, \
